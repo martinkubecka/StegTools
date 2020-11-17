@@ -1,20 +1,25 @@
-package gui.menu;
+package gui.tools.general;
+
+import process.CompressToZip;
+import process.ExtractMetadata;
 
 import javax.swing.*;
 import java.awt.event.*;
 
-public class Instructions extends JDialog {
+public class GeneralDialog extends JDialog {
     private JPanel contentPane;
-    private JButton buttonOK;
+    private JButton buttonCancel;
+    private JButton metadataButton;
+    private JButton compressButton;
 
-    public Instructions() {
+    public GeneralDialog() {
         setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
+        getRootPane().setDefaultButton(buttonCancel);
 
-        buttonOK.addActionListener(new ActionListener() {
+        buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK();
+                onCancel();
             }
         });
 
@@ -32,11 +37,22 @@ public class Instructions extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-    }
 
-    private void onOK() {
-        // add your code here
-        dispose();
+
+        metadataButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                ExtractMetadata.extractMetadata();
+            }
+        });
+        compressButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                CompressToZip.compressFilesToZip();
+            }
+        });
     }
 
     private void onCancel() {
@@ -44,10 +60,4 @@ public class Instructions extends JDialog {
         dispose();
     }
 
-    /*public static void main(String[] args) {
-        Instructions dialog = new Instructions();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }*/
 }

@@ -29,7 +29,6 @@ public class Main {
         frame.setLocation(x, y);
 
         frame.setVisible(true);
-
     }
 
 }

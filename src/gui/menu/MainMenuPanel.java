@@ -1,5 +1,7 @@
 package gui.menu;
 
+import gui.tools.ToolsDialog;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,6 +15,7 @@ public class MainMenuPanel extends JFrame {
     private JButton toolsButton;
     private JButton helpButton;
     private JButton exitButton;
+    private JLabel authorLabel;
 
     public MainMenuPanel(String title) {
         super(title);
@@ -30,8 +33,18 @@ public class MainMenuPanel extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                JDialog toolsDialog = new ToolsDialog(mainMenuPanel, "Tools Menu");
+                toolsDialog.getContentPane().setBackground(new Color(72, 0, 0));
 
+                Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+                int width = (int) (dimension.width * 0.2);
+                int height = (int) (dimension.width * 0.2);
+                toolsDialog.setSize(width, height);
+                int x = (int) ((dimension.getWidth() - toolsDialog.getWidth()) / 2);
+                int y = (int) ((dimension.getHeight() - toolsDialog.getHeight()) / 2);
+                toolsDialog.setLocation(x, y);
 
+                toolsDialog.setVisible(true);
             }
         });
 
@@ -40,19 +53,18 @@ public class MainMenuPanel extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                JDialog instructionsDialog = new Instructions();
+                JDialog instructionsDialog = new InstructionsDialog("Instructions");
                 instructionsDialog.getContentPane().setBackground(new Color(72, 0, 0));
 
                 Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-                int width = (int) (dimension.width * 0.2);
-                int height = (int) (dimension.width * 0.2);
+                int width = (int) (dimension.width * 0.25);
+                int height = (int) (dimension.width * 0.25);
                 instructionsDialog.setSize(width, height);
                 int x = (int) ((dimension.getWidth() - instructionsDialog.getWidth()) / 2);
                 int y = (int) ((dimension.getHeight() - instructionsDialog.getHeight()) / 2);
                 instructionsDialog.setLocation(x, y);
 
                 instructionsDialog.setVisible(true);
-
             }
         });
 
