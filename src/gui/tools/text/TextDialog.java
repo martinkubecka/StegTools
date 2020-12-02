@@ -1,23 +1,21 @@
-package gui.tools.general;
+package gui.tools.text;
 
-import process.Compression;
-import process.ExtractMetadata;
-import process.FileChooser;
+import process.Dictionary;
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.io.File;
 
-public class GeneralDialog extends JDialog {
+public class TextDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonCancel;
-    private JButton metadataButton;
-    private JButton compressButton;
+    private JButton messageShorteningButton;
+    private JButton button2;
+    private JButton button3;
+    private JButton button4;
 
-    public GeneralDialog() {
+    public TextDialog() {
         setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(buttonCancel);
 
         buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -40,23 +38,12 @@ public class GeneralDialog extends JDialog {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-
-        // METADATA
-        metadataButton.addActionListener(new ActionListener() {
+        // Message shortening
+        messageShorteningButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                File file = FileChooser.pickImageFromFileChooser();
-                ExtractMetadata.extractMetadata(file);
-            }
-        });
-
-        // COMPRESS FILES INTO ZIP
-        compressButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                Compression.compressFilesToZip();
+                Dictionary.applyMessageShortening();
             }
         });
     }
@@ -65,5 +52,4 @@ public class GeneralDialog extends JDialog {
         // add your code here if necessary
         dispose();
     }
-
 }

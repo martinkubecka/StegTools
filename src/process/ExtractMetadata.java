@@ -17,10 +17,9 @@ import java.util.Arrays;
 
 public class ExtractMetadata {
 
-    public static void extractMetadata() {
+    public static void extractMetadata(File file) {
 
-        File file = new File("E:\\Programming\\Java\\StegTools\\src\\cat.jpg");
-
+       // File file = new File("E:\\Programming\\Java\\StegTools\\src\\cat.jpg");
 
         // APPROACH 3: SPECIFIC METADATA TYPE
         //
@@ -96,7 +95,8 @@ public class ExtractMetadata {
      */
     private static void print(Metadata metadata, String method) {
 
-        System.out.print("\n------------------------- " + method + " -------------------------\n");
+        System.out.println("\n--------------------------------------------------------------");
+        System.out.print(">>    " + method + "\n\n");
 
         //
         // A Metadata object contains multiple Directory objects

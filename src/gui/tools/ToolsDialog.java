@@ -2,6 +2,7 @@ package gui.tools;
 
 import gui.menu.InstructionsDialog;
 import gui.tools.general.GeneralDialog;
+import gui.tools.text.TextDialog;
 
 import javax.swing.*;
 import java.awt.*;
@@ -65,7 +66,18 @@ public class ToolsDialog extends JDialog {
         textButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Text files
+                JDialog textDialog = new TextDialog();
+                textDialog.getContentPane().setBackground(new Color(72, 0, 0));
+
+                Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+                int width = (int) (dimension.width * 0.25);
+                int height = (int) (dimension.width * 0.25);
+                textDialog.setSize(width, height);
+                int x = (int) ((dimension.getWidth() - textDialog.getWidth()) / 2);
+                int y = (int) ((dimension.getHeight() - textDialog.getHeight()) / 2);
+                textDialog.setLocation(x, y);
+
+                textDialog.setVisible(true);
             }
         });
 

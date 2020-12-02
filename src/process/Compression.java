@@ -11,11 +11,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-public class CompressToZip {
+public class Compression {
 
     public static void compressFilesToZip() {
 
@@ -30,11 +31,13 @@ public class CompressToZip {
         zipParameters.setAesKeyStrength(AesKeyStrength.KEY_STRENGTH_256);
 
         //Contents to be zipped.
-        List<File> filesToAdd = Arrays.asList(
-                new File("E:\\Programming\\Java\\StegTools\\src\\cat.jpg"),
-                new File("E:\\Programming\\Java\\StegTools\\src\\dog.png"),
-                new File("E:\\Programming\\Java\\StegTools\\src\\cat_and_dog.jpg")
-        );
+//        List<File> filesToAdd = Arrays.asList(
+//                new File("E:\\Programming\\Java\\StegTools\\src\\cat.jpg"),
+//                new File("E:\\Programming\\Java\\StegTools\\src\\dog.png"),
+//                new File("E:\\Programming\\Java\\StegTools\\src\\cat_and_dog.jpg")
+//        );
+
+        List<File> filesToAdd = Arrays.asList(Objects.requireNonNull(FileChooser.pickMultipleFromFileChooser()));
 
         Scanner sc = new Scanner(System.in);
         String pass = null;
@@ -51,6 +54,29 @@ public class CompressToZip {
         System.out.println(">>  Successfully zipped contents");
 
     }
+
+    public static void deCompressFilesToZip() {
+
+        System.out.println(">>  Unzipping provided zip file");
+        try {
+            ZipFile zipFile = new ZipFile("E:\\Programming\\Java\\StegTools\\friends.zip", "heslo".toCharArray());
+            zipFile.extractAll("/unziped");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(">>  Successfully unzipped contents of zip file");
+
+        // Check if a zip file is password protected
+        // new ZipFile("encrypted_zip_file.zip").isEncrypted();
+
+        // unprotected zip
+        // new ZipFile("filename.zip").extractAll("/destination_directory");
+
+        // password protected zip
+        // new ZipFile("filename.zip", "password".toCharArray()).extractAll("/destination_directory");
+
+    }
+
 
     /*public static void compressFilesToZip() {
 

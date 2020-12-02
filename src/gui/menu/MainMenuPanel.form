@@ -68,7 +68,7 @@
         <properties>
           <foreground color="-2039584"/>
           <horizontalTextPosition value="10"/>
-          <text value="Martin Kubecka, 2020, v 0.2"/>
+          <text value="Martin Kubecka, 2020, v 0.4"/>
         </properties>
       </component>
     </children>
