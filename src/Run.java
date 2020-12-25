@@ -1,7 +1,4 @@
-import gui.menu.MainMenuPanel;
-
 import javax.swing.*;
-import java.awt.*;
 import java.util.Scanner;
 
 public class Run {
@@ -10,9 +7,12 @@ public class Run {
 
         System.out.println("\n--------------------------------------------------------------");
         System.out.println("-------------------------| StegTools |------------------------");
-        System.out.println("---------------------------| v0.4 |---------------------------");
+        System.out.println("---------------------------| v0.6 |---------------------------");
         System.out.println("--------------------------------------------------------------");
 
+        setUpGUI();
+
+        /*
         System.out.println("Menu: ");
         System.out.println("0 : exit");
         System.out.println("1 : start GUI application");
@@ -50,7 +50,7 @@ public class Run {
             } catch (Exception e) {
                 System.out.println("Invalid input.");
             }
-        }
+        }*/
 
     }
 
@@ -64,20 +64,8 @@ public class Run {
             e.printStackTrace();
         }
 
-        JFrame frame = new MainMenuPanel("StegTools");
-        //frame.setLocationRelativeTo(null);
-
-        frame.getContentPane().setBackground(new Color(72, 0, 0));
-
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int width = (int) (dimension.width * 0.3);
-        int height = (int) (dimension.width * 0.3);
-        frame.setSize(width, height);
-        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
-        frame.setLocation(x, y);
-
-        frame.setVisible(true);
-
+        MainFrame mainFrame = new MainFrame("StegTools");
+        mainFrame.setVisible(true);
     }
 }
+
