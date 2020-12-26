@@ -17,9 +17,27 @@ import java.util.Arrays;
 
 public class ExtractMetadata {
 
-    public static void extractMetadata(File file) {
+    public static Metadata extractMetadata(File file) {
 
-       // File file = new File("E:\\Programming\\Java\\StegTools\\src\\cat.jpg");
+        Metadata metadata = null;
+
+        try {
+            // We are only interested in handling
+            Iterable<JpegSegmentMetadataReader> readers = Arrays.asList(new ExifReader(), new IptcReader());
+
+            metadata = JpegMetadataReader.readMetadata(file, readers);
+
+            //print(metadata, "Using JpegMetadataReader for Exif and IPTC only");
+        } catch (JpegProcessingException | IOException e) {
+            print(e);
+        }
+
+        return metadata;
+    }
+
+    public static void extractMetadataComplex(File file) {
+
+        // File file = new File("E:\\Programming\\Java\\StegTools\\src\\cat.jpg");
 
         // APPROACH 3: SPECIFIC METADATA TYPE
         //
@@ -90,29 +108,21 @@ public class ExtractMetadata {
 //        }
     }
 
-    /**
-     * Write all extracted values to stdout.
-     */
+    // Write all extracted values to stdout.
     private static void print(Metadata metadata, String method) {
 
         System.out.println("\n--------------------------------------------------------------");
         System.out.print(">>    " + method + "\n\n");
 
-        //
         // A Metadata object contains multiple Directory objects
-        //
         for (Directory directory : metadata.getDirectories()) {
 
-            //
             // Each Directory stores values in Tag objects
-            //
             for (Tag tag : directory.getTags()) {
                 System.out.println(tag);
             }
 
-            //
             // Each Directory may also contain error messages
-            //
             for (String error : directory.getErrors()) {
                 System.err.println("ERROR: " + error);
             }
@@ -120,6 +130,7 @@ public class ExtractMetadata {
     }
 
     private static void print(Exception exception) {
+
         System.err.println("EXCEPTION: " + exception);
     }
 

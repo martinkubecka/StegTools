@@ -1,10 +1,9 @@
-import com.drew.metadata.jpeg.JpegCommentDescriptor;
-import gui.general.GeneralToolsPanel;
 import gui.menu.ChangeLogPanel;
 import gui.menu.HeaderPanel;
 import gui.menu.InstructionsDialog;
-import gui.text.TextToolsPanel;
 import gui.tools.ToolsPanel;
+import gui.tools.general.GeneralToolsPanel;
+import gui.tools.text.TextToolsPanel;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -36,10 +35,10 @@ public class MainFrame extends JFrame {
         mainContainer.add(headerPanel, BorderLayout.NORTH);
 
         // CENTER PANEL
-        //JPanel bottomPanel = new ChangeLogPanel();
+        JPanel bottomPanel = new ChangeLogPanel();
         //JPanel bottomPanel = new ToolsPanel();
         //JPanel bottomPanel = new GeneralToolsPanel();
-        JPanel bottomPanel = new TextToolsPanel();
+        //JPanel bottomPanel = new TextToolsPanel();
 
         mainContainer.add(bottomPanel, BorderLayout.CENTER);
     }

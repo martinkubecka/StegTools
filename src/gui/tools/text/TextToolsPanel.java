@@ -1,4 +1,4 @@
-package gui.text;
+package gui.tools.text;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +20,10 @@ public class TextToolsPanel extends JPanel {
         messageShorteningButton.setForeground(Color.BLACK);
         messageShorteningButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
         messageShorteningButton.setBackground(new Color(60, 63, 65));
+        messageShorteningButton.setFocusable(false);
+        messageShorteningButton.addActionListener(e -> {
+            // TODO Message Shortening Button Action
+        });
 
         JLabel compressionResultLabel = new JLabel("Message Shortening Result", SwingConstants.CENTER);
         compressionResultLabel.setVerticalAlignment(SwingConstants.TOP);
@@ -36,11 +40,19 @@ public class TextToolsPanel extends JPanel {
         multipleToolsZeroWidthButton.setForeground(Color.BLACK);
         multipleToolsZeroWidthButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
         multipleToolsZeroWidthButton.setBackground(new Color(60, 63, 65));
+        multipleToolsZeroWidthButton.setFocusable(false);
+        multipleToolsZeroWidthButton.addActionListener(e -> {
+            // TODO Multiple Tools Zero-Width Button Action
+        });
 
         JButton hideMessageButton = new JButton("Hide Message");
         hideMessageButton.setForeground(Color.BLACK);
         hideMessageButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
         hideMessageButton.setBackground(new Color(60, 63, 65));
+        hideMessageButton.setFocusable(false);
+        hideMessageButton.addActionListener(e -> {
+            // TODO Hide Message Button Action
+        });
 
         this.add(nameLabel);
         this.add(messageShorteningButton);

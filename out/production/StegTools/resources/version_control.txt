@@ -1,0 +1,29 @@
+2020-26-12 : v0.7
+- rewritten buttons action listeners
+- exception handled when no files chosen for compresion 
+- exception handled when no password entered for compresion
+- exception handled when no picture chosen for metadata extraction
+- metadata output to separated window
+
+2020-25-12 : v0.6
+- removed all automatically generated gui forms
+- reworked UI logics
+- rewritten UI from the scratch
+- deep code refactoring
+
+2020-12-03 : v0.4
+- implemented console testing
+- extraction of files from a password protected zip
+- message shortening with synonym dictionary
+- file chooser + image chooser filter
+- github readme
+
+2020-11-17 : v0.2
+- metadata extraction
+- compression with encryption
+
+2020-11-14 : v0.1
+- gui set up
+
+2020-11-12
+- version control set up

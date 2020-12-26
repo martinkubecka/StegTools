@@ -26,21 +26,37 @@ public class ToolsPanel extends JPanel {
         generalToolsButton.setForeground(Color.BLACK);
         generalToolsButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
         generalToolsButton.setBackground(new Color(60, 63, 65));
+        generalToolsButton.setFocusable(false);
+        generalToolsButton.addActionListener(e -> {
+            // TODO General Tools Button Action
+        });
 
         JButton textToolsButton = new JButton("Text");
         textToolsButton.setForeground(Color.BLACK);
         textToolsButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
         textToolsButton.setBackground(new Color(60, 63, 65));
+        textToolsButton.setFocusable(false);
+        textToolsButton.addActionListener(e -> {
+            // TODO Text Tools Button Action
+        });
 
         JButton pngToolsButton = new JButton("PNG");
         pngToolsButton.setForeground(Color.BLACK);
         pngToolsButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
         pngToolsButton.setBackground(new Color(60, 63, 65));
+        pngToolsButton.setFocusable(false);
+        pngToolsButton.addActionListener(e -> {
+            // TODO PNG Tools Button Action
+        });
 
         JButton bmpToolsButton = new JButton("BMP");
         bmpToolsButton.setForeground(Color.BLACK);
         bmpToolsButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
         bmpToolsButton.setBackground(new Color(60, 63, 65));
+        bmpToolsButton.setFocusable(false);
+        bmpToolsButton.addActionListener(e -> {
+            // TODO BMP Tools Button Action
+        });
 
         toolsButtonsPanel.add(generalToolsButton);
         toolsButtonsPanel.add(textToolsButton);

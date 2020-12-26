@@ -10,7 +10,7 @@
 ### To Do
  - [x] File Chooser 
  - [x] Image Chooser Filter
- - [ ] Fix Exceptions on File Chooser Cancel
+ - [x] Fix Exceptions on File Chooser Cancel
  - [ ] Hide a secret message with Zero-Width Characters
  - [ ] Detect Zero-Width Characters fingerprinting
  - [ ] Extract a secret message hidden with Zero-Width Characters

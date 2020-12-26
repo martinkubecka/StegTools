@@ -18,7 +18,7 @@ import java.util.zip.ZipOutputStream;
 
 public class Compression {
 
-    public static void compressFilesToZip() {
+    public static void compressFilesToZip(List<File> filesToCompress, String password) {
 
         System.out.println("\n--------------------------------------------------------------");
 
@@ -37,17 +37,15 @@ public class Compression {
 //                new File("E:\\Programming\\Java\\StegTools\\src\\cat_and_dog.jpg")
 //        );
 
-        List<File> filesToAdd = Arrays.asList(Objects.requireNonNull(FileChooser.pickMultipleFromFileChooser()));
-
-        Scanner sc = new Scanner(System.in);
-        String pass = null;
-        System.out.print("Enter password: ");
-        pass = sc.nextLine();
+//        Scanner sc = new Scanner(System.in);
+//        String pass = null;
+//        System.out.print("Enter password: ");
+//        pass = sc.nextLine();
 
         System.out.println(">>  Zipping the contents of input directory");
         try {
-            ZipFile zipFile = new ZipFile("friends.zip", pass.toCharArray());
-            zipFile.addFiles(filesToAdd, zipParameters);
+            ZipFile zipFile = new ZipFile("resource.zip", password.toCharArray());
+            zipFile.addFiles(filesToCompress, zipParameters);
         } catch (Exception e) {
             e.printStackTrace();
         }

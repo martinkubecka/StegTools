@@ -16,7 +16,7 @@ public class HeaderPanel extends JPanel {
         toolsButton.setForeground(Color.BLACK);
         toolsButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
         toolsButton.setBackground(new Color(60, 63, 65));
-
+        toolsButton.setFocusable(false);
         toolsButton.addActionListener(e -> {
             // TODO Tools Button Action
         });
@@ -25,7 +25,7 @@ public class HeaderPanel extends JPanel {
         helpButton.setForeground(Color.BLACK);
         helpButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
         helpButton.setBackground(new Color(60, 63, 65));
-
+        helpButton.setFocusable(false);
         helpButton.addActionListener(e -> {
 
             JDialog instructionsDialog = new InstructionsDialog("Instructions");

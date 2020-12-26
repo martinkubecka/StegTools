@@ -27,22 +27,36 @@ public class ChangeLogPanel extends JPanel {
         creatorLabel.setFont(new Font("Consolas", Font.PLAIN, 12));
 
         JTextArea textArea = new JTextArea();
-        textArea.setText("2020-12-03 : v0.4\n" +
-                "- implemented console testing\n" +
-                "- extraction of files from a password protected zip\n" +
-                "- message shortening with synonym dictionary\n" +
-                "- file chooser + image chooser filter\n" +
-                "- github readme\n" +
-                "\n" +
-                "2020-11-17 : v0.2\n" +
-                "- metadata extraction\n" +
-                "- compression with encryption\n" +
-                "\n" +
-                "2020-11-14 : v0.1\n" +
-                "- gui set up\n" +
-                "\n" +
-                "2020-11-12\n" +
-                "- version control set up\n");
+        textArea.setText(
+                "2020-26-12 : v0.7\n" +
+                        "- rewritten buttons action listeners\n" +
+                        "- exception handled when no files chosen for compresion \n" +
+                        "- exception handled when no password entered for compresion\n" +
+                        "- exception handled when no picture chosen for metadata extraction\n" +
+                        "- metadata output to separated window\n" +
+                        "\n" +
+                        "2020-25-12 : v0.6\n" +
+                        "- removed all automatically generated gui forms\n" +
+                        "- reworked UI logics\n" +
+                        "- rewritten UI from the scratch\n" +
+                        "- deep code refactoring\n" +
+                        "\n" +
+                        "2020-12-03 : v0.4\n" +
+                        "- implemented console testing\n" +
+                        "- extraction of files from a password protected zip\n" +
+                        "- message shortening with synonym dictionary\n" +
+                        "- file chooser + image chooser filter\n" +
+                        "- github readme\n" +
+                        "\n" +
+                        "2020-11-17 : v0.2\n" +
+                        "- metadata extraction\n" +
+                        "- compression with encryption\n" +
+                        "\n" +
+                        "2020-11-14 : v0.1\n" +
+                        "- gui set up\n" +
+                        "\n" +
+                        "2020-11-12\n" +
+                        "- version control set up");
 
         //textArea.setBounds(50, 50, 300, 300);
         textArea.setLineWrap(true);
