@@ -34,12 +34,11 @@ public class GeneralToolsPanel extends JPanel {
 
             File file = FileChooser.pickImageFromFileChooser();
             if (file != null) {
-                // TODO Show Metadata in DialogWindow
+
                 Metadata metadata = ExtractMetadata.extractMetadata(file);
                 MetadataWindow metadataWindow = new MetadataWindow("Metadata", metadata);
                 metadataWindow.setVisible(true);
             }
-
         });
 
         JButton compressFilesButton = new JButton("Compress Files");
@@ -52,7 +51,8 @@ public class GeneralToolsPanel extends JPanel {
             List<File> filesToCompress = null;
 
             try {
-                filesToCompress = Arrays.asList(Objects.requireNonNull(FileChooser.pickMultipleFromFileChooser()));
+                filesToCompress = Arrays.asList(Objects.requireNonNull(FileChooser.pickMultipleFilesFromFileChooser()));
+
             } catch (Exception exception) {
 
                 //System.out.println(exception);

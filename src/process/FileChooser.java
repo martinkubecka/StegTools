@@ -8,7 +8,7 @@ public class FileChooser {
     public static File pickImageFromFileChooser() {
 
         JFileChooser fc = new JFileChooser();
-        fc.setCurrentDirectory(new File("."));
+        fc.setCurrentDirectory(new File("src/resources/"));
         fc.setDialogTitle("Select the file to open... ");
         fc.setMultiSelectionEnabled(false);
         // fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -24,10 +24,10 @@ public class FileChooser {
         return null;
     }
 
-    public static File[] pickMultipleFromFileChooser() {
+    public static File[] pickMultipleFilesFromFileChooser() {
 
         JFileChooser fc = new JFileChooser();
-        fc.setCurrentDirectory(new File("."));
+        fc.setCurrentDirectory(new File("src/resources/"));
         fc.setDialogTitle("Select the file to open... ");
         fc.setMultiSelectionEnabled(true);
         // fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -49,10 +49,10 @@ public class FileChooser {
         }
         return null;
     }
-    public static File pickSingleFromFileChooser() {
+    public static File pickSingleTextFileFromFileChooser() {
 
         JFileChooser fc = new JFileChooser();
-        fc.setCurrentDirectory(new File("."));
+        fc.setCurrentDirectory(new File("src/resources/"));
         fc.setDialogTitle("Select the file to open... ");
         fc.setMultiSelectionEnabled(false);
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);

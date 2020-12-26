@@ -1,7 +1,15 @@
+2020-26-12 : v0.8
+- implemented fully working panel changing based on user choice
+- reworked main frame layout (updated to card layout)
+- created own panel for hiding message
+- created own panel for text manipulation
+- replaced instructions JDialog with own coded window
+- added home navigation from the header panel
+
 2020-26-12 : v0.7
 - rewritten buttons action listeners
-- exception handled when no files chosen for compresion 
-- exception handled when no password entered for compresion
+- exception handled when no files chosen for compression
+- exception handled when no password entered for compression
 - exception handled when no picture chosen for metadata extraction
 - metadata output to separated window
 

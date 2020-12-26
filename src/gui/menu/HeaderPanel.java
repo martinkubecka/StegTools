@@ -6,11 +6,22 @@ import java.awt.*;
 
 public class HeaderPanel extends JPanel {
 
-    public HeaderPanel() {
+    public HeaderPanel(JPanel contentPane, CardLayout cardLayout) {
 
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 3, 3));
         this.setBackground(new Color(72, 0, 0));
         this.setBorder(new LineBorder(Color.WHITE, 3));
+
+        JButton changeLogButton = new JButton("Home");
+        changeLogButton.setForeground(Color.BLACK);
+        changeLogButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
+        changeLogButton.setBackground(new Color(60, 63, 65));
+        changeLogButton.setFocusable(false);
+        changeLogButton.addActionListener(e -> {
+
+            String changeLogPanel = "ChangeLog Panel";
+            cardLayout.show(contentPane, changeLogPanel);
+        });
 
         JButton toolsButton = new JButton("Tools");
         toolsButton.setForeground(Color.BLACK);
@@ -18,7 +29,9 @@ public class HeaderPanel extends JPanel {
         toolsButton.setBackground(new Color(60, 63, 65));
         toolsButton.setFocusable(false);
         toolsButton.addActionListener(e -> {
-            // TODO Tools Button Action
+
+            String toolsPanel = "Tools Panel";
+            cardLayout.show(contentPane, toolsPanel);
         });
 
         JButton helpButton = new JButton("Help");
@@ -28,18 +41,9 @@ public class HeaderPanel extends JPanel {
         helpButton.setFocusable(false);
         helpButton.addActionListener(e -> {
 
-            JDialog instructionsDialog = new InstructionsDialog("Instructions");
-            instructionsDialog.getContentPane().setBackground(new Color(72, 0, 0));
+            HelpWindow helpWindow = new HelpWindow("Instructions");
+            helpWindow.setVisible(true);
 
-            Dimension dimension1 = Toolkit.getDefaultToolkit().getScreenSize();
-            int width1 = (int) (dimension1.width * 0.25);
-            int height1 = (int) (dimension1.width * 0.25);
-            instructionsDialog.setSize(width1, height1);
-            int x1 = (int) ((dimension1.getWidth() - instructionsDialog.getWidth()) / 2);
-            int y1 = (int) ((dimension1.getHeight() - instructionsDialog.getHeight()) / 2);
-            instructionsDialog.setLocation(x1, y1);
-
-            instructionsDialog.setVisible(true);
         });
 
 //        JButton exitButton = new JButton("Exit");
@@ -47,6 +51,7 @@ public class HeaderPanel extends JPanel {
 //        exitButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
 //        exitButton.setBackground(new Color(60, 63, 65));
 
+        this.add(changeLogButton);
         this.add(toolsButton);
         this.add(helpButton);
         //this.add(exitButton);

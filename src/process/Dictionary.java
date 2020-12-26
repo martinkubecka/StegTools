@@ -24,7 +24,7 @@ public class Dictionary {
         }
 
         try {
-            File secretMessage = FileChooser.pickSingleFromFileChooser();
+            File secretMessage = FileChooser.pickSingleTextFileFromFileChooser();
             BufferedReader in = new BufferedReader(new FileReader(secretMessage));
             String line = "";
             StringBuilder input = new StringBuilder();
@@ -48,8 +48,6 @@ public class Dictionary {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     private static void writeToOutput(String content) {
@@ -67,6 +65,5 @@ public class Dictionary {
                 System.out.println("Error writing to file");
             }
         }
-
     }
 }

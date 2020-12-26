@@ -26,12 +26,21 @@ public class ChangeLogPanel extends JPanel {
         creatorLabel.setForeground(new Color(244, 244, 244));
         creatorLabel.setFont(new Font("Consolas", Font.PLAIN, 12));
 
+        // TODO load version_control.txt automatically to Change Log
         JTextArea textArea = new JTextArea();
         textArea.setText(
-                "2020-26-12 : v0.7\n" +
+                        "2020-26-12 : v0.8\n" +
+                        "- implemented fully working panel changing based on user choice\n" +
+                        "- reworked main frame layout (updated to card layout)\n" +
+                        "- created own panel for hiding message\n" +
+                        "- created own panel for text manipulation\n" +
+                        "- replaced instructions JDialog with own coded window\n" +
+                        "- added home navigation from the header panel\n" +
+                        "\n" +
+                        "2020-26-12 : v0.7\n" +
                         "- rewritten buttons action listeners\n" +
-                        "- exception handled when no files chosen for compresion \n" +
-                        "- exception handled when no password entered for compresion\n" +
+                        "- exception handled when no files chosen for compression\n" +
+                        "- exception handled when no password entered for compression\n" +
                         "- exception handled when no picture chosen for metadata extraction\n" +
                         "- metadata output to separated window\n" +
                         "\n" +
@@ -58,7 +67,6 @@ public class ChangeLogPanel extends JPanel {
                         "2020-11-12\n" +
                         "- version control set up");
 
-        //textArea.setBounds(50, 50, 300, 300);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         //textArea.setBackground(new Color());

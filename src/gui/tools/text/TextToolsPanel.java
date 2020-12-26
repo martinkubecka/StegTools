@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class TextToolsPanel extends JPanel {
 
-    public TextToolsPanel() {
+    public TextToolsPanel(JPanel contentPane, CardLayout cardLayout) {
 
         this.setLayout(new GridLayout(6, 1, 8, 35));
         this.setBackground(new Color(72, 0, 0));
@@ -42,7 +42,9 @@ public class TextToolsPanel extends JPanel {
         multipleToolsZeroWidthButton.setBackground(new Color(60, 63, 65));
         multipleToolsZeroWidthButton.setFocusable(false);
         multipleToolsZeroWidthButton.addActionListener(e -> {
-            // TODO Multiple Tools Zero-Width Button Action
+
+            String textManipulationPanel = "Text Manipulation Panel";
+            cardLayout.show(contentPane, textManipulationPanel);
         });
 
         JButton hideMessageButton = new JButton("Hide Message");
@@ -51,7 +53,10 @@ public class TextToolsPanel extends JPanel {
         hideMessageButton.setBackground(new Color(60, 63, 65));
         hideMessageButton.setFocusable(false);
         hideMessageButton.addActionListener(e -> {
-            // TODO Hide Message Button Action
+
+            String hideMessagePanel = "Hide Message Panel";
+            cardLayout.show(contentPane, hideMessagePanel);
+
         });
 
         this.add(nameLabel);

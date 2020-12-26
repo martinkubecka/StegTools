@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class ToolsPanel extends JPanel {
 
-    public ToolsPanel() {
+    public ToolsPanel(JPanel contentPane, CardLayout cardLayout) {
 
         this.setBackground(new Color(72, 0, 0));
         this.setBorder(BorderFactory.createEmptyBorder(8, 8, 16, 16));
@@ -28,7 +28,9 @@ public class ToolsPanel extends JPanel {
         generalToolsButton.setBackground(new Color(60, 63, 65));
         generalToolsButton.setFocusable(false);
         generalToolsButton.addActionListener(e -> {
-            // TODO General Tools Button Action
+
+            String generalTools = "General Tools Panel";
+            cardLayout.show(contentPane, generalTools);
         });
 
         JButton textToolsButton = new JButton("Text");
@@ -37,7 +39,9 @@ public class ToolsPanel extends JPanel {
         textToolsButton.setBackground(new Color(60, 63, 65));
         textToolsButton.setFocusable(false);
         textToolsButton.addActionListener(e -> {
-            // TODO Text Tools Button Action
+
+            String generalTools = "Text Tools Panel";
+            cardLayout.show(contentPane, generalTools);
         });
 
         JButton pngToolsButton = new JButton("PNG");
