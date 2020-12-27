@@ -1,13 +1,15 @@
 package gui.tools.general;
 
 import com.drew.metadata.Metadata;
+import net.lingala.zip4j.ZipFile;
 import process.Compression;
 import process.ExtractMetadata;
-import process.FileChooser;
+import process.explorer.FileChooser;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +18,7 @@ public class GeneralToolsPanel extends JPanel {
 
     public GeneralToolsPanel() {
 
-        this.setLayout(new GridLayout(4, 1, 8, 100));
+        this.setLayout(new GridLayout(5, 1, 8, 70));
         this.setBackground(new Color(72, 0, 0));
         this.setBorder(BorderFactory.createEmptyBorder(8, 150, 8, 150));
 
@@ -56,11 +58,11 @@ public class GeneralToolsPanel extends JPanel {
             } catch (Exception exception) {
 
                 //System.out.println(exception);
-                JOptionPane.showMessageDialog(
-                        this,
-                        "No files selected",
-                        "Warning",
-                        JOptionPane.WARNING_MESSAGE);
+//                JOptionPane.showMessageDialog(
+//                        this,
+//                        "No files selected",
+//                        "Warning",
+//                        JOptionPane.WARNING_MESSAGE);
             }
 
             if (filesToCompress != null) {
@@ -93,6 +95,63 @@ public class GeneralToolsPanel extends JPanel {
             }
         });
 
+        JButton decompressFilesButton = new JButton("Decompress Files");
+        decompressFilesButton.setForeground(Color.BLACK);
+        decompressFilesButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
+        decompressFilesButton.setBackground(new Color(60, 63, 65));
+        decompressFilesButton.setFocusable(false);
+        decompressFilesButton.addActionListener(e -> {
+
+            // TODO Refactor this implementation !
+            File file = FileChooser.pickZipFromFileChooser();
+
+            if (file != null) {
+
+                try {
+
+                   // ZipFile zipFile = new ZipFile(file);
+
+                    // Zip is encrypted with password
+                    if (new ZipFile(file).isEncrypted()){
+
+                        JPasswordField passwordField = new JPasswordField();
+                        int okCxl = JOptionPane.showConfirmDialog(
+                                this,
+                                passwordField,
+                                "Enter Password",
+                                JOptionPane.OK_CANCEL_OPTION,
+                                JOptionPane.PLAIN_MESSAGE);
+
+                        if (okCxl == JOptionPane.OK_OPTION) {
+
+                            String password = new String(passwordField.getPassword());
+                            //System.err.println("You entered: " + password);
+
+                            if (!password.isEmpty()) {
+
+                                Compression.deCompressEncryptedZip(file, password);
+                            } else {
+
+                                JOptionPane.showMessageDialog(
+                                        this,
+                                        "No password entered",
+                                        "Warning",
+                                        JOptionPane.WARNING_MESSAGE);
+                            }
+                        }
+                    }
+
+                    // Zip without password
+                    else{
+
+                        Compression.deCompressUnencryptedZip(file);
+                    }
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+        });
+
         JLabel compressionResultLabel = new JLabel("Compression Result", SwingConstants.CENTER);
         compressionResultLabel.setVerticalAlignment(SwingConstants.TOP);
         compressionResultLabel.setForeground(new Color(244, 244, 244));
@@ -102,6 +161,7 @@ public class GeneralToolsPanel extends JPanel {
         this.add(nameLabel);
         this.add(showMetadataButton);
         this.add(compressFilesButton);
+        this.add(decompressFilesButton);
         this.add(compressionResultLabel);
     }
 }

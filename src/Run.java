@@ -5,14 +5,14 @@ public class Run {
 
     public static void main(String[] args) {
 
-        System.out.println("\n--------------------------------------------------------------");
-        System.out.println("-------------------------| StegTools |------------------------");
-        System.out.println("---------------------------| v0.6 |---------------------------");
-        System.out.println("--------------------------------------------------------------");
-
         setUpGUI();
 
         /*
+        System.out.println("\n--------------------------------------------------------------");
+        System.out.println("-------------------------| StegTools |------------------------");
+        System.out.println("---------------------------| v0.81 |---------------------------");
+        System.out.println("--------------------------------------------------------------");
+
         System.out.println("Menu: ");
         System.out.println("0 : exit");
         System.out.println("1 : start GUI application");

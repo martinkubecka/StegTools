@@ -1,4 +1,4 @@
-package process;
+package process.explorer;
 
 import javax.swing.filechooser.FileFilter;
 import java.io.File;
@@ -10,8 +10,6 @@ class ImageChooserFilter extends FileFilter {
     public final static String TIFF = "tiff";
     public final static String TIF = "tif";
     public final static String PNG = "png";
-
-
 
     @Override
     public boolean accept(File f) {

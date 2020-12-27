@@ -1,9 +1,26 @@
-package process;
+package process.explorer;
 
 import javax.swing.*;
 import java.io.File;
 
 public class FileChooser {
+
+    public static File pickZipFromFileChooser() {
+
+        JFileChooser fc = new JFileChooser();
+        fc.setCurrentDirectory(new File("src/resources/"));
+        fc.setDialogTitle("Select the file to open... ");
+        fc.setMultiSelectionEnabled(false);
+        fc.addChoosableFileFilter(new ZipChooserFilter());
+        fc.setAcceptAllFileFilterUsed(false);
+
+        int returnVal = fc.showOpenDialog(new JDialog());
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            return fc.getSelectedFile();
+        }
+        return null;
+    }
 
     public static File pickImageFromFileChooser() {
 
@@ -40,7 +57,7 @@ public class FileChooser {
 
             File[] files = fc.getSelectedFiles();
             StringBuilder fileNames = new StringBuilder();
-            for(File file: files){
+            for (File file : files) {
                 fileNames.append(file.getName()).append(" ");
             }
 
@@ -49,6 +66,7 @@ public class FileChooser {
         }
         return null;
     }
+
     public static File pickSingleTextFileFromFileChooser() {
 
         JFileChooser fc = new JFileChooser();
@@ -64,7 +82,6 @@ public class FileChooser {
         }
         return null;
     }
-
 
 
 }

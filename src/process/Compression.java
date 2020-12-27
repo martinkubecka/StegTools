@@ -6,15 +6,8 @@ import net.lingala.zip4j.model.enums.AesKeyStrength;
 import net.lingala.zip4j.model.enums.EncryptionMethod;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
+
 
 public class Compression {
 
@@ -22,25 +15,12 @@ public class Compression {
 
         System.out.println("\n--------------------------------------------------------------");
 
-
         ZipParameters zipParameters = new ZipParameters();
         zipParameters.setEncryptFiles(true);
         zipParameters.setEncryptionMethod(EncryptionMethod.AES);
         // AES 256 is used by default
         // Override it use AES 128 (AES 192 is supported only for extracting)
         zipParameters.setAesKeyStrength(AesKeyStrength.KEY_STRENGTH_256);
-
-        //Contents to be zipped.
-//        List<File> filesToAdd = Arrays.asList(
-//                new File("E:\\Programming\\Java\\StegTools\\src\\cat.jpg"),
-//                new File("E:\\Programming\\Java\\StegTools\\src\\dog.png"),
-//                new File("E:\\Programming\\Java\\StegTools\\src\\cat_and_dog.jpg")
-//        );
-
-//        Scanner sc = new Scanner(System.in);
-//        String pass = null;
-//        System.out.print("Enter password: ");
-//        pass = sc.nextLine();
 
         System.out.println(">>  Zipping the contents of input directory");
         try {
@@ -50,9 +30,33 @@ public class Compression {
             e.printStackTrace();
         }
         System.out.println(">>  Successfully zipped contents");
-
     }
 
+    public static void deCompressUnencryptedZip(File file) {
+
+        System.out.println(">>  Unzipping provided unencrypted zip file");
+        try {
+            ZipFile zipFile = new ZipFile(file);
+            zipFile.extractAll("src/resources/");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(">>  Successfully unzipped contents of zip file");
+    }
+
+    public static void deCompressEncryptedZip(File file, String password) {
+
+        System.out.println(">>  Unzipping provided encrypted zip file");
+        try {
+            ZipFile zipFile = new ZipFile(file, password.toCharArray());
+            zipFile.extractAll("src/resources");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(">>  Successfully unzipped contents of zip file");
+    }
+
+    /*
     public static void deCompressFilesToZip() {
 
         System.out.println(">>  Unzipping provided zip file");
@@ -73,7 +77,7 @@ public class Compression {
         // password protected zip
         // new ZipFile("filename.zip", "password".toCharArray()).extractAll("/destination_directory");
 
-    }
+    }*/
 
 
     /*public static void compressFilesToZip() {

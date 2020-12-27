@@ -1,3 +1,6 @@
+2020-27-12 : v0.81
+- reimplemented decompression for encrypted/unencrypted zip files
+
 2020-26-12 : v0.8
 - implemented fully working panel changing based on user choice
 - reworked main frame layout (updated to card layout)
