@@ -2,6 +2,7 @@ package gui.menu;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileReader;
 
 public class ChangeLogPanel extends JPanel {
 
@@ -21,53 +22,19 @@ public class ChangeLogPanel extends JPanel {
         changeLogLabel.setForeground(new Color(244, 244, 244));
         changeLogLabel.setFont(new Font("Consolas", Font.PLAIN, 20));
 
-        JLabel creatorLabel = new JLabel("Martin Kubecka, 2020, v0.81", SwingConstants.RIGHT);
+        JLabel creatorLabel = new JLabel("Martin Kubecka, 2020, v0.82", SwingConstants.RIGHT);
         creatorLabel.setVerticalAlignment(SwingConstants.BOTTOM);
         creatorLabel.setForeground(new Color(244, 244, 244));
         creatorLabel.setFont(new Font("Consolas", Font.PLAIN, 12));
 
-        // TODO load version_control.txt automatically to Change Log
         JTextArea textArea = new JTextArea();
-        textArea.setText("2020-27-12 : v0.81\n" +
-                        "- reimplemented decompression for encrypted/unencrypted zip files \n" +
-                        "\n" +
-                        "2020-26-12 : v0.8\n" +
-                        "- implemented fully working panel changing based on user choice\n" +
-                        "- reworked main frame layout (updated to card layout)\n" +
-                        "- created own panel for hiding message\n" +
-                        "- created own panel for text manipulation\n" +
-                        "- replaced instructions JDialog with own coded window\n" +
-                        "- added home navigation from the header panel\n" +
-                        "\n" +
-                        "2020-26-12 : v0.7\n" +
-                        "- rewritten buttons action listeners\n" +
-                        "- exception handled when no files chosen for compression\n" +
-                        "- exception handled when no password entered for compression\n" +
-                        "- exception handled when no picture chosen for metadata extraction\n" +
-                        "- metadata output to separated window\n" +
-                        "\n" +
-                        "2020-25-12 : v0.6\n" +
-                        "- removed all automatically generated gui forms\n" +
-                        "- reworked UI logics\n" +
-                        "- rewritten UI from the scratch\n" +
-                        "- deep code refactoring\n" +
-                        "\n" +
-                        "2020-12-03 : v0.4\n" +
-                        "- implemented console testing\n" +
-                        "- extraction of files from a password protected zip\n" +
-                        "- message shortening with synonym dictionary\n" +
-                        "- file chooser + image chooser filter\n" +
-                        "- github readme\n" +
-                        "\n" +
-                        "2020-11-17 : v0.2\n" +
-                        "- metadata extraction\n" +
-                        "- compression with encryption\n" +
-                        "\n" +
-                        "2020-11-14 : v0.1\n" +
-                        "- gui set up\n" +
-                        "\n" +
-                        "2020-11-12\n" +
-                        "- version control set up");
+
+        try {
+            FileReader reader = new FileReader("src/resources/version_control.txt");
+            textArea.read(reader, "src/resources/version_control.txt"); //Object of JTextArea
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
 
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);

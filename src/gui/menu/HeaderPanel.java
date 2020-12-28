@@ -1,5 +1,7 @@
 package gui.menu;
 
+import gui.tools.text.TextToolsPanel;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;

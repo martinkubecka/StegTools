@@ -8,11 +8,12 @@ import java.util.Map;
 
 public class Dictionary {
 
-    public static void applyMessageShortening() {
+    public static boolean applyMessageShortening() {
 
         Map<String, String> dictionary = new HashMap<String, String>();
 
         try {
+            // TODO rework dictionary load to only once per software run
             BufferedReader in = new BufferedReader(new FileReader("src/resources/dictionary.txt"));
             String line = "";
             while ((line = in.readLine()) != null) {
@@ -20,43 +21,56 @@ public class Dictionary {
                 dictionary.put(inputSplit[0], inputSplit[1]);
             }
             in.close();
-            //System.out.println(dictionary.toString());
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
 
         try {
             File secretMessage = FileChooser.pickSingleTextFileFromFileChooser();
-            BufferedReader in = new BufferedReader(new FileReader(secretMessage));
-            String line = "";
-            StringBuilder input = new StringBuilder();
-            while ((line = in.readLine()) != null) {
-                input.append(line);
+            if (secretMessage != null) {
+
+                BufferedReader in = new BufferedReader(new FileReader(secretMessage));
+                String line = "";
+                StringBuilder input = new StringBuilder();
+                while ((line = in.readLine()) != null) {
+                    input.append(line);
+                }
+                in.close();
+
+                System.out.println(">>  Successfully loaded secret message");
+                //System.out.println(input);
+                String message = input.toString();
+                for (Map.Entry<String, String> entry : dictionary.entrySet()) {
+
+                    message = message.replace(entry.getKey(), entry.getValue());
+                }
+
+                writeToOutput(message);
+                System.out.println(">>  Successfully applied dictionary");
+                return true;
             }
-            in.close();
-
-            System.out.println(">>  Successfully loaded secret message");
-            System.out.println(input);
-            String message = input.toString();
-            for (Map.Entry<String, String> entry : dictionary.entrySet()) {
-
-                message = message.replace(entry.getKey(), entry.getValue());
-
-            }
-
-            writeToOutput(message);
-            System.out.println(">>  Successfully applied dictionary");
 
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
+
+        return false;
     }
 
     private static void writeToOutput(String content) {
 
         File file = new File("src/resources/secret_message_shorten.txt");
 
-        if (file.exists()) {
+        //Create the file
+        try {
+            if (file.createNewFile()) {
+                System.out.println(">>  New Text File is created!");
+            } else {
+                System.out.println(">>  File already exists.");
+            }
+            //Write content
             BufferedWriter bw = null;
             try {
                 bw = new BufferedWriter(new FileWriter(file));
@@ -64,8 +78,10 @@ public class Dictionary {
                 bw.flush();
                 bw.close();
             } catch (IOException ex) {
-                System.out.println("Error writing to file");
+                System.out.println(">>  Error writing to file");
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -1,5 +1,7 @@
 package gui.tools.text;
 
+import process.Dictionary;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,20 +18,26 @@ public class TextToolsPanel extends JPanel {
         nameLabel.setForeground(new Color(244, 244, 244));
         nameLabel.setFont(new Font("Consolas", Font.PLAIN, 36));
 
+        JLabel messageShorteningResultButton = new JLabel("Message Shortening Result", SwingConstants.CENTER);
+        messageShorteningResultButton.setVerticalAlignment(SwingConstants.TOP);
+        messageShorteningResultButton.setForeground(new Color(244, 244, 244));
+        messageShorteningResultButton.setFont(new Font("Consolas", Font.ITALIC, 15));
+        messageShorteningResultButton.setVisible(false);
+
         JButton messageShorteningButton = new JButton("Message Shortening");
         messageShorteningButton.setForeground(Color.BLACK);
         messageShorteningButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
         messageShorteningButton.setBackground(new Color(60, 63, 65));
         messageShorteningButton.setFocusable(false);
         messageShorteningButton.addActionListener(e -> {
-            // TODO Message Shortening Button Action
-        });
 
-        JLabel compressionResultLabel = new JLabel("Message Shortening Result", SwingConstants.CENTER);
-        compressionResultLabel.setVerticalAlignment(SwingConstants.TOP);
-        compressionResultLabel.setForeground(new Color(244, 244, 244));
-        compressionResultLabel.setFont(new Font("Consolas", Font.PLAIN, 15));
-        compressionResultLabel.setVisible(false);
+           boolean result = Dictionary.applyMessageShortening();
+            messageShorteningResultButton.setVisible(true);
+            if (result){
+                messageShorteningResultButton.setText("Successfully applied dictionary");
+            }
+
+        });
 
         JLabel zeroWidthLabel = new JLabel("Zero-Width Characters", SwingConstants.CENTER);
         zeroWidthLabel.setVerticalAlignment(SwingConstants.CENTER);
@@ -61,7 +69,7 @@ public class TextToolsPanel extends JPanel {
 
         this.add(nameLabel);
         this.add(messageShorteningButton);
-        this.add(compressionResultLabel);
+        this.add(messageShorteningResultButton);
         this.add(zeroWidthLabel);
         this.add(multipleToolsZeroWidthButton);
         this.add(hideMessageButton);

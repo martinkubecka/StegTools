@@ -1,3 +1,9 @@
+2020-28-12 : v0.82
+- reimplemented message shortening with synonym dictionary
+- added enum class for file formats
+- added custom text file filter for file chooser
+- added change log reader from updated text file to its text area
+
 2020-27-12 : v0.81
 - reimplemented decompression for encrypted/unencrypted zip files
 

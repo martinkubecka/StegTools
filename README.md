@@ -1,10 +1,10 @@
 # StegTools
 
 ### List of Implemented Functionalities
- - Show image Metadata                                  (v0.2)
- - Password protected compression of chosen files       (v0.2)
- - Extraction of files from a password protected zip    (v0.4)
- - Message shortening with synonym dictionary           (v0.4)
+ - Show image Metadata                                  (v0.2 -> v0.7)
+ - Password protected compression of chosen files       (v0.2 -> v0.7)
+ - Extraction of files from a password protected zip    (v0.4 -> v0.81)
+ - Message shortening with synonym dictionary           (v0.4 -> v0.82)
 
 
 ### To Do

@@ -1,9 +1,15 @@
 package process.explorer;
 
+import process.explorer.filters.ImageChooserFilter;
+import process.explorer.filters.TextChooserFilter;
+import process.explorer.filters.ZipChooserFilter;
+
 import javax.swing.*;
 import java.io.File;
 
 public class FileChooser {
+
+    // TODO try to implement generalization
 
     public static File pickZipFromFileChooser() {
 
@@ -73,11 +79,14 @@ public class FileChooser {
         fc.setCurrentDirectory(new File("src/resources/"));
         fc.setDialogTitle("Select the file to open... ");
         fc.setMultiSelectionEnabled(false);
-        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        // fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fc.addChoosableFileFilter(new TextChooserFilter());
+        fc.setAcceptAllFileFilterUsed(false);
 
-        int returnVal = fc.showOpenDialog(null);
+        int returnVal = fc.showOpenDialog(new JDialog());
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
+            //File f = fc.getSelectedFile();
             return fc.getSelectedFile();
         }
         return null;

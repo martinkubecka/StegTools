@@ -1,10 +1,11 @@
-package process.explorer;
+package process.explorer.filters;
+
+import process.explorer.FileFormats;
 
 import javax.swing.filechooser.FileFilter;
 import java.io.File;
 
 public class ZipChooserFilter extends FileFilter {
-    public final static String ZIP = "zip";
 
     @Override
     public boolean accept(File f) {
@@ -14,14 +15,14 @@ public class ZipChooserFilter extends FileFilter {
 
         String extension = getExtension(f);
         if (extension != null) {
-            return extension.equals(ZIP);
+            return extension.equals(FileFormats.ZIP.getFormat());
         }
         return false;
     }
 
     @Override
     public String getDescription() {
-        return "Zip Only";
+        return ".zip";
     }
 
     String getExtension(File f) {

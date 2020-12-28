@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Compression {
 
-    public static void compressFilesToZip(List<File> filesToCompress, String password) {
+    public static boolean compressFilesToZip(List<File> filesToCompress, String password) {
 
         System.out.println("\n--------------------------------------------------------------");
 
@@ -25,35 +25,43 @@ public class Compression {
         System.out.println(">>  Zipping the contents of input directory");
         try {
             ZipFile zipFile = new ZipFile("resource.zip", password.toCharArray());
+            // TODO set default location for zip after compression
             zipFile.addFiles(filesToCompress, zipParameters);
+            System.out.println(">>  Successfully zipped contents");
+            return true;
         } catch (Exception e) {
+
             e.printStackTrace();
+            return false;
         }
-        System.out.println(">>  Successfully zipped contents");
     }
 
-    public static void deCompressUnencryptedZip(File file) {
+    public static boolean deCompressUnencryptedZip(File file) {
 
         System.out.println(">>  Unzipping provided unencrypted zip file");
         try {
             ZipFile zipFile = new ZipFile(file);
             zipFile.extractAll("src/resources/");
+            System.out.println(">>  Successfully unzipped contents of zip file");
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
-        System.out.println(">>  Successfully unzipped contents of zip file");
     }
 
-    public static void deCompressEncryptedZip(File file, String password) {
+    public static boolean deCompressEncryptedZip(File file, String password) {
 
         System.out.println(">>  Unzipping provided encrypted zip file");
         try {
             ZipFile zipFile = new ZipFile(file, password.toCharArray());
             zipFile.extractAll("src/resources");
+            System.out.println(">>  Successfully unzipped contents of zip file");
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
-        System.out.println(">>  Successfully unzipped contents of zip file");
     }
 
     /*

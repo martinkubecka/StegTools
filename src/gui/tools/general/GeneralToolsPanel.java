@@ -43,6 +43,12 @@ public class GeneralToolsPanel extends JPanel {
             }
         });
 
+        JLabel compressionResultLabel = new JLabel("Compression Result", SwingConstants.CENTER);
+        compressionResultLabel.setVerticalAlignment(SwingConstants.TOP);
+        compressionResultLabel.setForeground(new Color(244, 244, 244));
+        compressionResultLabel.setFont(new Font("Consolas", Font.ITALIC, 15));
+        compressionResultLabel.setVisible(false);
+
         JButton compressFilesButton = new JButton("Compress Files");
         compressFilesButton.setForeground(Color.BLACK);
         compressFilesButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
@@ -82,7 +88,12 @@ public class GeneralToolsPanel extends JPanel {
 
                     if (!password.isEmpty()) {
 
-                        Compression.compressFilesToZip(filesToCompress, password);
+                        boolean result = Compression.compressFilesToZip(filesToCompress, password);
+                        if (result) {
+                            compressionResultLabel.setVisible(true);
+                            compressionResultLabel.setText("Files successfully compressed.");
+                        }
+
                     } else {
 
                         JOptionPane.showMessageDialog(
@@ -109,10 +120,10 @@ public class GeneralToolsPanel extends JPanel {
 
                 try {
 
-                   // ZipFile zipFile = new ZipFile(file);
+                    // ZipFile zipFile = new ZipFile(file);
 
                     // Zip is encrypted with password
-                    if (new ZipFile(file).isEncrypted()){
+                    if (new ZipFile(file).isEncrypted()) {
 
                         JPasswordField passwordField = new JPasswordField();
                         int okCxl = JOptionPane.showConfirmDialog(
@@ -129,7 +140,12 @@ public class GeneralToolsPanel extends JPanel {
 
                             if (!password.isEmpty()) {
 
-                                Compression.deCompressEncryptedZip(file, password);
+                                boolean result = Compression.deCompressEncryptedZip(file, password);
+                                if (result) {
+                                    compressionResultLabel.setVisible(true);
+                                    compressionResultLabel.setText("Files successfully decompressed.");
+                                }
+
                             } else {
 
                                 JOptionPane.showMessageDialog(
@@ -142,21 +158,19 @@ public class GeneralToolsPanel extends JPanel {
                     }
 
                     // Zip without password
-                    else{
+                    else {
 
-                        Compression.deCompressUnencryptedZip(file);
+                        boolean result = Compression.deCompressUnencryptedZip(file);
+                        if (result) {
+                            compressionResultLabel.setVisible(true);
+                            compressionResultLabel.setText("Files successfully decompressed.");
+                        }
                     }
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
             }
         });
-
-        JLabel compressionResultLabel = new JLabel("Compression Result", SwingConstants.CENTER);
-        compressionResultLabel.setVerticalAlignment(SwingConstants.TOP);
-        compressionResultLabel.setForeground(new Color(244, 244, 244));
-        compressionResultLabel.setFont(new Font("Consolas", Font.PLAIN, 15));
-        compressionResultLabel.setVisible(false);
 
         this.add(nameLabel);
         this.add(showMetadataButton);
