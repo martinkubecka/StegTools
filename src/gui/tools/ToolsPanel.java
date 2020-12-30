@@ -50,7 +50,9 @@ public class ToolsPanel extends JPanel {
         pngToolsButton.setBackground(new Color(60, 63, 65));
         pngToolsButton.setFocusable(false);
         pngToolsButton.addActionListener(e -> {
-            // TODO PNG Tools Button Action
+
+            String pngTools = "PNG Tools Panel";
+            cardLayout.show(contentPane, pngTools);
         });
 
         JButton bmpToolsButton = new JButton("BMP");

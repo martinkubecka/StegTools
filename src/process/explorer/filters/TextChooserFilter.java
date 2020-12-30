@@ -1,5 +1,6 @@
 package process.explorer.filters;
 
+import process.explorer.FileChooser;
 import process.explorer.FileFormats;
 
 import javax.swing.filechooser.FileFilter;
@@ -13,7 +14,7 @@ public class TextChooserFilter extends FileFilter {
             return true;
         }
 
-        String extension = getExtension(f);
+        String extension = FileChooser.getExtension(f);
         if (extension != null) {
             return extension.equals(FileFormats.TXT.getFormat());
         }
@@ -25,16 +26,4 @@ public class TextChooserFilter extends FileFilter {
     public String getDescription() {
         return ".txt";
     }
-
-    String getExtension(File f) {
-        String ext = null;
-        String s = f.getName();
-        int i = s.lastIndexOf('.');
-
-        if (i > 0 && i < s.length() - 1) {
-            ext = s.substring(i + 1).toLowerCase();
-        }
-        return ext;
-    }
-
 }

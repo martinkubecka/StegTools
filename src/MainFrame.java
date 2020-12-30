@@ -2,6 +2,7 @@ import gui.menu.ChangeLogPanel;
 import gui.menu.HeaderPanel;
 import gui.tools.ToolsPanel;
 import gui.tools.general.GeneralToolsPanel;
+import gui.tools.png.PngToolsPanel;
 import gui.tools.text.HideMessagePanel;
 import gui.tools.text.TextManipulationPanel;
 import gui.tools.text.TextToolsPanel;
@@ -41,6 +42,7 @@ public class MainFrame extends JFrame {
         JPanel textToolsPanel = new TextToolsPanel(contentPane, cardLayout);
         JPanel textManipulationPanel = new TextManipulationPanel();
         JPanel hideMessagePanel = new HideMessagePanel();
+        JPanel pngToolsPanel= new PngToolsPanel();
 
         contentPane.add(changeLogPanel, "ChangeLog Panel");
         contentPane.add(toolsPanel, "Tools Panel");
@@ -48,6 +50,7 @@ public class MainFrame extends JFrame {
         contentPane.add(textToolsPanel, "Text Tools Panel");
         contentPane.add(textManipulationPanel, "Text Manipulation Panel");
         contentPane.add(hideMessagePanel, "Hide Message Panel");
+        contentPane.add(pngToolsPanel, "PNG Tools Panel");
 
         this.getContentPane().add(headerPanel, BorderLayout.PAGE_START);
         this.getContentPane().add(contentPane, BorderLayout.CENTER);

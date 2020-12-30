@@ -6,7 +6,7 @@ import process.explorer.FileFormats;
 import javax.swing.filechooser.FileFilter;
 import java.io.File;
 
-public class ZipChooserFilter extends FileFilter {
+public class PngChooserFilter extends FileFilter {
 
     @Override
     public boolean accept(File f) {
@@ -16,13 +16,13 @@ public class ZipChooserFilter extends FileFilter {
 
         String extension = FileChooser.getExtension(f);
         if (extension != null) {
-            return extension.equals(FileFormats.ZIP.getFormat());
+            return extension.equals(FileFormats.PNG.getFormat());
         }
         return false;
     }
 
     @Override
     public String getDescription() {
-        return ".zip";
+        return ".png";
     }
 }

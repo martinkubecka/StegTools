@@ -1,5 +1,6 @@
 package process.explorer.filters;
 
+import process.explorer.FileChooser;
 import process.explorer.FileFormats;
 
 import javax.swing.filechooser.FileFilter;
@@ -13,7 +14,7 @@ public class ImageChooserFilter extends FileFilter {
             return true;
         }
 
-        String extension = getExtension(f);
+        String extension = FileChooser.getExtension(f);
         if (extension != null) {
             if (extension.equals(FileFormats.JPEG.getFormat()) ||
                     extension.equals(FileFormats.JPG.getFormat()) ||
@@ -32,16 +33,5 @@ public class ImageChooserFilter extends FileFilter {
     @Override
     public String getDescription() {
         return "Image Only";
-    }
-
-    String getExtension(File f) {
-        String ext = null;
-        String s = f.getName();
-        int i = s.lastIndexOf('.');
-
-        if (i > 0 && i < s.length() - 1) {
-            ext = s.substring(i + 1).toLowerCase();
-        }
-        return ext;
     }
 }

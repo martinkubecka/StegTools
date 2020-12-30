@@ -1,6 +1,7 @@
 package process.explorer;
 
 import process.explorer.filters.ImageChooserFilter;
+import process.explorer.filters.PngChooserFilter;
 import process.explorer.filters.TextChooserFilter;
 import process.explorer.filters.ZipChooserFilter;
 
@@ -92,5 +93,32 @@ public class FileChooser {
         return null;
     }
 
+    public static File pickPngFromFileChooser() {
 
+        JFileChooser fc = new JFileChooser();
+        fc.setCurrentDirectory(new File("src/resources/"));
+        fc.setDialogTitle("Select the file to open... ");
+        fc.setMultiSelectionEnabled(false);
+        fc.addChoosableFileFilter(new PngChooserFilter());
+        fc.setAcceptAllFileFilterUsed(false);
+
+        int returnVal = fc.showOpenDialog(new JDialog());
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            return fc.getSelectedFile();
+        }
+        return null;
+    }
+
+    public static String getExtension(File f) {
+
+        String ext = null;
+        String s = f.getName();
+        int i = s.lastIndexOf('.');
+
+        if (i > 0 &&  i < s.length() - 1) {
+            ext = s.substring(i+1).toLowerCase();
+        }
+        return ext;
+    }
 }
