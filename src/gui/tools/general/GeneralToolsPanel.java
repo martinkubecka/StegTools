@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -34,11 +35,14 @@ public class GeneralToolsPanel extends JPanel {
         showMetadataButton.setFocusable(false);
         showMetadataButton.addActionListener(e -> {
 
-            File file = FileChooser.pickImageFromFileChooser();
+            File file = FileChooser.pickSingleFileChooser("images");
             if (file != null) {
 
                 Metadata metadata = ExtractMetadata.extractMetadata(file);
-                MetadataWindow metadataWindow = new MetadataWindow("Metadata", metadata);
+                // EXTRACT strings from METADATA object
+                ArrayList<String> metadataParsed = ExtractMetadata.parseMetadata(metadata);
+
+                MetadataWindow metadataWindow = new MetadataWindow("Metadata", metadataParsed);
                 metadataWindow.setVisible(true);
             }
         });
@@ -114,7 +118,7 @@ public class GeneralToolsPanel extends JPanel {
         decompressFilesButton.addActionListener(e -> {
 
             // TODO Refactor this implementation !
-            File file = FileChooser.pickZipFromFileChooser();
+            File file = FileChooser.pickSingleFileChooser("zip");
 
             if (file != null) {
 

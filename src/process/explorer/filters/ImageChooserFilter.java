@@ -16,16 +16,12 @@ public class ImageChooserFilter extends FileFilter {
 
         String extension = FileChooser.getExtension(f);
         if (extension != null) {
-            if (extension.equals(FileFormats.JPEG.getFormat()) ||
+            return extension.equals(FileFormats.JPEG.getFormat()) ||
                     extension.equals(FileFormats.JPG.getFormat()) ||
                     extension.equals(FileFormats.GIF.getFormat()) ||
                     extension.equals(FileFormats.TIFF.getFormat()) ||
                     extension.equals(FileFormats.TIF.getFormat()) ||
-                    extension.equals(FileFormats.PNG.getFormat())) {
-                return true;
-            } else {
-                return false;
-            }
+                    extension.equals(FileFormats.PNG.getFormat());
         }
         return false;
     }

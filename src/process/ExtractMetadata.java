@@ -10,102 +10,88 @@ import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
 import com.drew.metadata.exif.ExifReader;
 import com.drew.metadata.iptc.IptcReader;
+import process.explorer.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ExtractMetadata {
 
+    // TODO handle exception : File format could not be determined
+
     public static Metadata extractMetadata(File file) {
 
+        String fileFormat = FileChooser.getExtension(file);
         Metadata metadata = null;
 
-        try {
-            // We are only interested in handling
-            Iterable<JpegSegmentMetadataReader> readers = Arrays.asList(new ExifReader(), new IptcReader());
-
-            metadata = JpegMetadataReader.readMetadata(file, readers);
-
-            //print(metadata, "Using JpegMetadataReader for Exif and IPTC only");
-        } catch (JpegProcessingException | IOException e) {
-            print(e);
-        }
-
-        return metadata;
-    }
-
-    public static void extractMetadataComplex(File file) {
-
-        // File file = new File("E:\\Programming\\Java\\StegTools\\src\\cat.jpg");
-
-        // APPROACH 3: SPECIFIC METADATA TYPE
+        // SPECIFIC METADATA TYPE
         //
         // If you only wish to read a subset of the supported metadata types, you can do this by
         // passing the set of readers to use.
         //
         // This currently only applies to JPEG file processing.
-        try {
-            // We are only interested in handling
-            Iterable<JpegSegmentMetadataReader> readers = Arrays.asList(new ExifReader(), new IptcReader());
 
-            Metadata metadata = JpegMetadataReader.readMetadata(file, readers);
+        if (fileFormat.equals("jpg")) {
 
-            print(metadata, "Using JpegMetadataReader for Exif and IPTC only");
-        } catch (JpegProcessingException | IOException e) {
-            print(e);
+            try {
+                // We are only interested in handling
+                Iterable<JpegSegmentMetadataReader> readers = Arrays.asList(new ExifReader(), new IptcReader());
+
+                metadata = JpegMetadataReader.readMetadata(file, readers);
+
+                //print(metadata, "Using JpegMetadataReader for Exif and IPTC only");
+                return metadata;
+
+            } catch (JpegProcessingException | IOException e) {
+                print(e);
+            }
+
+            // UNKNOWN FILE TYPE
+            //
+            // This is the most generic approach.
+            // It will transparently determine the file type and invoke the appropriate readers.
+            // In most cases, this is the most appropriate usage.
+            // This will handle JPEG, TIFF, GIF, BMP and RAW
+            // (CRW/CR2/NEF/RW2/ORF) files and extract whatever metadata is available and understood.
+
+        } else {
+            try {
+                metadata = ImageMetadataReader.readMetadata(file);
+
+//                print(metadata, "Using ImageMetadataReader");
+                return metadata;
+
+            } catch (ImageProcessingException | IOException e) {
+                print(e);
+            }
         }
 
-        // SCENARIO 1: UNKNOWN FILE TYPE
-        //
-        // This is the most generic approach.  It will transparently determine the file type and invoke the appropriate
-        // readers.  In most cases, this is the most appropriate usage.  This will handle JPEG, TIFF, GIF, BMP and RAW
-        // (CRW/CR2/NEF/RW2/ORF) files and extract whatever metadata is available and understood.
-//
-//        try {
-//            Metadata metadata = ImageMetadataReader.readMetadata(file);
-//
-//            System.out.println("------------------------- " + "UNKNOWN FILE TYPE" + "------------------------- ");
-//            print(metadata, "Using ImageMetadataReader");
-//        } catch (ImageProcessingException | IOException e) {
-//            print(e);
-//        }
+        return null;
+    }
 
-        // SCENARIO 2: SPECIFIC FILE TYPE
-        //
-        // If you know the file to be a JPEG, you may invoke the JpegMetadataReader, rather than the generic reader
-        // used in approach 1.  Similarly, if you knew the file to be a TIFF/RAW image you might use TiffMetadataReader,
-        // PngMetadataReader for PNG files, BmpMetadataReader for BMP files, or GifMetadataReader for GIF files.
-        //
-        // Using the specific reader offers a very, very slight performance improvement.
-        //
-//        try {
-//            Metadata metadata = JpegMetadataReader.readMetadata(file);
-//
-//            print(metadata, "Using JpegMetadataReader");
-//        } catch (JpegProcessingException | IOException e) {
-//            print(e);
-//        }
+    public static ArrayList<String> parseMetadata(Metadata metadata) {
 
-//        try {
-//
-//            Metadata metadata = ImageMetadataReader.readMetadata(file);
-//            for (Directory directory : metadata.getDirectories()) {
-//                for (Tag tag : directory.getTags()) {
-//                    System.out.format("[%s] - %s = %s",
-//                            directory.getName(), tag.getTagName(), tag.getDescription());
-//                    System.out.println("\n");
-//                }
-//                if (directory.hasErrors()) {
-//                    for (String error : directory.getErrors()) {
-//                        System.err.format("ERROR: %s", error);
-//                    }
-//                }
-//            }
-//
-//        } catch (Exception e) {
-//            System.out.println("Exception");
-//        }
+        ArrayList<String> metadataParsed = new ArrayList<>();
+
+        // A Metadata object contains multiple Directory objects
+        for (Directory directory : metadata.getDirectories()) {
+
+            // Each Directory stores values in Tag objects
+            for (Tag tag : directory.getTags()) {
+                metadataParsed.add(tag.toString());
+                //System.out.println(tag.toString());
+            }
+
+            // Each Directory may also contain error messages
+            for (String error : directory.getErrors()) {
+                //System.err.println("ERROR: " + error);
+                metadataParsed.add("ERROR " + error);
+            }
+        }
+
+        return metadataParsed;
     }
 
     // Write all extracted values to stdout.
@@ -123,9 +109,9 @@ public class ExtractMetadata {
             }
 
             // Each Directory may also contain error messages
-            for (String error : directory.getErrors()) {
-                System.err.println("ERROR: " + error);
-            }
+//            for (String error : directory.getErrors()) {
+//                System.err.println("ERROR: " + error);
+//            }
         }
     }
 

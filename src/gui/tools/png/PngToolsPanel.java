@@ -5,6 +5,7 @@ import gui.tools.general.MetadataWindow;
 import process.Compression;
 import process.ExtractMetadata;
 import process.explorer.FileChooser;
+import process.explorer.filters.PngChooserFilter;
 import process.png.ImageHeader;
 
 import javax.swing.*;
@@ -32,7 +33,9 @@ public class PngToolsPanel extends JPanel {
         checkHeaderButton.addActionListener(e -> {
 
             // TODO refactor after implementation of controller
-            File file = FileChooser.pickPngFromFileChooser();
+           // File file = FileChooser.pickPngFromFileChooser();
+            File file = FileChooser.pickSingleFileChooser("png");
+
 
             if (file != null) {
 

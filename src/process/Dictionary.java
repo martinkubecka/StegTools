@@ -1,6 +1,7 @@
 package process;
 
 import process.explorer.FileChooser;
+import process.explorer.filters.TextChooserFilter;
 
 import java.io.*;
 import java.util.HashMap;
@@ -27,7 +28,9 @@ public class Dictionary {
         }
 
         try {
-            File secretMessage = FileChooser.pickSingleTextFileFromFileChooser();
+            //File secretMessage = FileChooser.pickSingleTextFileFromFileChooser();
+            File secretMessage = FileChooser.pickSingleFileChooser("txt");
+
             if (secretMessage != null) {
 
                 BufferedReader in = new BufferedReader(new FileReader(secretMessage));

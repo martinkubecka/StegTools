@@ -1,16 +1,12 @@
 package gui.tools.general;
 
-import com.drew.metadata.Directory;
-import com.drew.metadata.Metadata;
-import com.drew.metadata.Tag;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class MetadataWindow extends JFrame {
 
-    public MetadataWindow(String title, Metadata metadata) {
+    public MetadataWindow(String title, ArrayList<String> metadataParsed) {
         super(title);
 
         // METADATA WINDOW DIMENSIONS
@@ -35,11 +31,7 @@ public class MetadataWindow extends JFrame {
         textArea.setFont(new Font("Source Code Pro", Font.PLAIN, 14));
         textArea.setEditable(false);
 
-        // EXTRACT strings from METADATA object
-        ArrayList<String> metadataParsed = new ArrayList<>();
-        metadataParsed = parseMetadata(metadata);
-
-        for (String data : metadataParsed){
+        for (String data : metadataParsed) {
 
             textArea.append(data + "\n");
         }
@@ -50,28 +42,5 @@ public class MetadataWindow extends JFrame {
 
         panel.add(scrollPane);
         this.add(panel);
-    }
-
-    private ArrayList<String> parseMetadata(Metadata metadata) {
-
-        ArrayList<String> metadataParsed = new ArrayList<>();
-
-        // A Metadata object contains multiple Directory objects
-        for (Directory directory : metadata.getDirectories()) {
-
-            // Each Directory stores values in Tag objects
-            for (Tag tag : directory.getTags()) {
-                metadataParsed.add(tag.toString());
-                //System.out.println(tag.toString());
-            }
-
-            // Each Directory may also contain error messages
-            for (String error : directory.getErrors()) {
-                //System.err.println("ERROR: " + error);
-                metadataParsed.add("ERROR " + error);
-            }
-        }
-
-        return metadataParsed;
     }
 }

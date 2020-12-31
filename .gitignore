@@ -1,9 +1,0 @@
-########################
-###### StegTools #######
-########################
-
-# Content of resources directory
-resources/
-
-# Implementation not finished
-ZeroWidthCharacters.*

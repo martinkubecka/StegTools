@@ -22,7 +22,7 @@ public class ChangeLogPanel extends JPanel {
         changeLogLabel.setForeground(new Color(244, 244, 244));
         changeLogLabel.setFont(new Font("Consolas", Font.PLAIN, 20));
 
-        JLabel creatorLabel = new JLabel("Martin Kubecka, 2020, v0.82", SwingConstants.RIGHT);
+        JLabel creatorLabel = new JLabel("Martin Kubecka, 2020, v0.86", SwingConstants.RIGHT);
         creatorLabel.setVerticalAlignment(SwingConstants.BOTTOM);
         creatorLabel.setForeground(new Color(244, 244, 244));
         creatorLabel.setFont(new Font("Consolas", Font.PLAIN, 12));

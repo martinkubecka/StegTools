@@ -18,7 +18,7 @@ public class TextToolsPanel extends JPanel {
         nameLabel.setForeground(new Color(244, 244, 244));
         nameLabel.setFont(new Font("Consolas", Font.PLAIN, 36));
 
-        JLabel messageShorteningResultButton = new JLabel("Message Shortening Result", SwingConstants.CENTER);
+        JLabel messageShorteningResultButton = new JLabel("", SwingConstants.CENTER);
         messageShorteningResultButton.setVerticalAlignment(SwingConstants.TOP);
         messageShorteningResultButton.setForeground(new Color(244, 244, 244));
         messageShorteningResultButton.setFont(new Font("Consolas", Font.ITALIC, 15));
