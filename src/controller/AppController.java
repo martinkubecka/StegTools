@@ -3,6 +3,7 @@ package controller;
 import model.Compression;
 import model.Dictionary;
 import model.ExtractMetadata;
+import model.bmp.BitPlaneSlicing;
 import model.explorer.FileChooser;
 import model.png.ImageHeader;
 import view.MainFrame;
@@ -17,6 +18,7 @@ public class AppController {
     private ExtractMetadata extractMetadata;
     private FileChooser fileChooser;
     private ImageHeader imageHeader;
+    private BitPlaneSlicing bitPlaneSlicing;
 
     public AppController() {
 
@@ -25,6 +27,7 @@ public class AppController {
         extractMetadata = new ExtractMetadata();
         fileChooser = new FileChooser();
         imageHeader = new ImageHeader();
+        bitPlaneSlicing = new BitPlaneSlicing();
     }
 
     /**
@@ -61,5 +64,13 @@ public class AppController {
 
     public ImageHeader getImageHeader() {
         return imageHeader;
+    }
+
+    public BitPlaneSlicing getBitPlaneSlicing() {
+        return bitPlaneSlicing;
+    }
+
+    public MainFrame getFrame() {
+        return frame;
     }
 }

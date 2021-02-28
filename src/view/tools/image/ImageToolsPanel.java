@@ -1,6 +1,7 @@
 package view.tools.image;
 
 import controller.AppController;
+import view.Panels;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,15 +9,20 @@ import java.io.File;
 
 public class ImageToolsPanel extends JPanel {
 
+    private JPanel parentPanel;
     private AppController baseController;
+    private CardLayout cardLayout;
     private JLabel nameLabelPNG;
     private JButton checkHeaderButton;
     private JLabel nameLabelBMP;
+    private JButton bitPlanesButton;
     private JButton leastSignificantBitButton;
 
-    public ImageToolsPanel(AppController baseController) {
+    public ImageToolsPanel(Panels parentPanel, AppController baseController, CardLayout cardLayout) {
 
+        this.parentPanel = parentPanel;
         this.baseController = baseController;
+        this.cardLayout = cardLayout;
 
         nameLabelPNG = new JLabel("PNG Tools", SwingConstants.CENTER);
         nameLabelPNG.setVerticalAlignment(SwingConstants.CENTER);
@@ -34,6 +40,12 @@ public class ImageToolsPanel extends JPanel {
         nameLabelBMP.setForeground(new Color(244, 244, 244));
         nameLabelBMP.setFont(new Font("Consolas", Font.PLAIN, 36));
 
+        bitPlanesButton = new JButton("Bit Planes Viewer");
+        bitPlanesButton.setForeground(Color.BLACK);
+        bitPlanesButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
+        bitPlanesButton.setBackground(new Color(60, 63, 65));
+        bitPlanesButton.setFocusable(false);
+
         leastSignificantBitButton = new JButton("Least Significant Bit");
         leastSignificantBitButton.setForeground(Color.BLACK);
         leastSignificantBitButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
@@ -47,9 +59,9 @@ public class ImageToolsPanel extends JPanel {
 
     private void setUpLayout() {
 
-        this.setLayout(new GridLayout(5, 1, 8, 70));
+        this.setLayout(new GridLayout(5, 1, 8, 50));
         this.setBackground(new Color(72, 0, 0));
-        this.setBorder(BorderFactory.createEmptyBorder(8, 150, 8, 150));
+        this.setBorder(BorderFactory.createEmptyBorder(8, 150, 24, 150));
     }
 
     private void setUpPanel() {
@@ -57,6 +69,7 @@ public class ImageToolsPanel extends JPanel {
         this.add(nameLabelPNG);
         this.add(checkHeaderButton);
         this.add(nameLabelBMP);
+        this.add(bitPlanesButton);
         this.add(leastSignificantBitButton);
     }
 
@@ -99,6 +112,13 @@ public class ImageToolsPanel extends JPanel {
                     }
                 }
             }
+        });
+
+        bitPlanesButton.addActionListener(e -> {
+
+            String bitPlane = "Bit Plane Panel";
+            cardLayout.show(parentPanel, bitPlane);
+
         });
 
         leastSignificantBitButton.addActionListener(e -> {

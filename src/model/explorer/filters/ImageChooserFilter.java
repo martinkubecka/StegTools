@@ -21,6 +21,7 @@ public class ImageChooserFilter extends FileFilter {
                     extension.equals(FileFormats.GIF.getFormat()) ||
                     extension.equals(FileFormats.TIFF.getFormat()) ||
                     extension.equals(FileFormats.TIF.getFormat()) ||
+                    extension.equals(FileFormats.BMP.getFormat()) ||
                     extension.equals(FileFormats.PNG.getFormat());
         }
         return false;

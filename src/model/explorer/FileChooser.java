@@ -1,9 +1,6 @@
 package model.explorer;
 
-import model.explorer.filters.ImageChooserFilter;
-import model.explorer.filters.PngChooserFilter;
-import model.explorer.filters.TextChooserFilter;
-import model.explorer.filters.ZipChooserFilter;
+import model.explorer.filters.*;
 
 import javax.swing.*;
 import java.io.File;
@@ -18,9 +15,10 @@ public class FileChooser {
         fc.setMultiSelectionEnabled(false);
 
         switch (fileFormat) {
-            case "txt" -> fc.addChoosableFileFilter(new TextChooserFilter());
-            case "zip" -> fc.addChoosableFileFilter(new ZipChooserFilter());
-            case "png" -> fc.addChoosableFileFilter(new PngChooserFilter());
+            case "txt" -> fc.addChoosableFileFilter(new SingleFileChooserFilter("txt"));
+            case "zip" -> fc.addChoosableFileFilter(new SingleFileChooserFilter("zip"));
+            case "png" -> fc.addChoosableFileFilter(new SingleFileChooserFilter("png"));
+            case "bmp" -> fc.addChoosableFileFilter(new SingleFileChooserFilter("bmp"));
             case "images" -> fc.addChoosableFileFilter(new ImageChooserFilter());
         }
 

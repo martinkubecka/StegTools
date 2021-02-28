@@ -1,12 +1,18 @@
 package model.explorer.filters;
 
 import model.explorer.FileChooser;
-import model.explorer.FileFormats;
 
 import javax.swing.filechooser.FileFilter;
 import java.io.File;
 
-public class TextChooserFilter extends FileFilter {
+public class SingleFileChooserFilter extends FileFilter {
+
+    private String fileFormat;
+
+    public SingleFileChooserFilter(String fileFormat) {
+
+        this.fileFormat = fileFormat;
+    }
 
     @Override
     public boolean accept(File f) {
@@ -16,7 +22,7 @@ public class TextChooserFilter extends FileFilter {
 
         String extension = FileChooser.getExtension(f);
         if (extension != null) {
-            return extension.equals(FileFormats.TXT.getFormat());
+            return extension.equals(fileFormat);
         }
 
         return false;
@@ -24,6 +30,7 @@ public class TextChooserFilter extends FileFilter {
 
     @Override
     public String getDescription() {
-        return ".txt";
+        return "." + fileFormat;
     }
+
 }

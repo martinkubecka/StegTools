@@ -76,7 +76,7 @@ public class GeneralToolsPanel extends JPanel {
 
     private void setUpLayout() {
 
-        this.setLayout(new GridLayout(7, 1, 8, 40));
+        this.setLayout(new GridLayout(7, 1, 8, 37));
         this.setBackground(new Color(72, 0, 0));
         this.setBorder(BorderFactory.createEmptyBorder(8, 150, 8, 150));
     }

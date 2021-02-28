@@ -9,6 +9,7 @@ public enum FileFormats {
     TIF("tif"),
     PNG("png"),
     ZIP("zip"),
+    BMP("bmp"),
     TXT("txt");
 
     private String format;
