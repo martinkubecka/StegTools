@@ -2,6 +2,8 @@ package view.tools.image;
 
 import controller.AppController;
 import view.Panels;
+import view.tools.general.MetadataWindow;
+import view.tools.image.planes.BitPlaneWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -116,9 +118,11 @@ public class ImageToolsPanel extends JPanel {
 
         bitPlanesButton.addActionListener(e -> {
 
-            String bitPlane = "Bit Plane Panel";
-            cardLayout.show(parentPanel, bitPlane);
+//            String bitPlane = "Bit Plane Panel";
+//            cardLayout.show(parentPanel, bitPlane);
 
+            BitPlaneWindow bitPlaneWindow = new BitPlaneWindow("Bit Plane Viewer", baseController);
+            bitPlaneWindow.setVisible(true);
         });
 
         leastSignificantBitButton.addActionListener(e -> {

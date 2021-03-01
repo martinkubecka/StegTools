@@ -6,7 +6,7 @@ import view.menu.HeaderPanel;
 import view.tools.ToolsPanel;
 import view.tools.general.GeneralToolsPanel;
 import view.tools.image.ImageToolsPanel;
-import view.tools.image.BitPlanePanel;
+import view.tools.image.planes.BitPlanePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +20,7 @@ public class Panels extends JPanel {
     private ToolsPanel toolsPanel;
     private GeneralToolsPanel generalToolsPanel;
     private ImageToolsPanel imageToolsPanel;
-    private BitPlanePanel bitPlanePanel;
+//    private BitPlanePanel bitPlanePanel;
 
     public Panels(AppController baseController) {
 
@@ -36,7 +36,7 @@ public class Panels extends JPanel {
         toolsPanel = new ToolsPanel(this, cardLayout);
         generalToolsPanel = new GeneralToolsPanel(baseController);
         imageToolsPanel = new ImageToolsPanel(this, baseController, cardLayout);
-        bitPlanePanel = new BitPlanePanel(baseController);
+//        bitPlanePanel = new BitPlanePanel(baseController);
 
         setUpPanel();
     }
@@ -48,7 +48,7 @@ public class Panels extends JPanel {
         this.add(toolsPanel, "Tools Panel");
         this.add(generalToolsPanel, "General Tools Panel");
         this.add(imageToolsPanel, "Image Tools Panel");
-        this.add(bitPlanePanel, "Bit Plane Panel");
+//        this.add(bitPlanePanel, "Bit Plane Panel");
     }
 
     public HeaderPanel getHeaderPanel() {

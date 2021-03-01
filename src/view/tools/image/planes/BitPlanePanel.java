@@ -1,4 +1,4 @@
-package view.tools.image;
+package view.tools.image.planes;
 
 import controller.AppController;
 
@@ -14,10 +14,17 @@ public class BitPlanePanel extends JPanel {
     private AppController baseController;
     private JLabel currentPlain;
     private JLabel imageCanvas;
+
     private JPanel footerPanel;
+
+    private JPanel footerPanelControls;
     private JButton uploadButton;
     private JButton forwardButton;
     private JButton backwardButton;
+
+    private JPanel footerPanelMore;
+    private JButton saveImageButton;
+
     private BufferedImage image;
 
     public BitPlanePanel(AppController baseController) {
@@ -33,10 +40,20 @@ public class BitPlanePanel extends JPanel {
         // CANVAS
         imageCanvas = new JLabel("", SwingConstants.CENTER);
 
-        // FOOTER
+        // Footer Panel Controls
+        footerPanelControls = new JPanel();
+        footerPanelControls.setBackground(new Color(72, 0, 0));
+        footerPanelControls.setLayout(new FlowLayout());
+
+        // Footer Panel More
+        footerPanelMore = new JPanel();
+        footerPanelMore.setBackground(new Color(72, 0, 0));
+        footerPanelMore.setLayout(new FlowLayout());
+
+        // FOOTER Panel
         footerPanel = new JPanel();
         footerPanel.setBackground(new Color(72, 0, 0));
-        footerPanel.setLayout(new FlowLayout());
+        footerPanel.setLayout(new GridLayout(2, 1));
 
         uploadButton = new JButton("Upload Image");
         uploadButton.setForeground(Color.BLACK);
@@ -56,6 +73,12 @@ public class BitPlanePanel extends JPanel {
         backwardButton.setBackground(new Color(60, 63, 65));
         backwardButton.setFocusable(false);
 
+        saveImageButton = new JButton("Save Image");
+        saveImageButton.setForeground(Color.BLACK);
+        saveImageButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
+        saveImageButton.setBackground(new Color(60, 63, 65));
+        saveImageButton.setFocusable(false);
+
         setUpLayout();
         setUpPanel();
         setUpListeners();
@@ -72,9 +95,14 @@ public class BitPlanePanel extends JPanel {
 
         this.add(currentPlain, BorderLayout.NORTH);
 
-        footerPanel.add(backwardButton);
-        footerPanel.add(uploadButton);
-        footerPanel.add(forwardButton);
+        footerPanelControls.add(backwardButton);
+        footerPanelControls.add(uploadButton);
+        footerPanelControls.add(forwardButton);
+
+        footerPanelMore.add(saveImageButton);
+
+        footerPanel.add(footerPanelControls);
+        footerPanel.add(footerPanelMore);
 
         this.add(imageCanvas, BorderLayout.CENTER);
         this.add(footerPanel, BorderLayout.SOUTH);
@@ -98,6 +126,11 @@ public class BitPlanePanel extends JPanel {
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
+        });
+
+        saveImageButton.addActionListener(e -> {
+
+            // TODO
         });
 
         forwardButton.addActionListener(e -> {

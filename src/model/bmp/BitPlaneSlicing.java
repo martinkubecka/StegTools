@@ -103,7 +103,6 @@ public class BitPlaneSlicing {
         }
     }
 
-
     //    ----------------------------------------------------------------------------------------
 
     // Perform the previous transformation
@@ -133,10 +132,10 @@ public class BitPlaneSlicing {
     }
 
     // Initialize the current loaded image
-    public void setWorkingImage(BufferedImage image){
+    public void setWorkingImage(BufferedImage image) {
 
         this.originalImage = image;
-        this.transformedImage = image;
+        this.transformedImage = originalImage;
         currentTransition = 0;
     }
 
