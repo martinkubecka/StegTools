@@ -1,5 +1,7 @@
 package view.tools;
 
+import view.components.Button;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -28,17 +30,8 @@ public class ToolsPanel extends JPanel {
         toolsButtonsPanel.setBackground(new Color(72, 0, 0));
         toolsButtonsPanel.setLayout(new GridLayout(2, 2, 5, 5));
 
-        generalToolsButton = new JButton("General");
-        generalToolsButton.setForeground(Color.BLACK);
-        generalToolsButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
-        generalToolsButton.setBackground(new Color(60, 63, 65));
-        generalToolsButton.setFocusable(false);
-
-        imageToolsButton = new JButton("Image");
-        imageToolsButton.setForeground(Color.BLACK);
-        imageToolsButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
-        imageToolsButton.setBackground(new Color(60, 63, 65));
-        imageToolsButton.setFocusable(false);
+        generalToolsButton = new Button("General");
+        imageToolsButton = new Button("Image");
 
         setUpLayout();
         setUpPanel();

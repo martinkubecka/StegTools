@@ -4,6 +4,7 @@ import controller.AppController;
 import view.Panels;
 import view.tools.general.MetadataWindow;
 import view.tools.image.planes.BitPlaneWindow;
+import view.components.Button;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,28 +32,15 @@ public class ImageToolsPanel extends JPanel {
         nameLabelPNG.setForeground(new Color(244, 244, 244));
         nameLabelPNG.setFont(new Font("Consolas", Font.PLAIN, 36));
 
-        checkHeaderButton = new JButton("Check header");
-        checkHeaderButton.setForeground(Color.BLACK);
-        checkHeaderButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
-        checkHeaderButton.setBackground(new Color(60, 63, 65));
-        checkHeaderButton.setFocusable(false);
+        checkHeaderButton = new Button("Check header");
 
         nameLabelBMP = new JLabel("BMP Tools", SwingConstants.CENTER);
         nameLabelBMP.setVerticalAlignment(SwingConstants.CENTER);
         nameLabelBMP.setForeground(new Color(244, 244, 244));
         nameLabelBMP.setFont(new Font("Consolas", Font.PLAIN, 36));
 
-        bitPlanesButton = new JButton("Bit Planes Viewer");
-        bitPlanesButton.setForeground(Color.BLACK);
-        bitPlanesButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
-        bitPlanesButton.setBackground(new Color(60, 63, 65));
-        bitPlanesButton.setFocusable(false);
-
-        leastSignificantBitButton = new JButton("Least Significant Bit");
-        leastSignificantBitButton.setForeground(Color.BLACK);
-        leastSignificantBitButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
-        leastSignificantBitButton.setBackground(new Color(60, 63, 65));
-        leastSignificantBitButton.setFocusable(false);
+        bitPlanesButton = new Button("Bit Planes Viewer");
+        leastSignificantBitButton = new Button("Least Significant Bit");
 
         setUpLayout();
         setUpPanel();

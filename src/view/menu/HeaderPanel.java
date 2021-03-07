@@ -3,6 +3,7 @@ package view.menu;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import view.components.Button;
 
 public class HeaderPanel extends JPanel {
 
@@ -18,28 +19,11 @@ public class HeaderPanel extends JPanel {
         this.parentPanel = parentPanel;
         this.cardLayout = cardLayout;
 
-        changeLogButton = new JButton("Home");
-        changeLogButton.setForeground(Color.BLACK);
-        changeLogButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
-        changeLogButton.setBackground(new Color(60, 63, 65));
-        changeLogButton.setFocusable(false);
+        changeLogButton = new Button("Home");
+        toolsButton = new Button("Tools");
+        helpButton = new Button("Help");
 
-        toolsButton = new JButton("Tools");
-        toolsButton.setForeground(Color.BLACK);
-        toolsButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
-        toolsButton.setBackground(new Color(60, 63, 65));
-        toolsButton.setFocusable(false);
-
-        helpButton = new JButton("Help");
-        helpButton.setForeground(Color.BLACK);
-        helpButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
-        helpButton.setBackground(new Color(60, 63, 65));
-        helpButton.setFocusable(false);
-
-//        JButton exitButton = new JButton("Exit");
-//        exitButton.setForeground(Color.WHITE);
-//        exitButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
-//        exitButton.setBackground(new Color(60, 63, 65));
+//        JButton exitButton = new Button("Exit");
 
         setUpLayout();
         setUpPanel();

@@ -3,6 +3,7 @@ package view.tools.general;
 import com.drew.metadata.Metadata;
 import controller.AppController;
 import net.lingala.zip4j.ZipFile;
+import view.components.Button;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,11 +34,7 @@ public class GeneralToolsPanel extends JPanel {
         nameLabel.setForeground(new Color(244, 244, 244));
         nameLabel.setFont(new Font("Consolas", Font.PLAIN, 36));
 
-        showMetadataButton = new JButton("Show Metadata");
-        showMetadataButton.setForeground(Color.BLACK);
-        showMetadataButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
-        showMetadataButton.setBackground(new Color(60, 63, 65));
-        showMetadataButton.setFocusable(false);
+        showMetadataButton = new Button("Show Metadata");
 
         compressionResultLabel = new JLabel("Compression Result", SwingConstants.CENTER);
         compressionResultLabel.setVerticalAlignment(SwingConstants.TOP);
@@ -45,23 +42,9 @@ public class GeneralToolsPanel extends JPanel {
         compressionResultLabel.setFont(new Font("Consolas", Font.ITALIC, 15));
         compressionResultLabel.setVisible(false);
 
-        compressFilesButton = new JButton("Compress Files");
-        compressFilesButton.setForeground(Color.BLACK);
-        compressFilesButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
-        compressFilesButton.setBackground(new Color(60, 63, 65));
-        compressFilesButton.setFocusable(false);
-
-        decompressFilesButton = new JButton("Decompress Files");
-        decompressFilesButton.setForeground(Color.BLACK);
-        decompressFilesButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
-        decompressFilesButton.setBackground(new Color(60, 63, 65));
-        decompressFilesButton.setFocusable(false);
-
-        messageShorteningButton = new JButton("Message Shortening");
-        messageShorteningButton.setForeground(Color.BLACK);
-        messageShorteningButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
-        messageShorteningButton.setBackground(new Color(60, 63, 65));
-        messageShorteningButton.setFocusable(false);
+        compressFilesButton = new Button("Compress Files");
+        decompressFilesButton = new Button("Decompress Files");
+        messageShorteningButton = new Button("Message Shortening");
 
         messageShorteningResultLabel = new JLabel("", SwingConstants.CENTER);
         messageShorteningResultLabel.setVerticalAlignment(SwingConstants.TOP);
