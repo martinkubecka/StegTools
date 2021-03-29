@@ -9,10 +9,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BitPlanePanel extends JPanel {
+
+    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     private AppController baseController;
     private Label currentPlain;
@@ -33,6 +35,8 @@ public class BitPlanePanel extends JPanel {
     private BufferedImage image;
 
     public BitPlanePanel(AppController baseController) {
+
+        LOGGER.log(Level.SEVERE, "TEST", (Throwable) null);
 
         this.baseController = baseController;
 
@@ -117,8 +121,9 @@ public class BitPlanePanel extends JPanel {
                     }
                 }
 
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
+            } catch (Exception exception) {
+
+                LOGGER.log(Level.SEVERE, exception.toString(), exception);
             }
         });
 

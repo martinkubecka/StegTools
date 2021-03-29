@@ -1,4 +1,4 @@
-package model.image.bmp;
+package model.image.general;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

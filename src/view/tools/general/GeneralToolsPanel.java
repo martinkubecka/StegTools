@@ -14,8 +14,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GeneralToolsPanel extends JPanel {
+
+    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     private AppController baseController;
     private Label nameLabel;
@@ -192,7 +196,8 @@ public class GeneralToolsPanel extends JPanel {
                     }
 
                 } catch (IOException ioException) {
-                    ioException.printStackTrace();
+
+                    LOGGER.log(Level.SEVERE, ioException.toString(), ioException);
                 }
             }
         });

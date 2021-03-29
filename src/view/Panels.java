@@ -6,8 +6,7 @@ import view.menu.HeaderPanel;
 import view.tools.ToolsPanel;
 import view.tools.general.GeneralToolsPanel;
 import view.tools.image.ImageToolsPanel;
-import view.tools.image.planes.BitPlanePanel;
-import view.tools.image.planes.LSBPanel;
+import view.tools.image.bmp.LSBPanel;
 
 import javax.swing.*;
 import java.awt.*;

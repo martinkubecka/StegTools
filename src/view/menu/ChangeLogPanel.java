@@ -3,8 +3,12 @@ package view.menu;
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ChangeLogPanel extends JPanel {
+
+    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     private JLabel nameLabel;
     private JLabel changeLogLabel;
@@ -32,10 +36,13 @@ public class ChangeLogPanel extends JPanel {
         textArea = new JTextArea();
 
         try {
+
             FileReader reader = new FileReader("src/resources/version_control.txt");
             textArea.read(reader, "src/resources/version_control.txt"); //Object of JTextArea
+
         } catch (Exception exception) {
-            exception.printStackTrace();
+
+            LOGGER.log(Level.SEVERE, exception.toString(), exception);
         }
 
         textArea.setLineWrap(true);

@@ -1,4 +1,4 @@
-package view.tools.image.planes;
+package view.tools.image.bmp;
 
 import controller.AppController;
 import view.Panels;
@@ -7,8 +7,16 @@ import view.components.Label;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LSBPanel extends JPanel {
+
+    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     private JPanel parentPanel;
     private AppController baseController;
@@ -63,7 +71,38 @@ public class LSBPanel extends JPanel {
 
         insertDataButton.addActionListener(e -> {
 
-            // TODO
+            // Pick carrier - bmp only
+            File fileCarrier = baseController.getFileChooser().pickSingleFileChooser("bmp");
+
+            if (fileCarrier != null) {
+
+                // 0 = yes, 1 = no, 2 = cancel
+                int input = JOptionPane.showConfirmDialog(this,
+                        "Would you like to choose some secret files?", "Carrier picked successfully!", JOptionPane.YES_NO_CANCEL_OPTION);
+
+                if (input == 0) {
+
+//                    // Pick secret files
+                    List<File> filesToHide = null;
+                    try {
+
+                        filesToHide = Arrays.asList(Objects.requireNonNull(baseController.getFileChooser().pickMultipleFilesFromFileChooser()));
+
+                        boolean isTextFilePresent = baseController.getLeastSignificantBit().isTextFilePresent(filesToHide);
+
+                        if (isTextFilePresent){
+                            System.out.println("What now?");
+                        } else {
+                            System.out.println("Uff..");
+                        }
+
+                    } catch (Exception exception) {
+
+                        LOGGER.log(Level.SEVERE, exception.toString(), exception);
+                    }
+                }
+            }
+
 
         });
 
