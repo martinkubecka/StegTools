@@ -1,4 +1,4 @@
-package model.png;
+package model.image.png;
 
 import java.io.File;
 import java.io.FileInputStream;

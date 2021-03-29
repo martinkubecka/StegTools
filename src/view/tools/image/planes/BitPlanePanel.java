@@ -1,6 +1,8 @@
 package view.tools.image.planes;
 
 import controller.AppController;
+import view.components.Button;
+import view.components.Label;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -9,11 +11,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+
 public class BitPlanePanel extends JPanel {
 
     private AppController baseController;
-    private JLabel currentPlain;
+    private Label currentPlain;
     private JLabel imageCanvas;
+
+//    private JPanel imageCanvasPanel;
 
     private JPanel footerPanel;
 
@@ -23,7 +28,7 @@ public class BitPlanePanel extends JPanel {
     private JButton backwardButton;
 
     private JPanel footerPanelMore;
-    private JButton saveImageButton;
+//    private JButton saveImageButton;
 
     private BufferedImage image;
 
@@ -32,13 +37,12 @@ public class BitPlanePanel extends JPanel {
         this.baseController = baseController;
 
         // HEADER
-        currentPlain = new JLabel("", SwingConstants.CENTER);
-        currentPlain.setVerticalAlignment(SwingConstants.TOP);
-        currentPlain.setForeground(new Color(244, 244, 244));
-        currentPlain.setFont(new Font("Consolas", Font.PLAIN, 15));
+        currentPlain = new Label("", SwingConstants.CENTER, SwingConstants.TOP, Font.PLAIN, 15);
 
         // CANVAS
         imageCanvas = new JLabel("", SwingConstants.CENTER);
+//        imageCanvasPanel = new JPanel();
+        // TODO add scroll bars
 
         // Footer Panel Controls
         footerPanelControls = new JPanel();
@@ -55,29 +59,10 @@ public class BitPlanePanel extends JPanel {
         footerPanel.setBackground(new Color(72, 0, 0));
         footerPanel.setLayout(new GridLayout(2, 1));
 
-        uploadButton = new JButton("Upload Image");
-        uploadButton.setForeground(Color.BLACK);
-        uploadButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
-        uploadButton.setBackground(new Color(60, 63, 65));
-        uploadButton.setFocusable(false);
-
-        forwardButton = new JButton(">");
-        forwardButton.setForeground(Color.BLACK);
-        forwardButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
-        forwardButton.setBackground(new Color(60, 63, 65));
-        forwardButton.setFocusable(false);
-
-        backwardButton = new JButton("<");
-        backwardButton.setForeground(Color.BLACK);
-        backwardButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
-        backwardButton.setBackground(new Color(60, 63, 65));
-        backwardButton.setFocusable(false);
-
-        saveImageButton = new JButton("Save Image");
-        saveImageButton.setForeground(Color.BLACK);
-        saveImageButton.setFont(new Font("Source Code Pro", Font.BOLD, 14));
-        saveImageButton.setBackground(new Color(60, 63, 65));
-        saveImageButton.setFocusable(false);
+        uploadButton = new Button("Upload Image");
+        forwardButton = new Button(">");
+        backwardButton = new Button("<");
+//        saveImageButton = new Button("Save Image");
 
         setUpLayout();
         setUpPanel();
@@ -99,12 +84,13 @@ public class BitPlanePanel extends JPanel {
         footerPanelControls.add(uploadButton);
         footerPanelControls.add(forwardButton);
 
-        footerPanelMore.add(saveImageButton);
+//        footerPanelMore.add(saveImageButton);
 
         footerPanel.add(footerPanelControls);
         footerPanel.add(footerPanelMore);
 
         this.add(imageCanvas, BorderLayout.CENTER);
+//        this.add(imageCanvasPanel, BorderLayout.CENTER);
         this.add(footerPanel, BorderLayout.SOUTH);
     }
 
@@ -119,8 +105,16 @@ public class BitPlanePanel extends JPanel {
                 if (file != null) {
 
                     image = ImageIO.read(file);
-                    baseController.getBitPlaneSlicing().setWorkingImage(image);
-                    updateImage();
+                    boolean isSuported = baseController.getBitPlaneSlicing().setWorkingImage(image);
+
+                    if (isSuported){
+                        updateImage();
+                    } else {
+                        JOptionPane.showMessageDialog(this,
+                                "RGB images with 8‑bits per channel (24‑bit or 32-bit images) are supported.",
+                                "Image not supported",
+                                JOptionPane.PLAIN_MESSAGE);
+                    }
                 }
 
             } catch (IOException ioException) {
@@ -128,10 +122,10 @@ public class BitPlanePanel extends JPanel {
             }
         });
 
-        saveImageButton.addActionListener(e -> {
-
-            // TODO
-        });
+//        saveImageButton.addActionListener(e -> {
+//
+//            // TODO
+//        });
 
         forwardButton.addActionListener(e -> {
 

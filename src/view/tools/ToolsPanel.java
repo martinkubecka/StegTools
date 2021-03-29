@@ -1,6 +1,7 @@
 package view.tools;
 
 import view.components.Button;
+import view.components.Label;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +10,7 @@ public class ToolsPanel extends JPanel {
 
     private JPanel parentPanel;
     private CardLayout cardLayout;
-    private JLabel toolsMenuLabel;
+    private Label toolsMenuLabel;
     private JPanel toolsButtonsPanel;
     private JButton generalToolsButton;
     private JButton imageToolsButton;
@@ -20,10 +21,7 @@ public class ToolsPanel extends JPanel {
         this.cardLayout = cardLayout;
 
         // HEADER LABEL
-        toolsMenuLabel = new JLabel("Tools Menu", SwingConstants.CENTER);
-        toolsMenuLabel.setVerticalAlignment(SwingConstants.CENTER);
-        toolsMenuLabel.setForeground(new Color(244, 244, 244));
-        toolsMenuLabel.setFont(new Font("Consolas", Font.PLAIN, 36));
+        toolsMenuLabel = new Label("Tools Menu", SwingConstants.CENTER, SwingConstants.CENTER, Font.PLAIN, 36);
 
         // PANEL FOR BUTTONS
         toolsButtonsPanel = new JPanel();

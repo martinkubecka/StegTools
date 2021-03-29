@@ -1,11 +1,11 @@
 package controller;
 
-import model.Compression;
-import model.Dictionary;
-import model.ExtractMetadata;
-import model.bmp.BitPlaneSlicing;
+import model.general.Compression;
+import model.general.Dictionary;
+import model.general.ExtractMetadata;
+import model.image.bmp.BitPlaneSlicing;
 import model.explorer.FileChooser;
-import model.png.ImageHeader;
+import model.image.png.ImageHeader;
 import view.MainFrame;
 
 import javax.swing.*;
@@ -18,7 +18,7 @@ public class AppController {
     private ExtractMetadata extractMetadata;
     private FileChooser fileChooser;
     private ImageHeader imageHeader;
-    private BitPlaneSlicing bitPlaneSlicing;
+    private BitPlaneSlicing bitPlaneSlicing2;
 
     public AppController() {
 
@@ -27,7 +27,7 @@ public class AppController {
         extractMetadata = new ExtractMetadata();
         fileChooser = new FileChooser();
         imageHeader = new ImageHeader();
-        bitPlaneSlicing = new BitPlaneSlicing();
+        bitPlaneSlicing2 = new BitPlaneSlicing();
     }
 
     /**
@@ -67,7 +67,7 @@ public class AppController {
     }
 
     public BitPlaneSlicing getBitPlaneSlicing() {
-        return bitPlaneSlicing;
+        return bitPlaneSlicing2;
     }
 
     public MainFrame getFrame() {

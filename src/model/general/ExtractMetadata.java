@@ -1,4 +1,4 @@
-package model;
+package model.general;
 
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;

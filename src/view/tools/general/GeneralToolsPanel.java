@@ -4,6 +4,7 @@ import com.drew.metadata.Metadata;
 import controller.AppController;
 import net.lingala.zip4j.ZipFile;
 import view.components.Button;
+import view.components.Label;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,39 +18,30 @@ import java.util.Objects;
 public class GeneralToolsPanel extends JPanel {
 
     private AppController baseController;
-    private JLabel nameLabel;
+    private Label nameLabel;
     private JButton showMetadataButton;
-    private JLabel compressionResultLabel;
+    private Label compressionResultLabel;
     private JButton compressFilesButton;
     private JButton decompressFilesButton;
-    private JLabel messageShorteningResultLabel;
+    private Label messageShorteningResultLabel;
     private JButton messageShorteningButton;
 
     public GeneralToolsPanel(AppController baseController) {
 
         this.baseController = baseController;
 
-        nameLabel = new JLabel("General Tools", SwingConstants.CENTER);
-        nameLabel.setVerticalAlignment(SwingConstants.CENTER);
-        nameLabel.setForeground(new Color(244, 244, 244));
-        nameLabel.setFont(new Font("Consolas", Font.PLAIN, 36));
+        nameLabel = new Label("General Tools", SwingConstants.CENTER, SwingConstants.CENTER, Font.PLAIN, 36);
 
         showMetadataButton = new Button("Show Metadata");
 
-        compressionResultLabel = new JLabel("Compression Result", SwingConstants.CENTER);
-        compressionResultLabel.setVerticalAlignment(SwingConstants.TOP);
-        compressionResultLabel.setForeground(new Color(244, 244, 244));
-        compressionResultLabel.setFont(new Font("Consolas", Font.ITALIC, 15));
+        compressionResultLabel = new Label("Compression Result", SwingConstants.CENTER, SwingConstants.TOP, Font.ITALIC, 15);
         compressionResultLabel.setVisible(false);
 
         compressFilesButton = new Button("Compress Files");
         decompressFilesButton = new Button("Decompress Files");
         messageShorteningButton = new Button("Message Shortening");
 
-        messageShorteningResultLabel = new JLabel("", SwingConstants.CENTER);
-        messageShorteningResultLabel.setVerticalAlignment(SwingConstants.TOP);
-        messageShorteningResultLabel.setForeground(new Color(244, 244, 244));
-        messageShorteningResultLabel.setFont(new Font("Consolas", Font.ITALIC, 15));
+        messageShorteningResultLabel = new Label("", SwingConstants.CENTER, SwingConstants.TOP, Font.ITALIC, 15);
         messageShorteningResultLabel.setVisible(false);
 
         setUpLayout();

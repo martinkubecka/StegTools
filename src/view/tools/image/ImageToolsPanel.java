@@ -5,6 +5,7 @@ import view.Panels;
 import view.tools.general.MetadataWindow;
 import view.tools.image.planes.BitPlaneWindow;
 import view.components.Button;
+import view.components.Label;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,9 +16,11 @@ public class ImageToolsPanel extends JPanel {
     private JPanel parentPanel;
     private AppController baseController;
     private CardLayout cardLayout;
-    private JLabel nameLabelPNG;
+
+    private Label nameLabelImageTools;
+    private Label nameLabelPNG;
     private JButton checkHeaderButton;
-    private JLabel nameLabelBMP;
+    private Label nameLabelBMP;
     private JButton bitPlanesButton;
     private JButton leastSignificantBitButton;
 
@@ -27,19 +30,16 @@ public class ImageToolsPanel extends JPanel {
         this.baseController = baseController;
         this.cardLayout = cardLayout;
 
-        nameLabelPNG = new JLabel("PNG Tools", SwingConstants.CENTER);
-        nameLabelPNG.setVerticalAlignment(SwingConstants.CENTER);
-        nameLabelPNG.setForeground(new Color(244, 244, 244));
-        nameLabelPNG.setFont(new Font("Consolas", Font.PLAIN, 36));
+        nameLabelImageTools = new Label("Image Tools", SwingConstants.CENTER, SwingConstants.CENTER, Font.PLAIN, 36);
+
+        bitPlanesButton = new Button("Bit Planes Viewer");
+
+        nameLabelPNG = new Label("PNG Tools", SwingConstants.CENTER, SwingConstants.CENTER, Font.PLAIN, 30);
 
         checkHeaderButton = new Button("Check header");
 
-        nameLabelBMP = new JLabel("BMP Tools", SwingConstants.CENTER);
-        nameLabelBMP.setVerticalAlignment(SwingConstants.CENTER);
-        nameLabelBMP.setForeground(new Color(244, 244, 244));
-        nameLabelBMP.setFont(new Font("Consolas", Font.PLAIN, 36));
+        nameLabelBMP = new Label("BMP Tools", SwingConstants.CENTER, SwingConstants.CENTER, Font.PLAIN, 30);
 
-        bitPlanesButton = new Button("Bit Planes Viewer");
         leastSignificantBitButton = new Button("Least Significant Bit");
 
         setUpLayout();
@@ -49,17 +49,18 @@ public class ImageToolsPanel extends JPanel {
 
     private void setUpLayout() {
 
-        this.setLayout(new GridLayout(5, 1, 8, 50));
+        this.setLayout(new GridLayout(6, 1, 8, 25));
         this.setBackground(new Color(72, 0, 0));
         this.setBorder(BorderFactory.createEmptyBorder(8, 150, 24, 150));
     }
 
     private void setUpPanel() {
 
+        this.add(nameLabelImageTools);
+        this.add(bitPlanesButton);
         this.add(nameLabelPNG);
         this.add(checkHeaderButton);
         this.add(nameLabelBMP);
-        this.add(bitPlanesButton);
         this.add(leastSignificantBitButton);
     }
 
@@ -115,8 +116,8 @@ public class ImageToolsPanel extends JPanel {
 
         leastSignificantBitButton.addActionListener(e -> {
 
-            // TODO
-
+            String lsbTools = "LSB Panel";
+            cardLayout.show(parentPanel, lsbTools);
         });
     }
 }

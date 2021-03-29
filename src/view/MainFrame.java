@@ -41,6 +41,7 @@ public class MainFrame extends JFrame {
 
         this.setTitle("Stegtools");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
         this.setVisible(true);
     }
 }
