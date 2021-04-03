@@ -49,7 +49,7 @@ public class AppController {
             e.printStackTrace();
         }
 
-        LOGGER = new LogError();
+        //LOGGER = new LogError();
         frame = new MainFrame(this);
     }
 

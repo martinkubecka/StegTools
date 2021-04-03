@@ -24,6 +24,11 @@ public class LeastSignificantBit {
             if (currentExt.equals(textFile)) isPresent++;
         }
 
-        return isPresent > 0;
+        return (isPresent > 0);
+    }
+
+    public boolean areMoreFilesSelected(List<File> filesToHide) {
+
+        return (filesToHide.size() != 1);
     }
 }
