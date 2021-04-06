@@ -17,6 +17,9 @@ public class LogError {
      */
     private static void setUpLogger() {
 
+        // Add the following line to each class where logging should be present
+        // private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
         LogManager.getLogManager().reset();
         LOGGER.setLevel(Level.ALL);
 
@@ -25,7 +28,8 @@ public class LogError {
 //        LOGGER.addHandler(ch);
 
         try {
-            FileHandler fh = new FileHandler("errors.log", true);
+//            FileHandler fh = new FileHandler("errors.log", true);
+            FileHandler fh = new FileHandler("errors.log");
             fh.setLevel(Level.FINE);
             LOGGER.addHandler(fh);
 

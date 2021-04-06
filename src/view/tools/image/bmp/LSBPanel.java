@@ -204,7 +204,5 @@ public class LSBPanel extends JPanel {
                 }
             }
         }
-
-
     }
 }

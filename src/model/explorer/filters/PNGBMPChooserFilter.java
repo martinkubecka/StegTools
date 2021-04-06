@@ -6,7 +6,7 @@ import model.explorer.FileFormats;
 import javax.swing.filechooser.FileFilter;
 import java.io.File;
 
-public class ImageChooserFilter extends FileFilter {
+public class PNGBMPChooserFilter extends FileFilter {
 
     /**
      * Validating if provided file is an image file
@@ -22,12 +22,7 @@ public class ImageChooserFilter extends FileFilter {
 
         String extension = FileChooser.getExtension(f);
         if (extension != null) {
-            return extension.equals(FileFormats.JPEG.getFormat()) ||
-                    extension.equals(FileFormats.JPG.getFormat()) ||
-                    extension.equals(FileFormats.GIF.getFormat()) ||
-                    extension.equals(FileFormats.TIFF.getFormat()) ||
-                    extension.equals(FileFormats.TIF.getFormat()) ||
-                    extension.equals(FileFormats.BMP.getFormat()) ||
+            return extension.equals(FileFormats.BMP.getFormat()) ||
                     extension.equals(FileFormats.PNG.getFormat());
         }
         return false;
@@ -40,6 +35,6 @@ public class ImageChooserFilter extends FileFilter {
      */
     @Override
     public String getDescription() {
-        return "*.bmp, *.png, *.jpeg, *.jpg, *.gif, *.tiff, *.tif";
+        return "*.png, *.bmp";
     }
 }

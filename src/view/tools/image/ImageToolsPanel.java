@@ -2,7 +2,6 @@ package view.tools.image;
 
 import controller.AppController;
 import view.Panels;
-import view.tools.general.MetadataWindow;
 import view.tools.image.planes.BitPlaneWindow;
 import view.components.Button;
 import view.components.Label;
@@ -22,6 +21,7 @@ public class ImageToolsPanel extends JPanel {
     private JButton checkHeaderButton;
     private Label nameLabelBMP;
     private JButton bitPlanesButton;
+    private JButton appendedData;
     private JButton leastSignificantBitButton;
 
     public ImageToolsPanel(Panels parentPanel, AppController baseController, CardLayout cardLayout) {
@@ -34,9 +34,12 @@ public class ImageToolsPanel extends JPanel {
 
         bitPlanesButton = new Button("Bit Planes Viewer");
 
+        appendedData = new Button("Appended Data Extraction");
+
         nameLabelPNG = new Label("PNG Tools", SwingConstants.CENTER, SwingConstants.CENTER, Font.PLAIN, 30);
 
-        checkHeaderButton = new Button("Check header");
+        // header inspection
+        checkHeaderButton = new Button("Check Header");
 
         nameLabelBMP = new Label("BMP Tools", SwingConstants.CENTER, SwingConstants.CENTER, Font.PLAIN, 30);
 
@@ -49,7 +52,7 @@ public class ImageToolsPanel extends JPanel {
 
     private void setUpLayout() {
 
-        this.setLayout(new GridLayout(6, 1, 8, 25));
+        this.setLayout(new GridLayout(7, 1, 8, 10));
         this.setBackground(new Color(72, 0, 0));
         this.setBorder(BorderFactory.createEmptyBorder(8, 150, 24, 150));
     }
@@ -58,6 +61,7 @@ public class ImageToolsPanel extends JPanel {
 
         this.add(nameLabelImageTools);
         this.add(bitPlanesButton);
+        this.add(appendedData);
         this.add(nameLabelPNG);
         this.add(checkHeaderButton);
         this.add(nameLabelBMP);
@@ -99,7 +103,6 @@ public class ImageToolsPanel extends JPanel {
                                     "Warning",
                                     JOptionPane.ERROR_MESSAGE);
                         }
-
                     }
                 }
             }
@@ -112,6 +115,20 @@ public class ImageToolsPanel extends JPanel {
 
             BitPlaneWindow bitPlaneWindow = new BitPlaneWindow("Bit Plane Viewer", baseController);
             bitPlaneWindow.setVisible(true);
+        });
+
+        appendedData.addActionListener(e -> {
+
+            File file = baseController.getFileChooser().pickSingleFileChooser("png&bmp");
+
+            if (file != null) {
+
+                // TODO for BMP
+                String extractedMessage = baseController.getAppendedData().extractAppendedMessage(file);
+
+                ExtractedMessageWindow extractedMessageWindow = new ExtractedMessageWindow("Extracted Message", extractedMessage);
+                extractedMessageWindow.setVisible(true);
+            }
         });
 
         leastSignificantBitButton.addActionListener(e -> {

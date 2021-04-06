@@ -11,3 +11,4 @@
  - Show BMP, GIF, TIFF and RAW image Metadata                   :: v0.86
  - Bit Plane Slicing - Inverted Colours                         :: v0.91
  - Bit Plane Slicing for 24‑bit and 32-bit images               :: v0.91
+ - Appended data extraction for PNG image files                 :: v0.93

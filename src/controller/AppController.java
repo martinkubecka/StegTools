@@ -5,6 +5,7 @@ import model.general.Compression;
 import model.general.Dictionary;
 import model.general.ExtractMetadata;
 import model.image.bmp.LeastSignificantBit;
+import model.image.general.AppendedData;
 import model.image.general.BitPlaneSlicing;
 import model.explorer.FileChooser;
 import model.image.png.ImageHeader;
@@ -24,6 +25,7 @@ public class AppController {
     private ImageHeader imageHeader;
     private BitPlaneSlicing bitPlaneSlicing;
     private LeastSignificantBit leastSignificantBit;
+    private AppendedData appendedData;
 
     public AppController() {
 
@@ -34,6 +36,7 @@ public class AppController {
         imageHeader = new ImageHeader();
         bitPlaneSlicing = new BitPlaneSlicing();
         leastSignificantBit = new LeastSignificantBit();
+        appendedData = new AppendedData();
     }
 
     /**
@@ -49,7 +52,7 @@ public class AppController {
             e.printStackTrace();
         }
 
-        //LOGGER = new LogError();
+        LOGGER = new LogError();
         frame = new MainFrame(this);
     }
 
@@ -116,7 +119,16 @@ public class AppController {
         return leastSignificantBit;
     }
 
-//    public MainFrame getFrame() {
+    /**
+     * Access AppendedData class methods
+     *
+     * @return AppendedData class
+     */
+    public AppendedData getAppendedData() {
+        return appendedData;
+    }
+
+    //    public MainFrame getFrame() {
 //        return frame;
 //    }
 }

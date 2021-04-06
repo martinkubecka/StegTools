@@ -46,7 +46,7 @@ public class SingleFileChooserFilter extends FileFilter {
      */
     @Override
     public String getDescription() {
-        return "." + fileFormat;
+        return "*." + fileFormat;
     }
 
 }

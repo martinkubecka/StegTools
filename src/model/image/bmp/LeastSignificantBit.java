@@ -13,7 +13,7 @@ public class LeastSignificantBit {
     public boolean isTextFilePresent(List<File> filesToHide) {
 
         String textFile = "txt";
-        String currentExt = null;
+        String currentExt;
         int isPresent = 0;
 
         for (File file : filesToHide) {

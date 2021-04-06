@@ -36,8 +36,6 @@ public class BitPlanePanel extends JPanel {
 
     public BitPlanePanel(AppController baseController) {
 
-        LOGGER.log(Level.SEVERE, "TEST", (Throwable) null);
-
         this.baseController = baseController;
 
         // HEADER

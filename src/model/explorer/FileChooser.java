@@ -20,6 +20,7 @@ public class FileChooser {
             case "png" -> fc.addChoosableFileFilter(new SingleFileChooserFilter("png"));
             case "bmp" -> fc.addChoosableFileFilter(new SingleFileChooserFilter("bmp"));
             case "images" -> fc.addChoosableFileFilter(new ImageChooserFilter());
+            case "png&bmp" -> fc.addChoosableFileFilter(new PNGBMPChooserFilter());
         }
 
         fc.setAcceptAllFileFilterUsed(false);
