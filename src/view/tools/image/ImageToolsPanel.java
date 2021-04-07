@@ -50,6 +50,9 @@ public class ImageToolsPanel extends JPanel {
         setUpListeners();
     }
 
+    /**
+     * Sets panel layout, background color and border.
+     */
     private void setUpLayout() {
 
         this.setLayout(new GridLayout(7, 1, 8, 10));
@@ -57,6 +60,9 @@ public class ImageToolsPanel extends JPanel {
         this.setBorder(BorderFactory.createEmptyBorder(8, 150, 24, 150));
     }
 
+    /**
+     * Appends the specified components to the panel.
+     */
     private void setUpPanel() {
 
         this.add(nameLabelImageTools);
@@ -68,6 +74,9 @@ public class ImageToolsPanel extends JPanel {
         this.add(leastSignificantBitButton);
     }
 
+    /**
+     * Adds ActionListener to the panel buttons an carries out minimal logic.
+     */
     private void setUpListeners() {
 
         checkHeaderButton.addActionListener(e -> {
@@ -124,10 +133,10 @@ public class ImageToolsPanel extends JPanel {
             if (file != null) {
 
                 // TODO for BMP
-                String extractedMessage = baseController.getAppendedData().extractAppendedMessage(file);
+                String extractedMessage = baseController.getAppendedData().extractAppendedData(file);
 
-                ExtractedMessageWindow extractedMessageWindow = new ExtractedMessageWindow("Extracted Message", extractedMessage);
-                extractedMessageWindow.setVisible(true);
+                ExtractedDataWindow extractedDataWindow = new ExtractedDataWindow("Extracted Message", baseController, extractedMessage);
+                extractedDataWindow.setVisible(true);
             }
         });
 

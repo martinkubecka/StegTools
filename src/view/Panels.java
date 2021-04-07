@@ -43,9 +43,13 @@ public class Panels extends JPanel {
         setUpPanel();
     }
 
+    /**
+     * Sets panel layout and appends the specified components to the panel.
+     */
     private void setUpPanel() {
 
         this.setLayout(cardLayout);
+
         this.add(changeLogPanel, "ChangeLog Panel");
         this.add(toolsPanel, "Tools Panel");
         this.add(generalToolsPanel, "General Tools Panel");

@@ -36,6 +36,9 @@ public class ToolsPanel extends JPanel {
         setUpListeners();
     }
 
+    /**
+     * Sets panel layout, background color and border.
+     */
     private void setUpLayout() {
 
         this.setBackground(new Color(72, 0, 0));
@@ -43,6 +46,9 @@ public class ToolsPanel extends JPanel {
         this.setLayout(new GridLayout(3, 1));
     }
 
+    /**
+     * Appends the specified components to the panel.
+     */
     private void setUpPanel() {
 
         toolsButtonsPanel.add(generalToolsButton);
@@ -53,7 +59,11 @@ public class ToolsPanel extends JPanel {
         this.add(toolsButtonsPanel, BorderLayout.CENTER);
     }
 
+    /**
+     * Adds ActionListener to the panel buttons an carries out minimal logic.
+     */
     private void setUpListeners() {
+
 
         generalToolsButton.addActionListener(e -> {
 

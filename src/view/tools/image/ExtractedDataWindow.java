@@ -1,26 +1,38 @@
 package view.tools.image;
 
+import controller.AppController;
+import view.components.Button;
+
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class ExtractedMessageWindow extends JFrame {
+public class ExtractedDataWindow extends JFrame {
 
     private String extractedMessage;
+    private AppController baseController;
 
     private JPanel panel;
+    private JPanel footer;
     private JTextArea textArea;
     private JScrollPane scrollPane;
+    private Button getASCIIButton;
 
-    public ExtractedMessageWindow(String title, String extractedMessage) {
+    public ExtractedDataWindow(String title, AppController baseController, String extractedMessage) {
         super(title);
 
+        this.baseController = baseController;
         this.extractedMessage = extractedMessage;
 
         setUpFrame();
         setUpPanel();
+        setUpListeners();
     }
 
+    /**
+     * Sets frame dimensions and location.
+     */
     private void setUpFrame() {
 
         // METADATA WINDOW DIMENSIONS
@@ -35,10 +47,18 @@ public class ExtractedMessageWindow extends JFrame {
         this.setLocation(x, y);
     }
 
+    /**
+     * Appends the specified components to the panel.
+     */
     private void setUpPanel() {
 
         panel = new JPanel();
-        panel.setLayout(new GridLayout(1, 1, 8, 8));
+        panel.setLayout(new BorderLayout());
+
+        footer = new JPanel();
+        footer.setLayout(new FlowLayout());
+        footer.setBackground(new Color(72, 0, 0));
+        footer.setBorder(new LineBorder(Color.WHITE, 1));
 
         textArea = new JTextArea();
         textArea.setLineWrap(true);
@@ -54,8 +74,24 @@ public class ExtractedMessageWindow extends JFrame {
         scrollPane.setPreferredSize(new Dimension(500, 300));
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        panel.add(scrollPane);
+        getASCIIButton = new Button("Convert to ASCII");
+
+        footer.add(getASCIIButton);
+
+        panel.add(scrollPane, BorderLayout.CENTER);
+        panel.add(footer, BorderLayout.PAGE_END);
         this.add(panel);
+    }
+
+    /**
+     * Adds ActionListener to the panel buttons an carries out minimal logic.
+     */
+    private void setUpListeners() {
+
+        getASCIIButton.addActionListener(e -> {
+
+            textArea.setText(baseController.getAppendedData().hexToAscii(extractedMessage));
+        });
     }
 
 }

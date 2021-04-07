@@ -4,6 +4,8 @@ import model.explorer.FileChooser;
 import model.explorer.FileFormats;
 
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,21 +14,21 @@ public class AppendedData {
     private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     /**
-     * Extract appended data of PNG or BMP image file
+     * Extract appended data of a PNG or a BMP image file.
      *
      * @param file Chosen file by user
      * @return Extracted appended data from chosen image file
      */
-    public String extractAppendedMessage(File file) {
+    public String extractAppendedData(File file) {
 
-        String extractedMessage = null;
+        String extractedData = null;
         InputStream inputStream;
-        DataInputStream in = null;
+        DataInputStream dataInputStream = null;
 
         try {
 
             inputStream = new FileInputStream(file);
-            in = new DataInputStream(inputStream);
+            dataInputStream = new DataInputStream(inputStream);
 
         } catch (Exception exception) {
 
@@ -35,45 +37,92 @@ public class AppendedData {
 
         if (FileFormats.BMP.getFormat().equals(FileChooser.getExtension(file))) {
 
-            extractedMessage = hexToAscii(getBMPAppendedData(in));
-//            extractedMessage = getBMPAppendedData(in);
+//            extractedData = hexToAscii(getBMPAppendedData(dataInputStream));
+            extractedData = getBMPAppendedData(dataInputStream);
         }
         if (FileFormats.PNG.getFormat().equals(FileChooser.getExtension(file))) {
 
-            extractedMessage = hexToAscii(getPNGAppendedData(in));
-//            extractedMessage = getPNGAppendedData(in);
+//            extractedData = hexToAscii(getPNGAppendedData(dataInputStream));
+            extractedData = getPNGAppendedData(dataInputStream);
         }
 
-        return extractedMessage;
+        return extractedData;
     }
 
-    private String getBMPAppendedData(DataInputStream in) {
+    /**
+     * Read an extra data, if it exists, append to a BMP image from a DataInputStream.
+     *
+     * @param dataInputStream DataInputStream representing chosen file image
+     * @return Extracted data represented as a String of hexadecimal values
+     */
+    private String getBMPAppendedData(DataInputStream dataInputStream) {
 
+        StringBuilder extractedData = new StringBuilder();
 
-        return "";
+        try {
+            // Read the fileType : always 0x4d42 = "BM"
+            dataInputStream.readShort();
+            // Read the file size
+            byte[] fileSizeBuffer = new byte[4];
+            dataInputStream.readFully(fileSizeBuffer);
+
+            // Get integer type of the file size
+            // Shifts bits dataInputStream an integer to the left by the specified number of positions
+            // Then combines the pieces into a single number
+            // (Two options)
+            // final int fileSize = dataInputStream.readUnsignedByte() | dataInputStream.readUnsignedByte() << 8 | dataInputStream.readUnsignedByte() << 16 | dataInputStream.readUnsignedByte() << 24;
+            final int fileSize = ByteBuffer.wrap(fileSizeBuffer, 0, 4).order(ByteOrder.LITTLE_ENDIAN).getInt();
+            int bytesToSkip = fileSize - 6; // 2 byte for the signature, 4 bytes for the filesize.
+
+            // Skip the rest of bytes
+            while (bytesToSkip > 0) {
+
+                bytesToSkip -= dataInputStream.skipBytes(bytesToSkip);
+            }
+
+            // Read appended byte by byte if present
+            while (true) {
+                try {
+
+                    byte b = dataInputStream.readByte();
+                    extractedData.append(String.format("%02X", b));
+
+                } catch (Exception e) {
+
+                    break;
+                }
+            }
+
+        } catch (Exception exception) {
+
+            LOGGER.log(Level.SEVERE, exception.toString(), exception);
+        }
+
+        return extractedData.toString();
     }
 
     /* ------------------------------------------------------------------------------------ */
 
     /**
+     * Read an extra data, if it exists, append to a PNG image from a DataInputStream.
      * Modified PNGDecoder from the book by O'Reilly Media, Inc.
      * Java 2D Graphics
      * https://resources.oreilly.com/examples/9781565924840/blob/master/examples/PNGDecoder.java
      *
-     * @param in DataInputStream representing chosen file image
-     * @return Extracted message represented as a String of hexadecimal values
+     * @param dataInputStream DataInputStream representing chosen file image
+     * @return Extracted data represented as a String of hexadecimal values
      */
-    private String getPNGAppendedData(DataInputStream in) {
+    private String getPNGAppendedData(DataInputStream dataInputStream) {
 
-        StringBuilder message = new StringBuilder("");
+        StringBuilder extractedData = new StringBuilder();
         String EOF = "IEND";
 
         try {
 
             // Reading the signature
-            long signature = in.readLong();
-            if (signature != 0x89504e470d0a1a0aL)
-                throw new IOException("PNG signature not found!");
+            long signature = dataInputStream.readLong();
+//            if (signature != 0x89504e470d0a1a0aL)
+//                throw new IOException("PNG signature not found!");
 
             byte[] data;
             String typeOfChunk;
@@ -84,57 +133,55 @@ public class AppendedData {
             while (trucking) {
                 try {
                     // Read the length
-                    int length = in.readInt();
+                    int length = dataInputStream.readInt();
 
                     // Read the type of chunk
                     byte[] typeBytes = new byte[4];
-                    in.readFully(typeBytes);
+                    dataInputStream.readFully(typeBytes);
                     typeOfChunk = getTypeString(typeBytes);
 
                     // Read the data
                     data = new byte[length];
-                    in.readFully(data);
+                    dataInputStream.readFully(data);
 
                     // Read the CRC
-                    int crc = in.readInt();
+                    int crc = dataInputStream.readInt();
 
                     if (typeOfChunk.equals(EOF)) {
                         trucking = false;
                     }
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (Exception exception) {
+
+                    LOGGER.log(Level.SEVERE, exception.toString(), exception);
                 }
             }
 
             // Read appended byte by byte if present
-            boolean areSecretDataPresent = true;
-
-            while (areSecretDataPresent) {
+            while (true) {
                 try {
 
-                    byte b = in.readByte();
-                    message.append(String.format("%02X", b));
+                    byte b = dataInputStream.readByte();
+                    extractedData.append(String.format("%02X", b));
 
-                } catch (Exception e) {
+                } catch (Exception exception) {
 
-                    areSecretDataPresent = false;
+                    break;
                 }
             }
+        } catch (Exception exception) {
 
-        } catch (Exception e) {
-
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, exception.toString(), exception);
         }
 
-        return message.toString();
+        return extractedData.toString();
     }
 
     /**
-     * UTF-8 encoding of provided chunk of data
+     * UTF-8 encoding of provided chunk of data.
      *
      * @param typeBytes recent read chunk of data
-     * @return type of chunk as String
+     * @return type of chunk as a String
      */
     private String getTypeString(byte[] typeBytes) {
 
@@ -149,13 +196,13 @@ public class AppendedData {
     }
 
     /**
-     * Convert Hex to ASCII
+     * Convert Hex to ASCII.
      * https://www.baeldung.com/java-convert-hex-to-ascii
      *
      * @param hexStr Extracted message represented as a String of hexadecimal values
      * @return Converted hexadecimal String to ASCII
      */
-    private String hexToAscii(String hexStr) {
+    public String hexToAscii(String hexStr) {
 
         StringBuilder output = new StringBuilder("");
 

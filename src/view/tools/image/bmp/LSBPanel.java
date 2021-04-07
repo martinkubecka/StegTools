@@ -46,6 +46,9 @@ public class LSBPanel extends JPanel {
         setUpListeners();
     }
 
+    /**
+     * Sets panel layout, background color and border.
+     */
     private void setUpLayout() {
 
         this.setBackground(new Color(72, 0, 0));
@@ -57,6 +60,9 @@ public class LSBPanel extends JPanel {
         centerPanel.setBorder(BorderFactory.createEmptyBorder(8, 150, 24, 150));
     }
 
+    /**
+     * Appends the specified components to the panel.
+     */
     private void setUpPanel() {
 
         centerPanel.add(Box.createRigidArea(new Dimension(0, 60)));
@@ -67,6 +73,9 @@ public class LSBPanel extends JPanel {
         this.add(centerPanel, BorderLayout.CENTER);
     }
 
+    /**
+     * Adds ActionListener to the panel buttons an carries out minimal logic.
+     */
     private void setUpListeners() {
 
         insertDataButton.addActionListener(e -> {
@@ -105,6 +114,7 @@ public class LSBPanel extends JPanel {
 
                         filesToHide = Arrays.asList(Objects.requireNonNull(baseController.getFileChooser().pickMultipleFilesFromFileChooser()));
                         // TODO compute if it is possible to insert selected files into a carrier
+                        // TODO do not use images with less than 8bits per pixel !
 
                         /* ---------------------------------------------------------------------------------------------------------- */
                         boolean isTextFilePresent = baseController.getLeastSignificantBit().isTextFilePresent(filesToHide);

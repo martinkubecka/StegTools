@@ -53,6 +53,9 @@ public class GeneralToolsPanel extends JPanel {
         setUpListeners();
     }
 
+    /**
+     * Sets panel layout, background color and border.
+     */
     private void setUpLayout() {
 
         this.setLayout(new GridLayout(7, 1, 8, 37));
@@ -60,6 +63,9 @@ public class GeneralToolsPanel extends JPanel {
         this.setBorder(BorderFactory.createEmptyBorder(8, 150, 8, 150));
     }
 
+    /**
+     * Appends the specified components to the panel.
+     */
     private void setUpPanel() {
 
         this.add(nameLabel);
@@ -71,6 +77,9 @@ public class GeneralToolsPanel extends JPanel {
         this.add(messageShorteningResultLabel);
     }
 
+    /**
+     * Adds ActionListener to the panel buttons an carries out minimal logic.
+     */
     private void setUpListeners() {
 
         showMetadataButton.addActionListener(e -> {

@@ -30,6 +30,9 @@ public class HeaderPanel extends JPanel {
         setUpListeners();
     }
 
+    /**
+     * Sets panel layout, background color and border.
+     */
     private void setUpLayout() {
 
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 3, 3));
@@ -37,6 +40,9 @@ public class HeaderPanel extends JPanel {
         this.setBorder(new LineBorder(Color.WHITE, 3));
     }
 
+    /**
+     * Appends the specified components to the panel.
+     */
     private void setUpPanel() {
 
         this.add(changeLogButton);
@@ -45,6 +51,9 @@ public class HeaderPanel extends JPanel {
         //this.add(exitButton);
     }
 
+    /**
+     * Adds ActionListener to the panel buttons an carries out minimal logic.
+     */
     private void setUpListeners() {
 
         changeLogButton.addActionListener(e -> {

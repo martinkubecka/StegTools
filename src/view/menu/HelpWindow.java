@@ -16,6 +16,9 @@ public class HelpWindow extends JFrame {
         setUpPanel();
     }
 
+    /**
+     * Sets frame dimensions and location.
+     */
     private void setUpFrame() {
 
         // HELP WINDOW DIMENSIONS
@@ -30,6 +33,9 @@ public class HelpWindow extends JFrame {
         this.setLocation(x, y);
     }
 
+    /**
+     * Appends the specified components to the panel.
+     */
     private void setUpPanel() {
 
         panel = new JPanel();

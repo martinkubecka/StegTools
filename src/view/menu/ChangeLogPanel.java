@@ -61,6 +61,9 @@ public class ChangeLogPanel extends JPanel {
         setUpPanel();
     }
 
+    /**
+     * Sets panel layout, background color and border.
+     */
     private void setUpLayout() {
 
         this.setLayout(new GridLayout(4, 1, 8, 8));
@@ -68,6 +71,9 @@ public class ChangeLogPanel extends JPanel {
         this.setBorder(BorderFactory.createEmptyBorder(8, 16, 8, 16));
     }
 
+    /**
+     * Appends the specified components to the panel.
+     */
     private void setUpPanel() {
 
         this.add(nameLabel);

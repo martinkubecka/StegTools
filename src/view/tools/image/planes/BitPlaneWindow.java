@@ -17,6 +17,9 @@ public class BitPlaneWindow extends JFrame {
         setUpPanel();
     }
 
+    /**
+     * Sets frame dimensions and location.
+     */
     private void setUpFrame() {
 
         // BIT PLANE WINDOW DIMENSIONS
@@ -26,6 +29,9 @@ public class BitPlaneWindow extends JFrame {
         this.setLocationRelativeTo(null);
     }
 
+    /**
+     * Appends the specified components to the panel.
+     */
     private void setUpPanel() {
 
         this.add(bitPlanePanel);

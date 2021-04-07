@@ -10,7 +10,7 @@ public class MainFrame extends JFrame {
     private Panels panels;
 
     /**
-     * Create a Frame object
+     * Create a Frame object.
      *
      * @param baseController The reference to the AppController object
      */
@@ -21,7 +21,7 @@ public class MainFrame extends JFrame {
     }
 
     /**
-     * Sets the UI theme, content pane, frame dimensions and location, visibility
+     * Sets the UI theme, content pane, frame dimensions, location and visibility.
      */
     private void setUpFrame() {
 

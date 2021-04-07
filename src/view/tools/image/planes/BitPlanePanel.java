@@ -71,6 +71,9 @@ public class BitPlanePanel extends JPanel {
         setUpListeners();
     }
 
+    /**
+     * Sets panel layout, background color and border.
+     */
     private void setUpLayout() {
 
         this.setBackground(new Color(72, 0, 0));
@@ -78,6 +81,9 @@ public class BitPlanePanel extends JPanel {
         this.setLayout(new BorderLayout());
     }
 
+    /**
+     * Appends the specified components to the panel.
+     */
     private void setUpPanel() {
 
         this.add(currentPlain, BorderLayout.NORTH);
@@ -96,6 +102,9 @@ public class BitPlanePanel extends JPanel {
         this.add(footerPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Adds ActionListener to the panel buttons an carries out minimal logic.
+     */
     private void setUpListeners() {
 
         uploadButton.addActionListener(e -> {

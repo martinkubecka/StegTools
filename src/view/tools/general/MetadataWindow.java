@@ -20,6 +20,9 @@ public class MetadataWindow extends JFrame {
         setUpPanel();
     }
 
+    /**
+     * Sets frame dimensions and location.
+     */
     private void setUpFrame() {
 
         // METADATA WINDOW DIMENSIONS
@@ -34,6 +37,9 @@ public class MetadataWindow extends JFrame {
         this.setLocation(x, y);
     }
 
+    /**
+     * Appends the specified components to the panel.
+     */
     private void setUpPanel() {
 
         panel = new JPanel();
