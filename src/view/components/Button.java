@@ -5,6 +5,12 @@ import java.awt.*;
 
 public class Button extends JButton {
 
+    /**
+     * Constructor.
+     * <p>
+     *
+     * @param label for the button
+     */
     public Button(String label) {
         super(label);
 

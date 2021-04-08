@@ -88,9 +88,8 @@ public class GeneralToolsPanel extends JPanel {
 
             if (file != null) {
 
-                Metadata metadata = baseController.getExtractMetadata().extractMetadata(file);
                 // EXTRACT strings from METADATA object
-                ArrayList<String> metadataParsed = baseController.getExtractMetadata().parseMetadata(metadata);
+                ArrayList<String> metadataParsed = baseController.getExtractMetadata().extractMetadata(file);
 
                 MetadataWindow metadataWindow = new MetadataWindow("Metadata", metadataParsed);
                 metadataWindow.setVisible(true);

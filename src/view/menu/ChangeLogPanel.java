@@ -1,4 +1,5 @@
 package view.menu;
+import view.components.Label;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,20 +19,11 @@ public class ChangeLogPanel extends JPanel {
 
     public ChangeLogPanel() {
 
-        nameLabel = new JLabel("StegTools", SwingConstants.CENTER);
-        nameLabel.setVerticalAlignment(SwingConstants.CENTER);
-        nameLabel.setForeground(new Color(244, 244, 244));
-        nameLabel.setFont(new Font("Consolas", Font.PLAIN, 36));
+        nameLabel = new Label("StegTools", SwingConstants.CENTER, SwingConstants.CENTER, Font.PLAIN, 36);
 
-        changeLogLabel = new JLabel("Change Log:", SwingConstants.LEFT);
-        changeLogLabel.setVerticalAlignment(SwingConstants.BOTTOM);
-        changeLogLabel.setForeground(new Color(244, 244, 244));
-        changeLogLabel.setFont(new Font("Consolas", Font.PLAIN, 20));
+        changeLogLabel = new Label("Change Log:", SwingConstants.LEFT,SwingConstants.BOTTOM, Font.PLAIN, 20);
 
-        creatorLabel = new JLabel("Martin Kubecka, 2020/2021", SwingConstants.RIGHT);
-        creatorLabel.setVerticalAlignment(SwingConstants.BOTTOM);
-        creatorLabel.setForeground(new Color(244, 244, 244));
-        creatorLabel.setFont(new Font("Consolas", Font.PLAIN, 12));
+        creatorLabel = new Label("Martin Kubecka, 2020/2021", SwingConstants.RIGHT, SwingConstants.BOTTOM, Font.PLAIN, 12);
 
         textArea = new JTextArea();
 

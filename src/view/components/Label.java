@@ -5,6 +5,16 @@ import java.awt.*;
 
 public class Label extends JLabel {
 
+    /**
+     * Constructor.
+     * <p>
+     *
+     * @param text                to be displayed
+     * @param horizontalAlignment for label text
+     * @param verticalAlignment   for label text
+     * @param fontType            of label text
+     * @param fontSize            of label text
+     */
     public Label(String text, int horizontalAlignment,
                  int verticalAlignment, int fontType, int fontSize) {
         super(text, horizontalAlignment);

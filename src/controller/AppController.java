@@ -27,6 +27,11 @@ public class AppController {
     private LeastSignificantBit leastSignificantBit;
     private AppendedData appendedData;
 
+    /**
+     * Constructor
+     * <p>
+     * Initialize all classes which belongs to the Model component.
+     */
     public AppController() {
 
         compression = new Compression();
@@ -40,7 +45,7 @@ public class AppController {
     }
 
     /**
-     * Initialize the main application Frame and Logger
+     * Initialize the main application Frame and Logger.
      */
     public void start() {
 
@@ -57,8 +62,8 @@ public class AppController {
     }
 
     /**
-     * Access Compression class methods
-     *
+     * Access Compression class methods.
+     * <p>
      * @return Compression class
      */
     public Compression getCompression() {
@@ -66,8 +71,8 @@ public class AppController {
     }
 
     /**
-     * Access Dictionary class methods
-     *
+     * Access Dictionary class methods.
+     * <p>
      * @return Dictionary class
      */
     public Dictionary getDictionary() {
@@ -75,8 +80,8 @@ public class AppController {
     }
 
     /**
-     * Access ExtractMetadata class methods
-     *
+     * Access ExtractMetadata class methods.
+     * <p>
      * @return ExtractMetadata class
      */
     public ExtractMetadata getExtractMetadata() {
@@ -84,8 +89,8 @@ public class AppController {
     }
 
     /**
-     * Access FileChooser class methods
-     *
+     * Access FileChooser class methods.
+     * <p>
      * @return FileChooser class
      */
     public FileChooser getFileChooser() {
@@ -93,8 +98,8 @@ public class AppController {
     }
 
     /**
-     * Access ImageHeader class methods
-     *
+     * Access ImageHeader class methods.
+     * <p>
      * @return ImageHeader class
      */
     public ImageHeader getImageHeader() {
@@ -102,8 +107,8 @@ public class AppController {
     }
 
     /**
-     * Access BitPlaneSlicing class methods
-     *
+     * Access BitPlaneSlicing class methods.
+     * <p>
      * @return BitPlaneSlicing class
      */
     public BitPlaneSlicing getBitPlaneSlicing() {
@@ -111,8 +116,8 @@ public class AppController {
     }
 
     /**
-     * Access LeastSignificantBit class methods
-     *
+     * Access LeastSignificantBit class methods.
+     * <p>
      * @return LeastSignificantBit class
      */
     public LeastSignificantBit getLeastSignificantBit() {
@@ -120,8 +125,8 @@ public class AppController {
     }
 
     /**
-     * Access AppendedData class methods
-     *
+     * Access AppendedData class methods.
+     * <p>
      * @return AppendedData class
      */
     public AppendedData getAppendedData() {

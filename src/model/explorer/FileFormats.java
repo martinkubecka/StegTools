@@ -12,13 +12,26 @@ public enum FileFormats {
     BMP("bmp"),
     TXT("txt");
 
+    /**
+     * File format name.
+     **/
     private String format;
 
+    /**
+     * Constructor.
+     * <p>
+     * @param fileFormat  file format name
+     */
     FileFormats(String fileFormat) {
 
         this.format = fileFormat;
     }
 
+    /**
+     * Get a file format name.
+     * <p>
+     * @return file format name.
+     */
     public String getFormat() {
         return format;
     }

@@ -7,6 +7,9 @@ public class LogError {
 
     private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
+    /**
+     * Constructor.
+     */
     public LogError() {
 
         LogError.setUpLogger();

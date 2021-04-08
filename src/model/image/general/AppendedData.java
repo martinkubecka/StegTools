@@ -15,9 +15,9 @@ public class AppendedData {
 
     /**
      * Extract appended data of a PNG or a BMP image file.
-     *
-     * @param file Chosen file by user
-     * @return Extracted appended data from chosen image file
+     * <p>
+     * @param file  chosen file by user
+     * @return extracted appended data from chosen image file
      */
     public String extractAppendedData(File file) {
 
@@ -51,9 +51,9 @@ public class AppendedData {
 
     /**
      * Read an extra data, if it exists, append to a BMP image from a DataInputStream.
-     *
-     * @param dataInputStream DataInputStream representing chosen file image
-     * @return Extracted data represented as a String of hexadecimal values
+     * <p>
+     * @param dataInputStream  DataInputStream representing chosen file image
+     * @return extracted data represented as a String of hexadecimal values
      */
     private String getBMPAppendedData(DataInputStream dataInputStream) {
 
@@ -108,9 +108,9 @@ public class AppendedData {
      * Modified PNGDecoder from the book by O'Reilly Media, Inc.
      * Java 2D Graphics
      * https://resources.oreilly.com/examples/9781565924840/blob/master/examples/PNGDecoder.java
-     *
-     * @param dataInputStream DataInputStream representing chosen file image
-     * @return Extracted data represented as a String of hexadecimal values
+     * <p>
+     * @param dataInputStream  DataInputStream representing chosen file image
+     * @return extracted data represented as a String of hexadecimal values
      */
     private String getPNGAppendedData(DataInputStream dataInputStream) {
 
@@ -179,8 +179,8 @@ public class AppendedData {
 
     /**
      * UTF-8 encoding of provided chunk of data.
-     *
-     * @param typeBytes recent read chunk of data
+     * <p>
+     * @param typeBytes  recent read chunk of data
      * @return type of chunk as a String
      */
     private String getTypeString(byte[] typeBytes) {
@@ -198,9 +198,9 @@ public class AppendedData {
     /**
      * Convert Hex to ASCII.
      * https://www.baeldung.com/java-convert-hex-to-ascii
-     *
-     * @param hexStr Extracted message represented as a String of hexadecimal values
-     * @return Converted hexadecimal String to ASCII
+     * <p>
+     * @param hexStr  extracted message represented as a String of hexadecimal values
+     * @return converted hexadecimal String to ASCII
      */
     public String hexToAscii(String hexStr) {
 

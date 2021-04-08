@@ -9,7 +9,6 @@ import net.lingala.zip4j.model.enums.EncryptionMethod;
 import java.io.File;
 import java.util.List;
 
-
 public class Compression {
 
     public boolean compressFilesToZip(List<File> filesToCompress, String password) {

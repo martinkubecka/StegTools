@@ -16,15 +16,25 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ExtractMetadata {
 
+     private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
     // TODO handle exception : File format could not be determined
 
-    public Metadata extractMetadata(File file) {
+    /**
+     * Extract image metadata.
+     * <p>
+     * @param file  chosen for metadata extraction.
+     * @return ArrayList of parsed metadata tags represented as Strings.
+     */
+    public ArrayList<String> extractMetadata(File file) {
 
         String fileFormat = FileChooser.getExtension(file);
-        Metadata metadata = null;
+        Metadata metadata;
 
         // SPECIFIC METADATA TYPE
         //
@@ -42,10 +52,11 @@ public class ExtractMetadata {
                 metadata = JpegMetadataReader.readMetadata(file, readers);
 
                 //print(metadata, "Using JpegMetadataReader for Exif and IPTC only");
-                return metadata;
+                return parseMetadata(metadata);
 
-            } catch (JpegProcessingException | IOException e) {
-                print(e);
+            } catch (JpegProcessingException | IOException ioException) {
+
+                 LOGGER.log(Level.SEVERE, ioException.toString(), ioException);
             }
 
             // UNKNOWN FILE TYPE
@@ -61,17 +72,24 @@ public class ExtractMetadata {
                 metadata = ImageMetadataReader.readMetadata(file);
 
 //                print(metadata, "Using ImageMetadataReader");
-                return metadata;
+                return parseMetadata(metadata);
 
-            } catch (ImageProcessingException | IOException e) {
-                print(e);
+            } catch (ImageProcessingException | IOException ioException) {
+
+                LOGGER.log(Level.SEVERE, ioException.toString(), ioException);
             }
         }
 
         return null;
     }
 
-    public ArrayList<String> parseMetadata(Metadata metadata) {
+    /**
+     * Parse Metadata object and store its tags in the ArrayList.
+     * <p>
+     * @param metadata  object representing image metadata
+     * @return  ArrayList of parsed metadata tags
+     */
+    private ArrayList<String> parseMetadata(Metadata metadata) {
 
         ArrayList<String> metadataParsed = new ArrayList<>();
 
@@ -80,12 +98,14 @@ public class ExtractMetadata {
 
             // Each Directory stores values in Tag objects
             for (Tag tag : directory.getTags()) {
+
                 metadataParsed.add(tag.toString());
                 //System.out.println(tag.toString());
             }
 
             // Each Directory may also contain error messages
             for (String error : directory.getErrors()) {
+
                 //System.err.println("ERROR: " + error);
                 metadataParsed.add("ERROR " + error);
             }
@@ -95,29 +115,29 @@ public class ExtractMetadata {
     }
 
     // Write all extracted values to stdout.
-    private void print(Metadata metadata, String method) {
-
-        System.out.println("\n--------------------------------------------------------------");
-        System.out.print(">>    " + method + "\n\n");
-
-        // A Metadata object contains multiple Directory objects
-        for (Directory directory : metadata.getDirectories()) {
-
-            // Each Directory stores values in Tag objects
-            for (Tag tag : directory.getTags()) {
-                System.out.println(tag);
-            }
-
-            // Each Directory may also contain error messages
-//            for (String error : directory.getErrors()) {
-//                System.err.println("ERROR: " + error);
+//    private void print(Metadata metadata, String method) {
+//
+//        System.out.println("\n--------------------------------------------------------------");
+//        System.out.print(">>    " + method + "\n\n");
+//
+//        // A Metadata object contains multiple Directory objects
+//        for (Directory directory : metadata.getDirectories()) {
+//
+//            // Each Directory stores values in Tag objects
+//            for (Tag tag : directory.getTags()) {
+//                System.out.println(tag);
 //            }
-        }
-    }
-
-    private void print(Exception exception) {
-
-        System.err.println("EXCEPTION: " + exception);
-    }
+//
+//            // Each Directory may also contain error messages
+////            for (String error : directory.getErrors()) {
+////                System.err.println("ERROR: " + error);
+////            }
+//        }
+//    }
+//
+//    private void print(Exception exception) {
+//
+//        System.err.println("EXCEPTION: " + exception);
+//    }
 
 }

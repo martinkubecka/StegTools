@@ -116,9 +116,9 @@ public class BitPlanePanel extends JPanel {
                 if (file != null) {
 
                     image = ImageIO.read(file);
-                    boolean isSuported = baseController.getBitPlaneSlicing().setWorkingImage(image);
+                    boolean isSupported = baseController.getBitPlaneSlicing().setWorkingImage(image);
 
-                    if (isSuported){
+                    if (isSupported){
                         updateImage();
                     } else {
                         JOptionPane.showMessageDialog(this,

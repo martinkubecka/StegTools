@@ -10,9 +10,9 @@ public class SingleFileChooserFilter extends FileFilter {
     private String fileFormat;
 
     /**
-     * Set file extension for FileChooser filter
-     *
-     * @param fileFormat defined file extension for FileChooser filter
+     * Set file extension for FileChooser filter.
+     * <p>
+     * @param fileFormat  defined file extension for FileChooser filter
      */
     public SingleFileChooserFilter(String fileFormat) {
 
@@ -21,18 +21,21 @@ public class SingleFileChooserFilter extends FileFilter {
 
     /**
      * Validating if provided file is the same format as the defined file extension
-     *
-     * @param f Chosen file from FileChooser
+     * <p>
+     * @param file  chosen file from FileChooser
      * @return boolean value based on if provided file acceptable
      */
     @Override
-    public boolean accept(File f) {
-        if (f.isDirectory()) {
+    public boolean accept(File file) {
+
+        if (file.isDirectory()) {
             return true;
         }
 
-        String extension = FileChooser.getExtension(f);
+        String extension = FileChooser.getExtension(file);
+
         if (extension != null) {
+
             return extension.equals(fileFormat);
         }
 

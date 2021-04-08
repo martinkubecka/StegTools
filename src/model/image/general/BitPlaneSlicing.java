@@ -38,7 +38,13 @@ public class BitPlaneSlicing {
     private boolean isAlphaPresent;
     private int bitIndex;
 
-    // Initialize the current loaded image
+    /**
+     * Initialize the current loaded image.
+     * <p>
+     *
+     * @param image chosen for bit plane slicing.
+     * @return boolean value based on if chosen image is supported
+     */
     public boolean setWorkingImage(BufferedImage image) {
 
         this.originalImage = image;
@@ -60,12 +66,20 @@ public class BitPlaneSlicing {
         return false;
     }
 
-    // Get the current transformed image
+    /**
+     * Get the current transformed image.
+     * <p>
+     *
+     * @return transformed image
+     */
     public BufferedImage getImage() {
 
         return transformedImage;
     }
 
+    /**
+     * Perform backward action.
+     */
     public void backwardAction() {
 
         currentTransition--;
@@ -86,7 +100,10 @@ public class BitPlaneSlicing {
         setTransformation();
     }
 
-    // Perform the next transformation
+
+    /**
+     * Perform action forward (next transformation).
+     */
     public void forwardAction() {
 
         currentTransition++;
@@ -105,7 +122,9 @@ public class BitPlaneSlicing {
         setTransformation();
     }
 
-    // Perform desired transformation based on the bit index
+    /**
+     * Perform desired transformation based on the bit index.
+     */
     private void setTransformation() {
 
         if (bitIndex == bitsPerPixel) {
@@ -121,7 +140,12 @@ public class BitPlaneSlicing {
         }
     }
 
-    // Get the current transformation description
+    /**
+     * Get the current transformation description.
+     * <p>
+     *
+     * @return current transformation description
+     */
     public String getDescription() {
 
         if (isAlphaPresent) {
@@ -129,7 +153,6 @@ public class BitPlaneSlicing {
             if ((31 >= bitIndex) && (bitIndex >= 24)) {
 
                 return ("Alpha plane no." + (bitIndex - 24));
-
             }
         }
 
@@ -154,27 +177,30 @@ public class BitPlaneSlicing {
     }
 
     /* --------------------------------------------------------------------------------------------- */
-    /*
-    Consider a color pixel with the following values:
 
-    A = 255 ; R = 100 ; G = 150 ; B = 200
-
-    ARGB have an integer value in the <0 ; 255>
-
-   Convert the color pixel into negative:
-   - Subtract the value of R, G and B from 255
-
-    R = 255 - 100 = 155
-    G = 255 - 150 = 105
-    B = 255 - 200 = 55
-
-    The new ARGB value will be:
-
-    A = 255 ; R = 155 ; G = 105 ; B = 55
-
-    We don't have to change the alpha value
-    because it only controls the transparency of the pixel
- */
+    /**
+     * Perform image colour inversion.
+     * <p>
+     * Consider a color pixel with the following values:
+     * <p>
+     * A = 255 ; R = 100 ; G = 150 ; B = 200
+     * <p>
+     * ARGB have an integer value in the <0 ; 255>
+     * <p>
+     * Convert the color pixel into negative:
+     * - Subtract the value of R, G and B from 255
+     * <p>
+     * R = 255 - 100 = 155
+     * G = 255 - 150 = 105
+     * B = 255 - 200 = 55
+     * <p>
+     * The new ARGB value will be:
+     * <p>
+     * A = 255 ; R = 155 ; G = 105 ; B = 55
+     * <p>
+     * We don't have to change the alpha value
+     * because it only controls the transparency of the pixel
+     */
     private void colourInversion() {
 
         int originalWidth = originalImage.getWidth();

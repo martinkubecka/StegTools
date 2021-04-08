@@ -7,7 +7,13 @@ import java.io.File;
 
 public class FileChooser {
 
-    public File pickSingleFileChooser(String  fileFormat){
+    /**
+     * Initialize a file chooser with a filter based on the provided String.
+     * <p>
+     * @param fileFormat  file format name used to choose a file filter
+     * @return selected file from the file chooser
+     */
+    public File pickSingleFileChooser(String fileFormat) {
 
         JFileChooser fc = new JFileChooser();
         fc.setCurrentDirectory(new File("src/resources/"));
@@ -28,11 +34,17 @@ public class FileChooser {
         int returnVal = fc.showOpenDialog(new JDialog());
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
+
             return fc.getSelectedFile();
         }
         return null;
     }
 
+    /**
+     * Initialize a file chooser without any filters.
+     * <p>
+     * @return selected files from the file chooser
+     */
     public File[] pickMultipleFilesFromFileChooser() {
 
         JFileChooser fc = new JFileChooser();
@@ -49,6 +61,7 @@ public class FileChooser {
             StringBuilder fileNames = new StringBuilder();
 
             for (File file : files) {
+
                 fileNames.append(file.getName()).append(" ");
             }
 
@@ -57,15 +70,22 @@ public class FileChooser {
         return null;
     }
 
-    public static String getExtension(File f) {
+    /**
+     * Get a file extension from the name of the provided file.
+     * <p>
+     * @param file chosen file from the file chooser
+     * @return file extension without the dot
+     */
+    public static String getExtension(File file) {
 
-        String ext = null;
-        String s = f.getName();
+        String extension = null;
+        String s = file.getName();
         int i = s.lastIndexOf('.');
 
-        if (i > 0 &&  i < s.length() - 1) {
-            ext = s.substring(i+1).toLowerCase();
+        if (i > 0 && i < s.length() - 1) {
+
+            extension = s.substring(i + 1).toLowerCase();
         }
-        return ext;
+        return extension;
     }
 }
