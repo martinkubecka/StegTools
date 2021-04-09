@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/martinkubecka/StegTools/tree/master/src/resources/images/logo.png" alt="Stegtools">
+<img src="https://github.com/martinkubecka/StegTools/blob/master/src/resources/images/logo.png" alt="Stegtools">
 <p align="center">Steganographic multi tool in development as a part of my bachelor's thesis.<br>
 </p>
 
