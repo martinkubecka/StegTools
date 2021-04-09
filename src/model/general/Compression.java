@@ -8,8 +8,13 @@ import net.lingala.zip4j.model.enums.EncryptionMethod;
 
 import java.io.File;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Compression {
+
+     private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+     private static int zipNumber = 0;
 
     public boolean compressFilesToZip(List<File> filesToCompress, String password) {
 
@@ -24,14 +29,17 @@ public class Compression {
 
         System.out.println(">>  Zipping the contents of input directory");
         try {
-            ZipFile zipFile = new ZipFile("resource.zip", password.toCharArray());
+
+            String zipFileName = "resources_" + (++zipNumber) +".zip";
+            ZipFile zipFile = new ZipFile(zipFileName, password.toCharArray());
             // TODO set default location for zip after compression
             zipFile.addFiles(filesToCompress, zipParameters);
             System.out.println(">>  Successfully zipped contents");
             return true;
-        } catch (Exception e) {
+        } catch (Exception exception) {
 
-            e.printStackTrace();
+             LOGGER.log(Level.SEVERE, exception.toString(), exception);
+
             return false;
         }
     }

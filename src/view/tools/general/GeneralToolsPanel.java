@@ -212,12 +212,18 @@ public class GeneralToolsPanel extends JPanel {
 
         messageShorteningButton.addActionListener(e -> {
 
-            boolean result = baseController.getDictionary().applyMessageShortening();
-            messageShorteningResultLabel.setVisible(true);
-            if (result) {
-                messageShorteningResultLabel.setText("Successfully applied dictionary");
-            }
+            File file = baseController.getFileChooser().pickSingleFileChooser("txt");
 
+            if (file != null) {
+
+                File modifiedFile = baseController.getDictionary().applyMessageShortening(file, 1);
+
+                if (modifiedFile != null) {
+
+                    messageShorteningResultLabel.setVisible(true);
+                    messageShorteningResultLabel.setText("Successfully applied dictionary");
+                }
+            }
         });
     }
 }

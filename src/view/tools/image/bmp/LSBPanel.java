@@ -87,7 +87,7 @@ public class LSBPanel extends JPanel {
 
                 // 0 = yes, 1 = no, 2 = cancel
                 int chooseFiles = JOptionPane.showConfirmDialog(this,
-                        "Would you like to choose some secret files?", "Carrier picked successfully!", JOptionPane.YES_NO_CANCEL_OPTION);
+                        "Would you like to choose some secret files?", "Carrier picked successfully", JOptionPane.YES_NO_CANCEL_OPTION);
 
                 if (chooseFiles == 0) {
 
@@ -129,6 +129,7 @@ public class LSBPanel extends JPanel {
                             if (applyDictionary == 0) {
 
                                 System.out.println("Applying shortening ...");
+                                filesToHide = baseController.getLeastSignificantBit().textFileShortening(filesToHide);
                             }
                         }
 
@@ -145,13 +146,17 @@ public class LSBPanel extends JPanel {
                             // Compression selected
                             if (compressionOption == 0) {
 
-                                compressBeforeInsertion();
+                                File zipFile = compressBeforeInsertion(filesToHide);
+
+                                if (zipFile != null) {
+
+                                    baseController.getLeastSignificantBit().insertion(zipFile);
+                                }
                             }
                             // No compression
                             else {
 
-                                // Insertion
-                                System.out.println("Inserting a file to a carrier ...");
+                                baseController.getLeastSignificantBit().insertion(filesToHide.get(0));
                             }
                         }
                         // More files were selected
@@ -159,7 +164,12 @@ public class LSBPanel extends JPanel {
 
                             JOptionPane.showMessageDialog(this, "More files were selected thus compression is required.", "Information", JOptionPane.PLAIN_MESSAGE);
 
-                            compressBeforeInsertion();
+                            File zipFile = compressBeforeInsertion(filesToHide);
+
+                            if (zipFile != null) {
+
+                                baseController.getLeastSignificantBit().insertion(zipFile);
+                            }
                         }
 
                     } catch (Exception exception) {
@@ -176,10 +186,11 @@ public class LSBPanel extends JPanel {
         });
     }
 
-    private void compressBeforeInsertion() {
+    private File compressBeforeInsertion(List<File> filesToHide) {
 
         String password = "";
         int okCxl = 0;
+        File zipFile = null;
 
         while ((password.isEmpty()) && (okCxl == 0)) {
 
@@ -197,10 +208,31 @@ public class LSBPanel extends JPanel {
 
                 if (!password.isEmpty()) {
 
-                    //boolean result = baseController.getCompression().compressFilesToZip(filesToHide, password);
+                    // compress
                     System.out.println("Compressing file / files ...");
-                    System.out.println("Compression was successful!");
-                    // TODO rework to return the compressed zip file
+                    boolean result = baseController.getCompression().compressFilesToZip(filesToHide, password);
+
+                    if (result) {
+
+                        System.out.println("Compression was successful!");
+
+                        // pick a zip file from a file chooser
+
+                        JOptionPane.showMessageDialog(this, "Please choose a zip file we compressed for you.", "Successful compression", JOptionPane.PLAIN_MESSAGE);
+
+                        zipFile = baseController.getFileChooser().pickSingleFileChooser("zip");
+
+                        return zipFile;
+
+                    } else {
+
+                        JOptionPane.showMessageDialog(
+                                this,
+                                "An error was encountered while compressing.",
+                                "Error",
+                                JOptionPane.WARNING_MESSAGE);
+                    }
+
                     System.out.println("Inserting a zip file to a carrier ...");
                     //break;
 
@@ -214,5 +246,7 @@ public class LSBPanel extends JPanel {
                 }
             }
         }
+
+        return null;
     }
 }
