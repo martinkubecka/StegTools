@@ -3,15 +3,17 @@ package view.menu;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+
 import view.components.Button;
 
 public class HeaderPanel extends JPanel {
 
     private JPanel parentPanel;
     private CardLayout cardLayout;
-    private JButton changeLogButton;
-    private JButton toolsButton;
-    private JButton helpButton;
+    private Button homeButton;
+    private Button toolsButton;
+    private Button helpButton;
+    private Button changeLogButton;
 //    private JButton exitButton;
 
     public HeaderPanel(JPanel parentPanel, CardLayout cardLayout) {
@@ -19,11 +21,10 @@ public class HeaderPanel extends JPanel {
         this.parentPanel = parentPanel;
         this.cardLayout = cardLayout;
 
-        changeLogButton = new Button("Home");
+        homeButton = new Button("Home");
         toolsButton = new Button("Tools");
         helpButton = new Button("Help");
-
-//        JButton exitButton = new Button("Exit");
+        changeLogButton = new Button("Change Log");
 
         setUpLayout();
         setUpPanel();
@@ -45,10 +46,10 @@ public class HeaderPanel extends JPanel {
      */
     private void setUpPanel() {
 
-        this.add(changeLogButton);
+        this.add(homeButton);
         this.add(toolsButton);
         this.add(helpButton);
-        //this.add(exitButton);
+        this.add(changeLogButton);
     }
 
     /**
@@ -56,10 +57,10 @@ public class HeaderPanel extends JPanel {
      */
     private void setUpListeners() {
 
-        changeLogButton.addActionListener(e -> {
+        homeButton.addActionListener(e -> {
 
-            String changeLogPanel = "ChangeLog Panel";
-            cardLayout.show(parentPanel, changeLogPanel);
+            String homePanel = "Home Panel";
+            cardLayout.show(parentPanel, homePanel);
 
         });
 
@@ -73,6 +74,13 @@ public class HeaderPanel extends JPanel {
 
             HelpWindow helpWindow = new HelpWindow("Instructions");
             helpWindow.setVisible(true);
+
+        });
+
+        changeLogButton.addActionListener(e -> {
+
+            String changeLogPanel = "Change Log Panel";
+            cardLayout.show(parentPanel, changeLogPanel);
 
         });
     }

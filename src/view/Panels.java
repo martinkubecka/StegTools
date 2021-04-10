@@ -2,6 +2,7 @@ package view;
 
 import controller.AppController;
 import view.menu.ChangeLogPanel;
+import view.menu.HomePanel;
 import view.menu.HeaderPanel;
 import view.tools.ToolsPanel;
 import view.tools.general.GeneralToolsPanel;
@@ -16,6 +17,7 @@ public class Panels extends JPanel {
     private AppController baseController;
     private CardLayout cardLayout;
     private HeaderPanel headerPanel;
+    private HomePanel homePanel;
     private ChangeLogPanel changeLogPanel;
     private ToolsPanel toolsPanel;
     private GeneralToolsPanel generalToolsPanel;
@@ -33,6 +35,7 @@ public class Panels extends JPanel {
         headerPanel = new HeaderPanel(this, cardLayout);
 
         // CENTER PANELS
+        homePanel = new HomePanel();
         changeLogPanel = new ChangeLogPanel();
         toolsPanel = new ToolsPanel(this, cardLayout);
         generalToolsPanel = new GeneralToolsPanel(baseController);
@@ -50,7 +53,8 @@ public class Panels extends JPanel {
 
         this.setLayout(cardLayout);
 
-        this.add(changeLogPanel, "ChangeLog Panel");
+        this.add(homePanel, "Home Panel");
+        this.add(changeLogPanel, "Change Log Panel");
         this.add(toolsPanel, "Tools Panel");
         this.add(generalToolsPanel, "General Tools Panel");
         this.add(imageToolsPanel, "Image Tools Panel");

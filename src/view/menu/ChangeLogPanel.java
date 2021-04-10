@@ -1,9 +1,12 @@
 package view.menu;
+
 import view.components.Label;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.io.FileReader;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,26 +14,23 @@ public class ChangeLogPanel extends JPanel {
 
     private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-    private JLabel nameLabel;
-    private JLabel changeLogLabel;
-    private JLabel creatorLabel;
+    private Label changeLogLabel;
     private JTextArea textArea;
     private JScrollPane jScrollPane;
 
     public ChangeLogPanel() {
 
-        nameLabel = new Label("StegTools", SwingConstants.CENTER, SwingConstants.CENTER, Font.PLAIN, 36);
-
         changeLogLabel = new Label("Change Log:", SwingConstants.LEFT,SwingConstants.BOTTOM, Font.PLAIN, 20);
-
-        creatorLabel = new Label("Martin Kubecka, 2020/2021", SwingConstants.RIGHT, SwingConstants.BOTTOM, Font.PLAIN, 12);
 
         textArea = new JTextArea();
 
         try {
 
-            FileReader reader = new FileReader("src/resources/version_control.txt");
-            textArea.read(reader, "src/resources/version_control.txt"); //Object of JTextArea
+            ClassLoader classLoader = getClass().getClassLoader();
+            File textFile = new File(classLoader.getResource("resources/version_control.txt").getFile());
+
+            FileReader reader = new FileReader(textFile);
+            textArea.read(reader, textFile);
 
         } catch (Exception exception) {
 
@@ -58,19 +58,17 @@ public class ChangeLogPanel extends JPanel {
      */
     private void setUpLayout() {
 
-        this.setLayout(new GridLayout(4, 1, 8, 8));
+        this.setLayout(new BorderLayout());
         this.setBackground(new Color(72, 0, 0));
-        this.setBorder(BorderFactory.createEmptyBorder(8, 16, 8, 16));
+        this.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
     }
-
     /**
      * Appends the specified components to the panel.
      */
     private void setUpPanel() {
 
-        this.add(nameLabel);
-        this.add(changeLogLabel);
-        this.add(jScrollPane);
-        this.add(creatorLabel);
+        this.add(changeLogLabel, BorderLayout.NORTH);
+        this.add(jScrollPane, BorderLayout.CENTER);
     }
+
 }
