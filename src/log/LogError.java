@@ -33,7 +33,7 @@ public class LogError {
 
         try {
 //            FileHandler fh = new FileHandler("errors.log", true);
-            FileHandler fh = new FileHandler("errors.log");
+            FileHandler fh = new FileHandler("errors.xml");
             fh.setLevel(Level.FINE);
             LOGGER.addHandler(fh);
 
