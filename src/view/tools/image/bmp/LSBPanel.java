@@ -215,7 +215,7 @@ public class LSBPanel extends JPanel {
 
                     JOptionPane.showMessageDialog(
                             this,
-                            "More files were selected thus compression is required.",
+                            "Successfully extracted hidden data.",
                             "Information",
                             JOptionPane.PLAIN_MESSAGE);
 
