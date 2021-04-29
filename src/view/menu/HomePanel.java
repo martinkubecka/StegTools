@@ -4,10 +4,7 @@ import view.components.Label;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileReader;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class HomePanel extends JPanel {
 

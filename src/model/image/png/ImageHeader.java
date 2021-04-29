@@ -49,11 +49,6 @@ public class ImageHeader {
         byte[] data = readContentIntoByteArray(file);
         byte[] correctHeader = new byte[]{-119, 80, 78, 71, 13, 10, 26, 10};
 
-//        for (int i = 0; i < correctHeader.length; i++) {
-//
-//            data[i] = correctHeader[i];
-//        }
-
         System.arraycopy(correctHeader, 0, data, 0, correctHeader.length);
 
         try {
@@ -99,25 +94,20 @@ public class ImageHeader {
     private byte[] readContentIntoByteArray(File file) {
 
         FileInputStream fileInputStream;
-        byte[] bFile = new byte[(int) file.length()];
+        byte[] fileBytes = new byte[(int) file.length()];
 
         try {
+
             // Convert file into array of bytes
             fileInputStream = new FileInputStream(file);
-            fileInputStream.read(bFile);
+            fileInputStream.read(fileBytes);
             fileInputStream.close();
-
-            // hex form:    printf("%02x ", bFile[i])
-            // dec form:    printf("%d ", bFile[i]) or print(bFile[i] + " ")
-//            for (byte b : bFile) {
-//                System.out.printf("%02x", b);
-//            }
 
         } catch (Exception exception) {
 
             LOGGER.log(Level.SEVERE, exception.toString(), exception);
         }
 
-        return bFile;
+        return fileBytes;
     }
 }

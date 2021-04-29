@@ -1,4 +1,4 @@
-package model.general;
+package model.image.general;
 
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
@@ -21,14 +21,15 @@ import java.util.logging.Logger;
 
 public class ExtractMetadata {
 
-     private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     // TODO handle exception : File format could not be determined
 
     /**
      * Extract image metadata.
      * <p>
-     * @param file  chosen for metadata extraction.
+     *
+     * @param file chosen for metadata extraction.
      * @return ArrayList of parsed metadata tags represented as Strings.
      */
     public ArrayList<String> extractMetadata(File file) {
@@ -56,7 +57,7 @@ public class ExtractMetadata {
 
             } catch (JpegProcessingException | IOException ioException) {
 
-                 LOGGER.log(Level.SEVERE, ioException.toString(), ioException);
+                LOGGER.log(Level.SEVERE, ioException.toString(), ioException);
             }
 
             // UNKNOWN FILE TYPE
@@ -86,8 +87,9 @@ public class ExtractMetadata {
     /**
      * Parse Metadata object and store its tags in the ArrayList.
      * <p>
-     * @param metadata  object representing image metadata
-     * @return  ArrayList of parsed metadata tags
+     *
+     * @param metadata object representing image metadata
+     * @return ArrayList of parsed metadata tags
      */
     private ArrayList<String> parseMetadata(Metadata metadata) {
 

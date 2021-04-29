@@ -183,7 +183,7 @@ public class AppendedData {
      * @param typeBytes  recent read chunk of data
      * @return type of chunk as a String
      */
-    private String getTypeString(byte[] typeBytes) {
+    public static String getTypeString(byte[] typeBytes) {
 
         try {
 

@@ -14,7 +14,6 @@ public class HeaderPanel extends JPanel {
     private Button toolsButton;
     private Button helpButton;
     private Button changeLogButton;
-//    private JButton exitButton;
 
     public HeaderPanel(JPanel parentPanel, CardLayout cardLayout) {
 

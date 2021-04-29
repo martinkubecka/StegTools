@@ -1,6 +1,7 @@
 package view.tools.image.bmp;
 
 import controller.AppController;
+import model.explorer.FileChooser;
 import view.Panels;
 import view.components.Button;
 import view.components.Label;
@@ -160,22 +161,38 @@ public class LSBPanel extends JPanel {
                                 // Only one file was selected
                                 if (!areMoreFilesSelected) {
 
-                                    // 0 = yes, 1 = no, 2 = cancel
-                                    int compressionOption = JOptionPane.showConfirmDialog(this,
-                                            "Would you like to compress your secret file to a password protected zip file?", " Recommendation", JOptionPane.YES_NO_CANCEL_OPTION);
+                                    if (!FileChooser.getExtension(filesToHide.get(0)).equals("zip")) {
 
-                                    // Compression selected
-                                    if (compressionOption == 0) {
+                                        // 0 = yes, 1 = no, 2 = cancel
+                                        int compressionOption = JOptionPane.showConfirmDialog(this,
+                                                "Would you like to compress your secret file to a password protected zip file?", " Recommendation", JOptionPane.YES_NO_CANCEL_OPTION);
 
-                                        File zipFile = compressBeforeInsertion(filesToHide);
+                                        // Compression selected
+                                        if (compressionOption == 0) {
 
-                                        if (zipFile != null) {
+                                            File zipFile = compressBeforeInsertion(filesToHide);
 
-                                            baseController.getLeastSignificantBit().insertLSB(fileCarrier, zipFile);
+                                            if (zipFile != null) {
+
+                                                baseController.getLeastSignificantBit().insertLSB(fileCarrier, zipFile);
+                                            }
                                         }
-                                    }
-                                    // No compression
-                                    else {
+                                        // No compression
+                                        else {
+
+                                            if (FileChooser.getExtension(filesToHide.get(0)).length() == 3) {
+
+                                                baseController.getLeastSignificantBit().insertLSB(fileCarrier, filesToHide.get(0));
+                                            } else {
+
+                                                JOptionPane.showMessageDialog(
+                                                        this,
+                                                        "Only files with 3 character extension are allowed to be inserted.",
+                                                        "Warning",
+                                                        JOptionPane.WARNING_MESSAGE);
+                                            }
+                                        }
+                                    } else {
 
                                         baseController.getLeastSignificantBit().insertLSB(fileCarrier, filesToHide.get(0));
                                     }
@@ -198,6 +215,12 @@ public class LSBPanel extends JPanel {
                             LOGGER.log(Level.SEVERE, exception.toString(), exception);
                         }
                     }
+
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Successfully inserted data.",
+                            "Information",
+                            JOptionPane.PLAIN_MESSAGE);
                 }
             }
         });

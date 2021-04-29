@@ -30,7 +30,6 @@ public class BitPlaneSlicing {
     private BufferedImage transformedImage;
     private int currentTransition;
 
-    // The number of transformations supported
     private int maxTransformations;
 
     private ColorModel colorModel;
@@ -85,8 +84,6 @@ public class BitPlaneSlicing {
         currentTransition--;
         bitIndex++;
 
-//        System.out.println("Current Transition : " + currentTransition + "| bitIndex : " + bitIndex);
-
         if (currentTransition < 0) {
 
             currentTransition = maxTransformations;
@@ -134,6 +131,7 @@ public class BitPlaneSlicing {
         } else if (bitIndex == -1) {
 
             colourInversion();
+
         } else {
 
             singlePlane(bitIndex);
@@ -225,7 +223,7 @@ public class BitPlaneSlicing {
     /*
     EXAMPLE :
 
-
+        // TODO
 
     */
     private void singlePlane(int d) {

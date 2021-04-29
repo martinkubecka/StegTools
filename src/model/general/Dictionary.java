@@ -1,6 +1,5 @@
 package model.general;
 
-import model.explorer.FileChooser;
 
 import java.io.*;
 import java.util.HashMap;
@@ -14,6 +13,11 @@ public class Dictionary {
     private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static int newFileCounter = 0;
 
+    /**
+     * Dictionary constructor.
+     * <p>
+     * Load an English synonym dictionary into a HashMap.
+     */
     public Dictionary() {
 
         try {
@@ -35,7 +39,16 @@ public class Dictionary {
         }
     }
 
-    // mode 1 = to the new file | 2 = rewrite provided file
+    /**
+     * Apply message shortening on the provided text file based on the selected mode.
+     * <p>
+     * Mode = 1 : write to the new file
+     * Mode = 2 : rewrite provided file
+     *
+     * @param file text file
+     * @param mode write mode
+     * @return shortened text file
+     */
     public File applyMessageShortening(File file, int mode) {
 
         try {
@@ -51,8 +64,6 @@ public class Dictionary {
 
             in.close();
 
-            System.out.println(">>  Successfully loaded secret message");
-            //System.out.println(input);
             String message = input.toString();
 
             for (Map.Entry<String, String> entry : dictionary.entrySet()) {
@@ -69,8 +80,6 @@ public class Dictionary {
 
                 return writeToText(file, message);
             }
-            System.out.println(">>  Successfully applied dictionary");
-
 
         } catch (IOException ioException) {
 
@@ -80,13 +89,21 @@ public class Dictionary {
         return null;
     }
 
+    /**
+     * Write a message to the text file.
+     * <p>
+     *
+     * @param file    text file
+     * @param message message to be written
+     * @return text file with a message
+     */
     private File writeToText(File file, String message) {
 
         try {
 
-            FileWriter f2 = new FileWriter(file, false);
-            f2.write(message);
-            f2.close();
+            FileWriter fw = new FileWriter(file, false);
+            fw.write(message);
+            fw.close();
 
         } catch (IOException ioException) {
 
@@ -96,23 +113,19 @@ public class Dictionary {
         return file;
     }
 
+    /**
+     * Write a message to a new file.
+     * <p>
+     *
+     * @param content message to be written
+     */
     private void writeToOutput(String content) {
 
-        //Create the file
         String newFileName = "src/resources/secret_message_shorten_" + (++newFileCounter) + ".txt";
         File file = new File(newFileName);
 
         try {
 
-            if (file.createNewFile()) {
-
-                System.out.println(">>  New Text File is created!");
-            } else {
-
-                System.out.println(">>  File already exists.");
-            }
-
-            //Write content
             BufferedWriter bw = null;
 
             try {
@@ -124,12 +137,12 @@ public class Dictionary {
 
             } catch (IOException ioException) {
 
-                System.out.println(">>  Error writing to file");
                 LOGGER.log(Level.SEVERE, ioException.toString(), ioException);
             }
-        } catch (IOException ioException) {
 
-            LOGGER.log(Level.SEVERE, ioException.toString(), ioException);
+        } catch (Exception exception) {
+
+            LOGGER.log(Level.SEVERE, exception.toString(), exception);
         }
     }
 }

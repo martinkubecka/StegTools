@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.FileReader;
-import java.net.URL;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,7 +27,7 @@ public class ChangeLogPanel extends JPanel {
         try {
 
             ClassLoader classLoader = getClass().getClassLoader();
-            File textFile = new File(classLoader.getResource("resources/version_control.txt").getFile());
+            File textFile = new File(Objects.requireNonNull(classLoader.getResource("resources/version_control.txt")).getFile());
 
             FileReader reader = new FileReader(textFile);
             textArea.read(reader, textFile);
@@ -39,7 +39,6 @@ public class ChangeLogPanel extends JPanel {
 
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
-        //textArea.setBackground(new Color());
         textArea.setBorder(BorderFactory.createBevelBorder(1));
         textArea.setForeground(Color.BLACK);
         textArea.setFont(new Font("Source Code Pro", Font.PLAIN, 14));

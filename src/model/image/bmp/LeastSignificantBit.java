@@ -2,6 +2,7 @@ package model.image.bmp;
 
 import model.explorer.FileChooser;
 import model.general.Dictionary;
+import model.image.general.AppendedData;
 
 
 import javax.imageio.ImageIO;
@@ -73,41 +74,27 @@ public class LeastSignificantBit {
                 prepend += "0";
             }
 
-            System.out.println("To prepand : " + prepend);
             String insertSize = prepend + fileSize;
-            System.out.println("Inserting size (string) : " + insertSize);
 
             sizeInputStream = new ByteArrayInputStream(insertSize.getBytes());
 
-            // Do for all bytes in the data to hide
             while ((dataByte = sizeInputStream.read()) != -1) {
 
-                // Insert 1 bit a time from the data to hide
                 for (int bit = 7; bit >= 0; bit--) {
 
-                    // Get picture-byte and clear the last bit
                     pictureByte = originalCarrier.read() & clearBit;
-                    // Sift dataByte to the right to get the bit currently inserting
-                    // Insert selected bit at the last position in the pictureByte
                     pictureByte = (pictureByte | ((dataByte >> bit) & 1));
-                    // Write picture-byte in to the output image
                     outputCarrier.write(pictureByte);
                 }
             }
             /* ------------------------------------------------------------------ */
             /* ------------------------- Hide data ------------------------------ */
-            // Do for all bytes in the data to hide
             while ((dataByte = fileToHide.read()) != -1) {
 
-                // Insert 1 bit a time from the data to hide
                 for (int bit = 7; bit >= 0; bit--) {
 
-                    // Get picture-byte and clear the last bit
                     pictureByte = originalCarrier.read() & clearBit;
-                    // Sift dataByte to the right to get the bit currently inserting
-                    // Insert selected bit at the last position in the pictureByte
                     pictureByte = (pictureByte | ((dataByte >> bit) & 1));
-                    // Write picture-byte in to the output image
                     outputCarrier.write(pictureByte);
                 }
             }
@@ -131,40 +118,6 @@ public class LeastSignificantBit {
         }
     }
 
-
-    /* -------------------------------------------------------------------------------------*/
-    /* -------------------------------------- TESTING --------------------------------------*/
-    private void streamTesting(SequenceInputStream dataToHide) throws IOException {
-
-        // Read custom header
-        // File extension (3B) + Size of inserting data (8B)
-        byte[] typeBytes = new byte[3];
-        dataToHide.read(typeBytes);
-        String extension = getTypeString(typeBytes);
-
-        byte[] sizeBytes = new byte[8];
-        dataToHide.read(sizeBytes);
-        String insertingSize = getTypeString(sizeBytes);
-
-        System.out.println("Read Ext : " + extension);
-        System.out.println("Read Size : " + insertingSize + " bytes");
-    }
-
-    private String getTypeString(byte[] typeBytes) {
-
-        try {
-
-            return new String(typeBytes, "UTF8");
-
-        } catch (UnsupportedEncodingException uee) {
-
-            return "";
-        }
-    }
-    /* -------------------------------------------------------------------------------------*/
-    /* -------------------------------------------------------------------------------------*/
-
-
     public int extractLSB(File fileCarrier) {
 
         FileInputStream image = null;
@@ -172,21 +125,20 @@ public class LeastSignificantBit {
 
         try {
 
+            // TODO return 0 if nothing was inserted
+
             image = new FileInputStream(fileCarrier);
 
             // Read BMP header
             image.readNBytes(54);
-            //for (int i = 1; i <= HEADSIZE; i++) image.read();
 
-            // Read Custom header (11B)
-            // File extension (3B) + Size of inserting data (8B)
-
-            int dataByte = 0, extractedLSB;
-            int counter = 0;
-            byte[] extByteArray = new byte[3];
+            // Custom header (11B)
 
             // Extract extension
             // 3B = 24bits hidden inside 24B
+            byte[] extByteArray = new byte[3];
+            int dataByte = 0, extractedLSB = 0, counter = 0;
+
             for (int i = 0; i < 24; i++) {
 
                 dataByte = image.read();
@@ -195,17 +147,13 @@ public class LeastSignificantBit {
                 counter++;
             }
 
-            String extension = getTypeString(extByteArray);
-            System.out.println("\nExtracted extension : " + extension);
+            String extension = AppendedData.getTypeString(extByteArray);
 
             // Extract length
-            dataByte = 0;
-            extractedLSB = 0;
-            counter = 0;
-            byte[] lengthByteArray = new byte[8];
-
-            // Extract extension
             // 8B = 64bits hidden inside 64B
+            byte[] lengthByteArray = new byte[8];
+            dataByte = 0; extractedLSB = 0; counter = 0;
+
             for (int i = 0; i < 64; i++) {
 
                 dataByte = image.read();
@@ -214,22 +162,16 @@ public class LeastSignificantBit {
                 counter++;
             }
 
-            String length = getTypeString(lengthByteArray);
-//            String length = getTypeString(lengthByteArray).replaceAll("[^\\d.]", "");
+            String length = AppendedData.getTypeString(lengthByteArray);
             int size = Integer.parseInt(length);
-            System.out.println("\nExtracted size of the hidden file : " + size);
 
             // Extract file
             byte[] hiddenFile = new byte[size];
-            // Based on the size do for all bytes
+            dataByte = 0; extractedLSB = 0; counter = 0;
             int iterator = size * 8;
-            dataByte = 0;
-            extractedLSB = 0;
-            counter = 0;
-            // secret.txt = 6B = 48b hidden inside 48B
+
             for (int i = 0; i < iterator; i++) {
 
-                //System.out.print(i + " ");
                 dataByte = image.read();
                 extractedLSB = dataByte & (byte) 1;
                 hiddenFile[counter / 8] |= (extractedLSB << (7 - (counter % 8)));
@@ -280,20 +222,15 @@ public class LeastSignificantBit {
         long filesToHideByteSize = 0;
         long availableByteSpace = 0;
 
-        // Less than 60B would mean that we can not even write our own header
-        if (fileByteSize > 60) {
+        // Less than 66B would mean that we can not even write our own header and a single character
+        if (fileByteSize > 66) {
 
             for (File toHide : filesToHide) {
 
                 filesToHideByteSize += toHide.length();
             }
 
-//            System.out.println("fileByteSize : " + fileByteSize);
-//            System.out.println("filesToHideByteSize : " + filesToHideByteSize);
-
             availableByteSpace = (fileByteSize - 54 - 11) / 8;
-
-//            System.out.println("availableByteSpace : " + availableByteSpace);
 
             return filesToHideByteSize < availableByteSpace;
         }
@@ -369,7 +306,6 @@ public class LeastSignificantBit {
         for (File file : filesToHide) {
 
             currentExt = FileChooser.getExtension(file);
-            //System.out.println(currentExt);
 
             if (currentExt.equals(textFile)) isPresent++;
         }

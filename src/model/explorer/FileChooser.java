@@ -10,7 +10,8 @@ public class FileChooser {
     /**
      * Initialize a file chooser with a filter based on the provided String.
      * <p>
-     * @param fileFormat  file format name used to choose a file filter
+     *
+     * @param fileFormat file format name used to choose a file filter
      * @return selected file from the file chooser
      */
     public File pickSingleFileChooser(String fileFormat) {
@@ -43,6 +44,7 @@ public class FileChooser {
     /**
      * Initialize a file chooser without any filters.
      * <p>
+     *
      * @return selected files from the file chooser
      */
     public File[] pickMultipleFilesFromFileChooser() {
@@ -73,6 +75,7 @@ public class FileChooser {
     /**
      * Get a file extension from the name of the provided file.
      * <p>
+     *
      * @param file chosen file from the file chooser
      * @return file extension without the dot
      */

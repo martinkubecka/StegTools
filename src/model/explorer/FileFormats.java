@@ -20,7 +20,8 @@ public enum FileFormats {
     /**
      * Constructor.
      * <p>
-     * @param fileFormat  file format name
+     *
+     * @param fileFormat file format name
      */
     FileFormats(String fileFormat) {
 
@@ -30,6 +31,7 @@ public enum FileFormats {
     /**
      * Get a file format name.
      * <p>
+     *
      * @return file format name.
      */
     public String getFormat() {

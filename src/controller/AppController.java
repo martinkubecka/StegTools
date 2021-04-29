@@ -3,7 +3,7 @@ package controller;
 import log.LogError;
 import model.general.Compression;
 import model.general.Dictionary;
-import model.general.ExtractMetadata;
+import model.image.general.ExtractMetadata;
 import model.image.bmp.LeastSignificantBit;
 import model.image.general.AppendedData;
 import model.image.general.BitPlaneSlicing;
@@ -133,7 +133,4 @@ public class AppController {
         return appendedData;
     }
 
-    //    public MainFrame getFrame() {
-//        return frame;
-//    }
 }
