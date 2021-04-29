@@ -16,83 +16,6 @@ public class LeastSignificantBit {
 
     private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-    public void insertLSBOld(File fileCarrier, File filesToHide) {
-
-        final long HEADSIZE = 120;
-
-        FileInputStream originalCarrier = null;
-        FileInputStream fileToHide = null;
-        InputStream sizeInputStream = null;
-        InputStream extension = null;
-        FileOutputStream outputCarrier = null;
-        String fileToHideExt;
-
-        try {
-
-            originalCarrier = new FileInputStream(fileCarrier);
-            fileToHide = new FileInputStream(filesToHide);
-            // The file is created when FileOutputStream object is instantiated. If the file already exists, it is overridden.
-            outputCarrier = new FileOutputStream("secret.bmp");
-
-            // Create custom header
-            // Save a file extension (3B) and size of inserting data (8B)
-            // EXTENSION
-            fileToHideExt = FileChooser.getExtension(filesToHide);
-            extension = new ByteArrayInputStream(fileToHideExt.getBytes()); // TODO verify only 3 chars are returned
-
-            // FILE SIZE
-            long filesToHideSize = filesToHide.length();
-            String fileSize = Long.toString(filesToHideSize);
-            sizeInputStream = new ByteArrayInputStream(fileSize.getBytes());
-
-            // Merge extension and "file size" data stream = customHeader
-            SequenceInputStream customHeader = new SequenceInputStream(extension, sizeInputStream);
-
-            // Merge custom header and files to hide data stream
-            SequenceInputStream dataToHide = new SequenceInputStream(customHeader, fileToHide);
-
-            // TESTING
-            streamTesting(dataToHide);
-
-            int pictureByte, dataByte;
-            byte clearBit = (byte) 0xFE; // 254 = 11111110
-
-            // Copy header to the output image
-            outputCarrier.write(originalCarrier.readNBytes(54));
-//            for (int i = 1; i <= HEADSIZE; i++) outputCarrier.write(originalCarrier.read()); //copy header
-
-            // Do for all bytes in the data to hide
-            while ((dataByte = dataToHide.read()) != -1) {
-
-                // Insert 1 bit a time from the data to hide
-                for (int bit = 7; bit >= 0; bit--) {
-
-                    // Get picture-byte and clear the last bit
-                    pictureByte = originalCarrier.read() & clearBit;
-                    // Sift dataByte to the right to get the bit currently inserting
-                    // Insert selected bit at the last position in the pictureByte
-                    pictureByte = (pictureByte | ((dataByte >> bit) & 1));
-                    // Write picture-byte in to the output image
-                    outputCarrier.write(pictureByte);
-                }
-            }
-
-//            // Copy rest of the carrier to the output image
-            while ((pictureByte = originalCarrier.read()) != -1) {
-
-                outputCarrier.write(pictureByte);
-            }
-
-            originalCarrier.close();
-            dataToHide.close();
-            outputCarrier.close();
-
-        } catch (Exception exception) {
-
-            LOGGER.log(Level.SEVERE, exception.toString(), exception);
-        }
-    }
-
     public void insertLSB(File fileCarrier, File filesToHide) {
 
         FileInputStream originalCarrier = null;
@@ -136,13 +59,25 @@ public class LeastSignificantBit {
                 }
             }
             /* ------------------------------------------------------------------ */
-            /* ------------------------------------------------------------------ */
-
-            /* ------------------------------------------------------------------ */
             /* -------------------------- File Size ----------------------------- */
             long filesToHideSize = filesToHide.length();
             String fileSize = Long.toString(filesToHideSize);
-            sizeInputStream = new ByteArrayInputStream(fileSize.getBytes());
+
+            int length = String.valueOf(filesToHideSize).length();
+            int numDigitsToFill = 8 - length;
+
+            String prepend = "";
+
+            for (int i = 0; i < numDigitsToFill; i++) {
+
+                prepend += "0";
+            }
+
+            System.out.println("To prepand : " + prepend);
+            String insertSize = prepend + fileSize;
+            System.out.println("Inserting size (string) : " + insertSize);
+
+            sizeInputStream = new ByteArrayInputStream(insertSize.getBytes());
 
             // Do for all bytes in the data to hide
             while ((dataByte = sizeInputStream.read()) != -1) {
@@ -196,6 +131,7 @@ public class LeastSignificantBit {
         }
     }
 
+
     /* -------------------------------------------------------------------------------------*/
     /* -------------------------------------- TESTING --------------------------------------*/
     private void streamTesting(SequenceInputStream dataToHide) throws IOException {
@@ -224,43 +160,6 @@ public class LeastSignificantBit {
 
             return "";
         }
-    }
-
-    public byte[] extractLSB(File file, int size) {
-
-        FileInputStream fileInputStream = null;
-        byte[] lsbByteArray = new byte[size];
-        int arrayOffset = 0;
-
-        int dataByte, extractedLSB;
-        byte clearingByte = (byte) 0x01; // 0000 0001
-
-        try {
-            fileInputStream = new FileInputStream(file);
-
-            // Read byte by byte from the file input stream
-            while ((dataByte = fileInputStream.read()) != -1) {
-
-                // extract lsb and save it to the lsbByteArray
-                /*
-                //I've been trying something like this
-
-                    extractedLSB = dataByte & clearingByte; // ? get lsb
-                    lsbByteArray[arrayOffset] <<= 1;        // make space for a new bit
-                    lsbByteArray[arrayOffset/8] |= extractLSB; // "append" the lsb bit
-                    arrayOffset++;
-
-                 */
-            }
-
-            fileInputStream.close();
-
-        } catch (Exception exception) {
-
-            exception.printStackTrace();
-        }
-
-        return lsbByteArray;
     }
     /* -------------------------------------------------------------------------------------*/
     /* -------------------------------------------------------------------------------------*/
@@ -315,7 +214,8 @@ public class LeastSignificantBit {
                 counter++;
             }
 
-            String length = getTypeString(lengthByteArray).replaceAll("[^\\d.]", "");
+            String length = getTypeString(lengthByteArray);
+//            String length = getTypeString(lengthByteArray).replaceAll("[^\\d.]", "");
             int size = Integer.parseInt(length);
             System.out.println("\nExtracted size of the hidden file : " + size);
 
@@ -337,26 +237,21 @@ public class LeastSignificantBit {
             }
 
             // Create extracted file
-            String fileName = "extracted." + extension;
+            FileOutputStream outputStream;
 
-            // first option
-            try (FileOutputStream outputStream = new FileOutputStream(fileName)) {
+            try {
+
+                String fileName = "extracted." + extension;
+                outputStream = new FileOutputStream(fileName);
                 outputStream.write(hiddenFile);
+
+            } catch (Exception e) {
+
+                LOGGER.log(Level.SEVERE, e.toString(), e);
+                return -1;
             }
 
-            // second option
-//            BufferedOutputStream bs = null;
-//
-//            try {
-//
-//                FileOutputStream fs = new FileOutputStream(fileName);
-//                bs = new BufferedOutputStream(fs);
-//                bs.write(hiddenFile);
-//                bs.close();
-//
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
+            outputStream.close();
 
             return 1;
 

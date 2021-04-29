@@ -1,0 +1,105 @@
+2021-04-29 : v0.98
+- implemented LSB extraction for BMP images
+
+2021-04-27 : v0.95
+- fixed custom header insertion for LSB method
+
+2021-04-19 : v0.95
+- implemented LSB insertion for BMP images
+
+2021-04-10 : v0.93
+- separated home panel from change log panel
+- created a new logo
+
+2021-04-09 : v0.93
+- new modified functions for compression and message shortening used in LSB insertion
+
+2021-04-07 : v0.93
+- added extraction of appended data for BMP
+
+2021-04-06 : v0.93
+- added extraction of appended data for PNG
+
+2021-04-03 : v0.92
+- added pre-process and logic of files choosing for LSB insertion
+
+2021-03-30 : v0.92
+- added error logging to a file
+
+2021-03-29 : v0.91
+- fixed showing Alpha channel in Bit Plane Slicing when not present
+- created own Label component to reduce repetitive code
+- added gui for LSB method
+
+2021-03-07 : v0.91
+- created own Button component to reduce repetitive code
+
+2021-03-01 : v0.91
+- changed bit plane viewer from integrated panel to a separate window
+
+2021-02-28 : v0.91
+- merged single file chooser filters into one
+- added new panel for bit plane slicing
+- added image colour inversion
+
+2021-02-23 : v0.90
+- final implementation of Model–view–controller software design pattern
+- text tools merged with general tools
+- BMP and PNG tools merged into image tools
+
+2020-12-31 : v0.86
+- refactored FileChooser class, now based on the passed string identifier
+- reworked implementation of showing metadata, now based on the file format
+- new file formats supported for obtaining metadata (BMP, GIF, TIFF, RAW)
+
+2020-12-30 : v0.85
+- implemented function for checking png header correctness
+- implemented function for automatic repair of corrupted png header
+- created own panel for png tools
+
+2020-12-28 : v0.82
+- reimplemented message shortening with synonym dictionary
+- added enum class for file formats
+- added custom text file filter for file chooser
+- added change log reader from updated text file to its text area
+
+2020-12-27 : v0.81
+- reimplemented decompression for encrypted/unencrypted zip files
+
+2020-12-26 : v0.8
+- implemented fully working panel changing based on user choice
+- reworked main frame layout (updated to card layout)
+- created own panel for hiding message
+- created own panel for text manipulation
+- replaced instructions JDialog with own coded window
+- added home navigation from the header panel
+
+2020-12-26 : v0.7
+- rewritten buttons action listeners
+- exception handled when no files chosen for compression
+- exception handled when no password entered for compression
+- exception handled when no picture chosen for metadata extraction
+- metadata output to separated window
+
+2020-12-25 : v0.6
+- removed all automatically generated old.gui forms
+- reworked UI logics
+- rewritten UI from the scratch
+- deep code refactoring
+
+2020-12-03 : v0.4
+- implemented console testing
+- extraction of files from a password protected zip
+- message shortening with synonym dictionary
+- file chooser + image chooser filter
+- github readme
+
+2020-11-17 : v0.2
+- metadata extraction
+- compression with encryption
+
+2020-11-14 : v0.1
+- old gui set up
+
+2020-11-12
+- version control set up

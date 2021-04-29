@@ -20,6 +20,6 @@
 ----
 ## Sofvér
 
-- [ ] Extrakcia dát pre stego techniku LSB
+- [x] Extrakcia dát pre stego techniku LSB
 - [ ] Finálny refaktor kódu
 - [ ] Vygenerovanie **jar** a **java doc**

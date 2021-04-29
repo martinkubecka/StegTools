@@ -46,6 +46,7 @@
 | Bit Plane Slicing for 24‑bit and 32-bit images | v0.91 | |
 | Appended data extraction for PNG and BMP image files | v0.93 | |
 | LSB Insertion for BMP images | v0.95
+| LSB Extraction for BMP images | v0.98
 ---
 ## :running: Running Stegtools
 
