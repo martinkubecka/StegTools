@@ -1,6 +1,5 @@
 package model.general;
 
-
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,13 +15,15 @@ public class Dictionary {
     /**
      * Dictionary constructor.
      * <p>
-     * Load an English synonym dictionary into a HashMap.
+     * Load an English dictionary of shortened words into a HashMap.
      */
     public Dictionary() {
 
         try {
 
-            BufferedReader in = new BufferedReader(new FileReader("src/resources/dictionary.txt"));
+            String path = System.getProperty("user.dir");
+            String fileName = path + "/dictionary.txt";
+            BufferedReader in = new BufferedReader(new FileReader(fileName));
             String line = "";
 
             while ((line = in.readLine()) != null) {
@@ -121,7 +122,8 @@ public class Dictionary {
      */
     private void writeToOutput(String content) {
 
-        String newFileName = "src/resources/secret_message_shorten_" + (++newFileCounter) + ".txt";
+        String path = System.getProperty("user.dir");
+        String newFileName = path + "/secret_message_shorten_" + (++newFileCounter) + ".txt";
         File file = new File(newFileName);
 
         try {

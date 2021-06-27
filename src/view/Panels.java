@@ -22,7 +22,6 @@ public class Panels extends JPanel {
     private ToolsPanel toolsPanel;
     private GeneralToolsPanel generalToolsPanel;
     private ImageToolsPanel imageToolsPanel;
-//    private BitPlanePanel bitPlanePanel;
     private LSBPanel leastSignificantBitPanel;
 
     public Panels(AppController baseController) {
@@ -40,7 +39,6 @@ public class Panels extends JPanel {
         toolsPanel = new ToolsPanel(this, cardLayout);
         generalToolsPanel = new GeneralToolsPanel(baseController);
         imageToolsPanel = new ImageToolsPanel(this, baseController, cardLayout);
-//        bitPlanePanel = new BitPlanePanel(baseController);
         leastSignificantBitPanel = new LSBPanel(this, baseController, cardLayout);
 
         setUpPanel();
@@ -58,7 +56,6 @@ public class Panels extends JPanel {
         this.add(toolsPanel, "Tools Panel");
         this.add(generalToolsPanel, "General Tools Panel");
         this.add(imageToolsPanel, "Image Tools Panel");
-//        this.add(bitPlanePanel, "Bit Plane Panel");
         this.add(leastSignificantBitPanel, "LSB Panel");
     }
 

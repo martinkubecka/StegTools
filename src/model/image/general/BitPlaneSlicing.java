@@ -4,26 +4,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 
-/*
-    8-bit color and 16-bit color images
-    - The bits refer to the number of possible tonal values
-      available to each color channel (red, green, and blue) of each pixel.
-
-    32-bit image
-    - Includes an 8-bit Alpha channel,
-      where Alpha denotes transparency,
-      zero being invisible, and 255 being fully opaque.
-    - Alpha is a measure of overall pixel intensity.
-
-
-    Index values :
-    BLUE : [0, 7] : MSB is 0 ; LSB is 7
-    GREEN : [8, 15] : MSB is 8 ; LSB is 15
-    RED : [16, 23] : MSB is 16 ; LSB is 23
-
-    If present :
-    Alpha channel : [0, 7] : MSB is 0 ; ! R G B planes shifted by 8 bits !
- */
 public class BitPlaneSlicing {
 
     private BufferedImage originalImage;
@@ -183,7 +163,7 @@ public class BitPlaneSlicing {
      * <p>
      * A = 255 ; R = 100 ; G = 150 ; B = 200
      * <p>
-     * ARGB have an integer value in the <0 ; 255>
+     * ARGB have an integer value in the [0 ; 255]
      * <p>
      * Convert the color pixel into negative:
      * - Subtract the value of R, G and B from 255
@@ -205,43 +185,47 @@ public class BitPlaneSlicing {
         int originalHeight = originalImage.getHeight();
         transformedImage = new BufferedImage(originalWidth, originalHeight, BufferedImage.TYPE_INT_ARGB);
 
-        int currentPixelColor = 0;
+        int pixelColor = 0;
 
-        for (int indexWidth = 0; indexWidth < originalImage.getWidth(); indexWidth++) {
-            for (int indexHeight = 0; indexHeight < originalImage.getHeight(); indexHeight++) {
+        for (int i = 0; i < originalImage.getWidth(); i++) {
+            for (int j = 0; j < originalImage.getHeight(); j++) {
 
-                currentPixelColor = originalImage.getRGB(indexWidth, indexHeight);
+                pixelColor = originalImage.getRGB(i, j);
 
-                Color color = new Color(currentPixelColor);
+                Color color = new Color(pixelColor);
                 color = new Color(255 - color.getRed(), 255 - color.getGreen(), 255 - color.getBlue());
 
-                transformedImage.setRGB(indexWidth, indexHeight, color.getRGB());
+                transformedImage.setRGB(i, j, color.getRGB());
             }
         }
     }
 
-    /*
-    EXAMPLE :
-
-        // TODO
-
-    */
+    /**
+     * Create an image bitmap representing the current bit plane.
+     * <p>
+     * Shift the value by d bits, it the shifted value has its last bit set to 1 set the current pixel color to white, else it is set to black.
+     * <p>
+     *
+     * @param d index of the current bit plane
+     */
     private void singlePlane(int d) {
 
-        transformedImage = new BufferedImage(originalImage.getWidth(), originalImage.getHeight(), BufferedImage.TYPE_INT_RGB);
+        int originalWidth = originalImage.getWidth();
+        int originalHeight = originalImage.getHeight();
+        transformedImage = new BufferedImage(originalWidth, originalHeight, BufferedImage.TYPE_INT_RGB);
 
         for (int i = 0; i < originalImage.getWidth(); i++)
             for (int j = 0; j < originalImage.getHeight(); j++) {
 
-                int color = 0; // BLACK
-                int fcol = originalImage.getRGB(i, j);
+                int setColor = 0; // BLACK
+                int pixelColor = originalImage.getRGB(i, j);
 
-                if (((fcol >>> d) & 1) > 0) {
+                if (((pixelColor >>> d) & 1) > 0) {
 
-                    color = 0xffffff; // WHITE
+                    setColor = 0xffffff; // WHITE
                 }
 
-                transformedImage.setRGB(i, j, color);
+                transformedImage.setRGB(i, j, setColor);
             }
     }
 }

@@ -58,7 +58,9 @@ public class Compression {
         try {
 
             ZipFile zipFile = new ZipFile(file);
-            zipFile.extractAll("src/resources/extract");
+//            zipFile.extractAll("src/resources/extract");
+            String path = System.getProperty("user.dir");
+            zipFile.extractAll(path);
 
             return true;
 
@@ -83,7 +85,9 @@ public class Compression {
         try {
 
             ZipFile zipFile = new ZipFile(file, password.toCharArray());
-            zipFile.extractAll("src/resources/extract");
+//            zipFile.extractAll("src/resources/extract");
+            String path = System.getProperty("user.dir");
+            zipFile.extractAll(path);
 
             return true;
 

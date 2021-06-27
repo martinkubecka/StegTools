@@ -19,18 +19,12 @@ public class BitPlanePanel extends JPanel {
     private AppController baseController;
     private Label currentPlain;
     private JLabel imageCanvas;
-
-//    private JPanel imageCanvasPanel;
-
     private JPanel footerPanel;
-
     private JPanel footerPanelControls;
     private JButton uploadButton;
     private JButton forwardButton;
     private JButton backwardButton;
-
     private JPanel footerPanelMore;
-//    private JButton saveImageButton;
 
     private BufferedImage image;
 
@@ -43,8 +37,6 @@ public class BitPlanePanel extends JPanel {
 
         // CANVAS
         imageCanvas = new JLabel("", SwingConstants.CENTER);
-//        imageCanvasPanel = new JPanel();
-        // TODO add scroll bars
 
         // Footer Panel Controls
         footerPanelControls = new JPanel();
@@ -64,7 +56,6 @@ public class BitPlanePanel extends JPanel {
         uploadButton = new Button("Upload Image");
         forwardButton = new Button(">");
         backwardButton = new Button("<");
-//        saveImageButton = new Button("Save Image");
 
         setUpLayout();
         setUpPanel();
@@ -92,13 +83,10 @@ public class BitPlanePanel extends JPanel {
         footerPanelControls.add(uploadButton);
         footerPanelControls.add(forwardButton);
 
-//        footerPanelMore.add(saveImageButton);
-
         footerPanel.add(footerPanelControls);
         footerPanel.add(footerPanelMore);
 
         this.add(imageCanvas, BorderLayout.CENTER);
-//        this.add(imageCanvasPanel, BorderLayout.CENTER);
         this.add(footerPanel, BorderLayout.SOUTH);
     }
 
@@ -110,7 +98,6 @@ public class BitPlanePanel extends JPanel {
         uploadButton.addActionListener(e -> {
 
             try {
-                //File file = baseController.getFileChooser().pickSingleFileChooser("bmp");
                 File file = baseController.getFileChooser().pickSingleFileChooser("images");
 
                 if (file != null) {
@@ -133,11 +120,6 @@ public class BitPlanePanel extends JPanel {
                 LOGGER.log(Level.SEVERE, exception.toString(), exception);
             }
         });
-
-//        saveImageButton.addActionListener(e -> {
-//
-//            // TODO
-//        });
 
         forwardButton.addActionListener(e -> {
 

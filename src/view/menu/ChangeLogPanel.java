@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.FileReader;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,8 +25,8 @@ public class ChangeLogPanel extends JPanel {
 
         try {
 
-            ClassLoader classLoader = getClass().getClassLoader();
-            File textFile = new File(Objects.requireNonNull(classLoader.getResource("resources/version_control.txt")).getFile());
+            String path = System.getProperty("user.dir");
+            File textFile = new File(path + "/version_control.txt");
 
             FileReader reader = new FileReader(textFile);
             textArea.read(reader, textFile);

@@ -30,8 +30,8 @@ public class MainFrame extends JFrame {
 
         // MAIN WINDOW DIMENSIONS
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int width = (int) (dimension.width * 0.3);
-        int height = (int) (dimension.width * 0.3);
+        int width = (int) (dimension.width * 0.4);
+        int height = (int) (dimension.width * 0.4);
         this.setSize(width, height);
         int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
         int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
@@ -41,7 +41,6 @@ public class MainFrame extends JFrame {
 
         this.setTitle("Stegtools");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(false);
         this.setVisible(true);
     }
 }

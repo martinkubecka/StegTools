@@ -83,6 +83,7 @@ public class LSBPanel extends JPanel {
 
             // Pick carrier - bmp only
             File fileCarrier = baseController.getFileChooser().pickSingleFileChooser("bmp");
+            boolean successfulInsertion = false;
 
             if (fileCarrier != null) {
 
@@ -175,6 +176,7 @@ public class LSBPanel extends JPanel {
                                             if (zipFile != null) {
 
                                                 baseController.getLeastSignificantBit().insertLSB(fileCarrier, zipFile);
+                                                successfulInsertion = true;
                                             }
                                         }
                                         // No compression
@@ -183,6 +185,8 @@ public class LSBPanel extends JPanel {
                                             if (FileChooser.getExtension(filesToHide.get(0)).length() == 3) {
 
                                                 baseController.getLeastSignificantBit().insertLSB(fileCarrier, filesToHide.get(0));
+                                                successfulInsertion = true;
+
                                             } else {
 
                                                 JOptionPane.showMessageDialog(
@@ -195,6 +199,7 @@ public class LSBPanel extends JPanel {
                                     } else {
 
                                         baseController.getLeastSignificantBit().insertLSB(fileCarrier, filesToHide.get(0));
+                                        successfulInsertion = true;
                                     }
                                 }
                                 // More files were selected
@@ -207,6 +212,7 @@ public class LSBPanel extends JPanel {
                                     if (zipFile != null) {
 
                                         baseController.getLeastSignificantBit().insertLSB(fileCarrier, zipFile);
+                                        successfulInsertion = true;
                                     }
                                 }
                             }
@@ -216,11 +222,13 @@ public class LSBPanel extends JPanel {
                         }
                     }
 
-                    JOptionPane.showMessageDialog(
-                            this,
-                            "Successfully inserted data.",
-                            "Information",
-                            JOptionPane.PLAIN_MESSAGE);
+                    if (successfulInsertion) {
+                        JOptionPane.showMessageDialog(
+                                this,
+                                "Successfully inserted data.",
+                                "Information",
+                                JOptionPane.PLAIN_MESSAGE);
+                    }
                 }
             }
         });
@@ -242,13 +250,6 @@ public class LSBPanel extends JPanel {
                             "Information",
                             JOptionPane.PLAIN_MESSAGE);
 
-                } else if (result == 2) {
-
-                    JOptionPane.showMessageDialog(
-                            this,
-                            "There are no hidden data in chosen carrier.",
-                            "Information",
-                            JOptionPane.PLAIN_MESSAGE);
                 } else {
 
                     JOptionPane.showMessageDialog(

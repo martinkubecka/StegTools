@@ -4,7 +4,6 @@ import model.explorer.FileChooser;
 import model.general.Dictionary;
 import model.image.general.AppendedData;
 
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
@@ -17,6 +16,13 @@ public class LeastSignificantBit {
 
     private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
+    /**
+     * Insert any file with extension made of 3 characters into the least significant bits of a BMP image file.
+     * <p>
+     *
+     * @param fileCarrier BMP image file
+     * @param filesToHide any file with extension made of 3 characters
+     */
     public void insertLSB(File fileCarrier, File filesToHide) {
 
         FileInputStream originalCarrier = null;
@@ -118,14 +124,19 @@ public class LeastSignificantBit {
         }
     }
 
+    /**
+     * Extract information from the least significant bits of the BMP image carrier.
+     * <p>
+     *
+     * @param fileCarrier BMP image file
+     * @return int value based on if the extraction was successful or not
+     */
     public int extractLSB(File fileCarrier) {
 
         FileInputStream image = null;
         FileOutputStream extractedFile = null;
 
         try {
-
-            // TODO return 0 if nothing was inserted
 
             image = new FileInputStream(fileCarrier);
 
@@ -152,7 +163,9 @@ public class LeastSignificantBit {
             // Extract length
             // 8B = 64bits hidden inside 64B
             byte[] lengthByteArray = new byte[8];
-            dataByte = 0; extractedLSB = 0; counter = 0;
+            dataByte = 0;
+            extractedLSB = 0;
+            counter = 0;
 
             for (int i = 0; i < 64; i++) {
 
@@ -167,7 +180,9 @@ public class LeastSignificantBit {
 
             // Extract file
             byte[] hiddenFile = new byte[size];
-            dataByte = 0; extractedLSB = 0; counter = 0;
+            dataByte = 0;
+            extractedLSB = 0;
+            counter = 0;
             int iterator = size * 8;
 
             for (int i = 0; i < iterator; i++) {
@@ -206,8 +221,6 @@ public class LeastSignificantBit {
 
     /**
      * Calculate if it is possible to hide chosen data inside a carrier.
-     * <p>
-     * dataToHide < availableSpace
      * <p>
      * availableSpace = (carrierFileSize - BMP_header - Custom_header) / 8
      * <p>

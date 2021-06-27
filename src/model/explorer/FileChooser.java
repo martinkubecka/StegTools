@@ -17,7 +17,9 @@ public class FileChooser {
     public File pickSingleFileChooser(String fileFormat) {
 
         JFileChooser fc = new JFileChooser();
-        fc.setCurrentDirectory(new File("src/resources/"));
+        File workingDirectory = new File(System.getProperty("user.dir"));
+        fc.setCurrentDirectory(workingDirectory);
+        //fc.setCurrentDirectory(new File("src/resources/"));
         fc.setDialogTitle("Select the file to open... ");
         fc.setMultiSelectionEnabled(false);
 
@@ -50,7 +52,9 @@ public class FileChooser {
     public File[] pickMultipleFilesFromFileChooser() {
 
         JFileChooser fc = new JFileChooser();
-        fc.setCurrentDirectory(new File("src/resources/"));
+        File workingDirectory = new File(System.getProperty("user.dir"));
+        fc.setCurrentDirectory(workingDirectory);
+        //fc.setCurrentDirectory(new File("src/resources/"));
         fc.setDialogTitle("Select the file to open... ");
         fc.setMultiSelectionEnabled(true);
         fc.setAcceptAllFileFilterUsed(true);

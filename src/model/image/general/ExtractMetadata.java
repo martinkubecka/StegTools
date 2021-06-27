@@ -59,17 +59,18 @@ public class ExtractMetadata {
 
                 LOGGER.log(Level.SEVERE, ioException.toString(), ioException);
             }
+        }
+        // UNKNOWN FILE TYPE
+        //
+        // This is the most generic approach.
+        // It will transparently determine the file type and invoke the appropriate readers.
+        // In most cases, this is the most appropriate usage.
+        // This will handle JPEG, PNG, TIFF, GIF, BMP and RAW
+        // (CRW/CR2/NEF/RW2/ORF) files and extract whatever metadata is available and understood.
 
-            // UNKNOWN FILE TYPE
-            //
-            // This is the most generic approach.
-            // It will transparently determine the file type and invoke the appropriate readers.
-            // In most cases, this is the most appropriate usage.
-            // This will handle JPEG, TIFF, GIF, BMP and RAW
-            // (CRW/CR2/NEF/RW2/ORF) files and extract whatever metadata is available and understood.
-
-        } else {
+        else {
             try {
+
                 metadata = ImageMetadataReader.readMetadata(file);
 
 //                print(metadata, "Using ImageMetadataReader");

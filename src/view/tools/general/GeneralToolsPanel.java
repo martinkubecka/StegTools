@@ -1,6 +1,5 @@
 package view.tools.general;
 
-import com.drew.metadata.Metadata;
 import controller.AppController;
 import net.lingala.zip4j.ZipFile;
 import view.components.Button;
@@ -58,7 +57,7 @@ public class GeneralToolsPanel extends JPanel {
      */
     private void setUpLayout() {
 
-        this.setLayout(new GridLayout(7, 1, 8, 37));
+        this.setLayout(new GridLayout(7, 1, 40, 37));
         this.setBackground(new Color(72, 0, 0));
         this.setBorder(BorderFactory.createEmptyBorder(8, 150, 8, 150));
     }
@@ -105,12 +104,7 @@ public class GeneralToolsPanel extends JPanel {
 
             } catch (Exception exception) {
 
-                //System.out.println(exception);
-//                JOptionPane.showMessageDialog(
-//                        this,
-//                        "No files selected",
-//                        "Warning",
-//                        JOptionPane.WARNING_MESSAGE);
+                // nothing to do here
             }
 
             if (filesToCompress != null) {
@@ -126,7 +120,6 @@ public class GeneralToolsPanel extends JPanel {
                 if (okCxl == JOptionPane.OK_OPTION) {
 
                     String password = new String(passwordField.getPassword());
-                    //System.err.println("You entered: " + password);
 
                     if (!password.isEmpty()) {
 

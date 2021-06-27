@@ -72,7 +72,9 @@ public class ImageHeader {
 
         try {
 
-            final File file = new File("src/resources/rebuilt.png");
+            String path = System.getProperty("user.dir");
+            String fileName = path + "/rebuilt.png";
+            final File file = new File(fileName);
             final FileOutputStream fileOut = new FileOutputStream(file);
             fileOut.write(bytes);
             fileOut.flush();

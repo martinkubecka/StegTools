@@ -38,7 +38,6 @@ public class ImageToolsPanel extends JPanel {
 
         nameLabelPNG = new Label("PNG Tools", SwingConstants.CENTER, SwingConstants.CENTER, Font.PLAIN, 30);
 
-        // header inspection
         checkHeaderButton = new Button("Check Header");
 
         nameLabelBMP = new Label("BMP Tools", SwingConstants.CENTER, SwingConstants.CENTER, Font.PLAIN, 30);
@@ -119,9 +118,6 @@ public class ImageToolsPanel extends JPanel {
 
         bitPlanesButton.addActionListener(e -> {
 
-//            String bitPlane = "Bit Plane Panel";
-//            cardLayout.show(parentPanel, bitPlane);
-
             BitPlaneWindow bitPlaneWindow = new BitPlaneWindow("Bit Plane Viewer", baseController);
             bitPlaneWindow.setVisible(true);
         });
@@ -132,7 +128,6 @@ public class ImageToolsPanel extends JPanel {
 
             if (file != null) {
 
-                // TODO for BMP
                 String extractedMessage = baseController.getAppendedData().extractAppendedData(file);
 
                 ExtractedDataWindow extractedDataWindow = new ExtractedDataWindow("Extracted Message", baseController, extractedMessage);

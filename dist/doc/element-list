@@ -1,0 +1,16 @@
+controller
+log
+model.explorer
+model.explorer.filters
+model.general
+model.image.bmp
+model.image.general
+model.image.png
+view
+view.components
+view.menu
+view.tools
+view.tools.general
+view.tools.image
+view.tools.image.bmp
+view.tools.image.planes
